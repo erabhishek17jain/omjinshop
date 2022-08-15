@@ -5,16 +5,16 @@ Demo Url - https://flipkartwebs.herokuapp.com
 Email - testuser1@gmail.com
 Password - Test@123
 
-# user account
+User Account:
 Email - testuser@gmail.com
 Password - Test@123
 
-# admin account
+Admin Account:
 Email - admin@gmail.com
 Password - Test@123
 
-# Upload Images
+Upload Images
 https://cloudinary.com
 
-# Send Emails
+Send Emails
 https://app.sendgrid.com
