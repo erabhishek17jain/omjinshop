@@ -8,7 +8,7 @@ import SecondaryDropDownMenu from './SecondaryDropDownMenu';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import logo1 from '../../../assets/images/logo/logo-1.png';
+import logo1 from '../../../assets/images/logo/logo.png';
 import bannerMega0 from '../../../assets/images/banners/banner-mega-0.jpg';
 import bannerMega1 from '../../../assets/images/banners/banner-mega-1.jpg';
 import bannerMega2 from '../../../assets/images/banners/banner-mega-2.jpg';
@@ -40,7 +40,11 @@ const Header = () => {
         <nav className="primary-nav primary-nav-wrapper--border">
           <div className="container">
             <div className="primary-nav">
-              <a className="main-logo" href="index.html">
+              <a
+                className="main-logo"
+                href="index.html"
+                style={{ width: '150px' }}
+              >
                 <img src={logo1} alt="" />
               </a>
               <form className="main-form">

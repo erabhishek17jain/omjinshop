@@ -4821,7 +4821,7 @@ input::-ms-clear {
 
 .post-video-block .post-video-link:before {
   content: '';
-  background: url(../video/video-play.png) no-repeat 0 0;
+  background: #fff;
   background-size: contain;
 }
 
@@ -4831,7 +4831,7 @@ input::-ms-clear {
 
 .post-video-block.process.pause .post-video-link:before {
   content: '';
-  background: url(../video/video-pause.png) no-repeat;
+  background: #fff;
 }
 
 .post-center-wrap {
@@ -5208,7 +5208,6 @@ input::-ms-clear {
 
 .blog-w__h {
   display: block;
-  vertical-align: middle;
   font-size: 16px;
   color: #333333;
   letter-spacing: 0.03em;
