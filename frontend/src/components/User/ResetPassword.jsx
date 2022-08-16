@@ -9,43 +9,49 @@ import MetaData from '../Layouts/MetaData';
 import FormSidebar from './FormSidebar';
 
 const ResetPassword = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { enqueueSnackbar } = useSnackbar();
   const params = useParams();
 
-  const { error, success, loading } = useSelector((state) => state.forgotPassword);
+  const { error, success, loading } = useSelector(
+    (state) => state.forgotPassword
+  );
 
-  const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (newPassword.length < 8) {
-      enqueueSnackbar("Password length must be atleast 8 characters", { variant: "warning" });
+      enqueueSnackbar(
+        'Password length must be atleast 8 characters',
+        { variant: 'warning' }
+      );
       return;
     }
     if (newPassword !== confirmPassword) {
-      enqueueSnackbar("Password Doesn't Match", { variant: "error" });
+      enqueueSnackbar("Password Doesn't Match", { variant: 'error' });
       return;
     }
 
     const formData = new FormData();
-    formData.set("password", newPassword);
-    formData.set("confirmPassword", confirmPassword);
+    formData.set('password', newPassword);
+    formData.set('confirmPassword', confirmPassword);
     dispatch(resetPassword(params.token, formData));
-  }
+  };
 
   useEffect(() => {
     if (error) {
-      enqueueSnackbar(error, { variant: "error" });
+      enqueueSnackbar(error, { variant: 'error' });
       dispatch(clearErrors());
     }
     if (success) {
-      enqueueSnackbar("Password Updated Successfully", { variant: "success" });
-      navigate("/login")
+      enqueueSnackbar('Password Updated Successfully', {
+        variant: 'success',
+      });
+      navigate('/login');
     }
   }, [dispatch, error, success, navigate, enqueueSnackbar]);
 
@@ -54,28 +60,25 @@ const ResetPassword = () => {
       <MetaData title="Password Reset | Omjinshop" />
 
       {loading && <BackdropLoader />}
-      <main class="w-full mt-12 sm:pt-20 sm:mt-0">
-
+      <main className="w-full mt-12 sm:pt-20 sm:mt-0">
         {/* <!-- row --> */}
-        <div class="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
-
+        <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
           <FormSidebar
             title="Reset Password"
             tag="Get access to your Orders, Wishlist and Recommendations"
           />
 
           {/* <!-- login column --> */}
-          <div class="flex-1 overflow-hidden">
-            <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Reset Password</h2>
+          <div className="flex-1 overflow-hidden">
+            <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">
+              Reset Password
+            </h2>
 
             {/* <!-- edit info container --> */}
-            <div class="text-center py-10 px-4 sm:px-14">
-
+            <div className="text-center py-10 px-4 sm:px-14">
               {/* <!-- input container --> */}
               <form onSubmit={handleSubmit}>
-
-                <div class="flex flex-col w-full gap-4">
-
+                <div className="flex flex-col w-full gap-4">
                   <TextField
                     fullWidth
                     label="New Password"
@@ -91,30 +94,56 @@ const ResetPassword = () => {
                     type="password"
                     name="confirmPassword"
                     value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    onChange={(e) =>
+                      setConfirmPassword(e.target.value)
+                    }
                     required
                   />
 
                   {/* <!-- button container --> */}
-                  <div class="flex flex-col gap-2.5 mt-2 mb-32">
-                    <p class="text-xs text-primary-grey text-left">By continuing, you agree to Omjinshop's <a href="https://www.omjinshop.com/pages/terms" class="text-primary-blue"> Terms of Use</a> and <a href="https://www.omjinshop.com/pages/privacypolicy" class="text-primary-blue"> Privacy Policy.</a></p>
-                    <button type="submit" class="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium">Submit</button>
+                  <div className="flex flex-col gap-2.5 mt-2 mb-32">
+                    <p className="text-xs text-primary-grey text-left">
+                      By continuing, you agree to Omjinshop's{' '}
+                      <a
+                        href="https://www.omjinshop.com/pages/terms"
+                        className="text-primary-blue"
+                      >
+                        {' '}
+                        Terms of Use
+                      </a>{' '}
+                      and{' '}
+                      <a
+                        href="https://www.omjinshop.com/pages/privacypolicy"
+                        className="text-primary-blue"
+                      >
+                        {' '}
+                        Privacy Policy.
+                      </a>
+                    </p>
+                    <button
+                      type="submit"
+                      className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium"
+                    >
+                      Submit
+                    </button>
                   </div>
                   {/* <!-- button container --> */}
-
                 </div>
               </form>
               {/* <!-- input container --> */}
 
-              <Link to="/register" class="font-medium text-sm text-primary-blue">New to Omjinshop? Create an account</Link>
+              <Link
+                to="/register"
+                className="font-medium text-sm text-primary-blue"
+              >
+                New to Omjinshop? Create an account
+              </Link>
             </div>
             {/* <!-- edit info container --> */}
-
           </div>
           {/* <!-- login column --> */}
         </div>
         {/* <!-- row --> */}
-
       </main>
     </>
   );

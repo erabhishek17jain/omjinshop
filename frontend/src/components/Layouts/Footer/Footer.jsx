@@ -8,186 +8,439 @@ import { useLocation } from 'react-router-dom';
 
 const footerLinks = [
   {
-    title: "about",
+    title: 'about',
     links: [
       {
-        name: "Contact Us",
-        redirect: "https://www.omjinshop.com/helpcentre",
+        name: 'Contact Us',
+        redirect: 'https://www.omjinshop.com/helpcentre',
       },
       {
-        name: "About Us",
-        redirect: "https://www.omjinshop.com/about-us",
+        name: 'About Us',
+        redirect: 'https://www.omjinshop.com/about-us',
       },
       {
-        name: "Careers",
-        redirect: "https://www.omjinshopcareers.com",
+        name: 'Careers',
+        redirect: 'https://www.omjinshopcareers.com',
       },
       {
-        name: "Omjinshop Stories",
-        redirect: "https://stories.omjinshop.com",
+        name: 'Omjinshop Stories',
+        redirect: 'https://stories.omjinshop.com',
       },
       {
-        name: "Press",
-        redirect: "https://stories.omjinshop.com/category/top-stories/news",
+        name: 'Press',
+        redirect:
+          'https://stories.omjinshop.com/category/top-stories/news',
       },
       {
-        name: "Omjinshop Wholesale",
-        redirect: "https://www.omjinshopwholesale.com",
+        name: 'Omjinshop Wholesale',
+        redirect: 'https://www.omjinshopwholesale.com',
       },
       {
-        name: "Corporate Information",
-        redirect: "https://www.omjinshop.com/corporate-information",
+        name: 'Corporate Information',
+        redirect: 'https://www.omjinshop.com/corporate-information',
       },
-    ]
+    ],
   },
   {
-    title: "help",
+    title: 'help',
     links: [
       {
-        name: "Payments",
-        redirect: "https://www.omjinshop.com/pages/payments",
+        name: 'Payments',
+        redirect: 'https://www.omjinshop.com/pages/payments',
       },
       {
-        name: "Shipping",
-        redirect: "https://www.omjinshop.com/pages/shipping",
+        name: 'Shipping',
+        redirect: 'https://www.omjinshop.com/pages/shipping',
       },
       {
-        name: "Cancellation & Returns",
-        redirect: "https://www.omjinshop.com/helpcentre?catalog=55c9c6edb000002e002c1701&view=CATALOG",
+        name: 'Cancellation & Returns',
+        redirect:
+          'https://www.omjinshop.com/helpcentre?catalog=55c9c6edb000002e002c1701&view=CATALOG',
       },
       {
-        name: "FAQ",
-        redirect: "https://www.omjinshop.com/helpcentre?catalog=55c9c8e2b0000023002c1702&view=CATALOG",
-      }
-    ]
+        name: 'FAQ',
+        redirect:
+          'https://www.omjinshop.com/helpcentre?catalog=55c9c8e2b0000023002c1702&view=CATALOG',
+      },
+    ],
   },
   {
-    title: "policy",
+    title: 'policy',
     links: [
       {
-        name: "Return Policy",
-        redirect: "https://www.omjinshop.com/pages/returnpolicy",
+        name: 'Return Policy',
+        redirect: 'https://www.omjinshop.com/pages/returnpolicy',
       },
       {
-        name: "Terms Of Use",
-        redirect: "https://www.omjinshop.com/pages/terms",
+        name: 'Terms Of Use',
+        redirect: 'https://www.omjinshop.com/pages/terms',
       },
       {
-        name: "Security",
-        redirect: "https://www.omjinshop.com/pages/paymentsecurity",
+        name: 'Security',
+        redirect: 'https://www.omjinshop.com/pages/paymentsecurity',
       },
       {
-        name: "Privacy",
-        redirect: "https://www.omjinshop.com/pages/privacypolicy",
+        name: 'Privacy',
+        redirect: 'https://www.omjinshop.com/pages/privacypolicy',
       },
       {
-        name: "Sitemap",
-        redirect: "https://www.omjinshop.com/sitemap",
+        name: 'Sitemap',
+        redirect: 'https://www.omjinshop.com/sitemap',
       },
       {
-        name: "EPR Compliance",
-        redirect: "https://www.omjinshop.com/pages/ewaste-compliance-tnc",
+        name: 'EPR Compliance',
+        redirect:
+          'https://www.omjinshop.com/pages/ewaste-compliance-tnc',
       },
-    ]
+    ],
   },
   {
-    title: "social",
+    title: 'social',
     links: [
       {
-        name: "Facebook",
-        redirect: "https://www.facebook.com/omjinshop",
+        name: 'Facebook',
+        redirect: 'https://www.facebook.com/omjinshop',
       },
       {
-        name: "Twitter",
-        redirect: "https://twitter.com/omjinshop",
+        name: 'Twitter',
+        redirect: 'https://twitter.com/omjinshop',
       },
       {
-        name: "YouTube",
-        redirect: "https://www.youtube.com/omjinshop",
-      }
-    ]
-  }
-]
+        name: 'YouTube',
+        redirect: 'https://www.youtube.com/omjinshop',
+      },
+    ],
+  },
+];
 
 const Footer = () => {
-
   const location = useLocation();
   const [adminRoute, setAdminRoute] = useState(false);
 
   useEffect(() => {
-    setAdminRoute(location.pathname.split("/", 2).includes("admin"))
+    setAdminRoute(location.pathname.split('/', 2).includes('admin'));
   }, [location]);
 
   return (
     <>
       {!adminRoute && (
         <>
-          <footer className="mt-20 w-full py-1 sm:py-4 px-4 sm:px-12 bg-primary-darkBlue text-white text-xs border-b border-gray-600 flex flex-col sm:flex-row overflow-hidden">
+          <footer>
+            <div className="outer-footer">
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-4 col-md-6">
+                    <div className="outer-footer__content u-s-m-b-40">
+                      <span className="outer-footer__content-title">
+                        Contact Us
+                      </span>
+                      <div className="outer-footer__text-wrap">
+                        <i className="fas fa-home"></i>
+
+                        <span>
+                          4247 Ashford Drive Virginia VA-20006 USA
+                        </span>
+                      </div>
+                      <div className="outer-footer__text-wrap">
+                        <i className="fas fa-phone-volume"></i>
+
+                        <span>(+0) 900 901 904</span>
+                      </div>
+                      <div className="outer-footer__text-wrap">
+                        <i className="far fa-envelope"></i>
+
+                        <span>contact@domain.com</span>
+                      </div>
+                      <div className="outer-footer__social">
+                        <ul>
+                          <li>
+                            <a className="s-fb--color-hover" href="#">
+                              <i className="fab fa-facebook-f"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a className="s-tw--color-hover" href="#">
+                              <i className="fab fa-twitter"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="s-youtube--color-hover"
+                              href="#"
+                            >
+                              <i className="fab fa-youtube"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="s-insta--color-hover"
+                              href="#"
+                            >
+                              <i className="fab fa-instagram"></i>
+                            </a>
+                          </li>
+                          <li>
+                            <a
+                              className="s-gplus--color-hover"
+                              href="#"
+                            >
+                              <i className="fab fa-google-plus-g"></i>
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-md-6">
+                    <div className="row">
+                      <div className="col-lg-6 col-md-6">
+                        <div className="outer-footer__content u-s-m-b-40">
+                          <span className="outer-footer__content-title">
+                            Information
+                          </span>
+                          <div className="outer-footer__list-wrap">
+                            <ul>
+                              <li>
+                                <a href="cart.html">Cart</a>
+                              </li>
+                              <li>
+                                <a href="dashboard.html">Account</a>
+                              </li>
+                              <li>
+                                <a href="shop-side-version-2.html">
+                                  Manufacturer
+                                </a>
+                              </li>
+                              <li>
+                                <a href="dash-payment-option.html">
+                                  Finance
+                                </a>
+                              </li>
+                              <li>
+                                <a href="shop-side-version-2.html">
+                                  Shop
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="col-lg-6 col-md-6">
+                        <div className="outer-footer__content u-s-m-b-40">
+                          <div className="outer-footer__list-wrap">
+                            <span className="outer-footer__content-title">
+                              Our Company
+                            </span>
+                            <ul>
+                              <li>
+                                <a href="about.html">About us</a>
+                              </li>
+                              <li>
+                                <a href="contact.html">Contact Us</a>
+                              </li>
+                              <li>
+                                <a href="index.html">Sitemap</a>
+                              </li>
+                              <li>
+                                <a href="dash-my-order.html">
+                                  Delivery
+                                </a>
+                              </li>
+                              <li>
+                                <a href="shop-side-version-2.html">
+                                  Store
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-lg-4 col-md-12">
+                    <div className="outer-footer__content">
+                      <span className="outer-footer__content-title">
+                        Join our Newsletter
+                      </span>
+                      <form className="newsletter">
+                        <div className="u-s-m-b-15">
+                          <div className="radio-box newsletter__radio">
+                            <input
+                              type="radio"
+                              id="male"
+                              name="gender"
+                            />
+                            <div className="radio-box__state radio-box__state--primary">
+                              <label
+                                className="radio-box__label"
+                                htmlFor="male"
+                              >
+                                Male
+                              </label>
+                            </div>
+                          </div>
+                          <div className="radio-box newsletter__radio">
+                            <input
+                              type="radio"
+                              id="female"
+                              name="gender"
+                            />
+                            <div className="radio-box__state radio-box__state--primary">
+                              <label
+                                className="radio-box__label"
+                                htmlFor="female"
+                              >
+                                Female
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="newsletter__group">
+                          <label htmlFor="newsletter"></label>
+
+                          <input
+                            className="input-text input-text--only-white"
+                            type="text"
+                            id="newsletter"
+                            placeholder="Enter your Email"
+                          />
+
+                          <button
+                            className="btn btn--e-brand newsletter__btn"
+                            type="submit"
+                          >
+                            SUBSCRIBE
+                          </button>
+                        </div>
+
+                        <span className="newsletter__text">
+                          Subscribe to the mailing list to receive
+                          updates on promotions, new arrivals,
+                          discount and coupons.
+                        </span>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="lower-footer">
+              <div className="container">
+                <div className="row">
+                  <div className="col-lg-12">
+                    <div className="lower-footer__content">
+                      <div className="lower-footer__copyright">
+                        <span>Copyright © 2018</span>
+
+                        <a href="index.html">Reshop</a>
+
+                        <span>All Right Reserved</span>
+                      </div>
+                      <div className="lower-footer__payment">
+                        <ul>
+                          <li>
+                            <i className="fab fa-cc-stripe"></i>
+                          </li>
+                          <li>
+                            <i className="fab fa-cc-paypal"></i>
+                          </li>
+                          <li>
+                            <i className="fab fa-cc-mastercard"></i>
+                          </li>
+                          <li>
+                            <i className="fab fa-cc-visa"></i>
+                          </li>
+                          <li>
+                            <i className="fab fa-cc-discover"></i>
+                          </li>
+                          <li>
+                            <i className="fab fa-cc-amex"></i>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </footer>
+
+          {/* <footer className="mt-20 w-full py-1 sm:py-4 px-4 sm:px-12 bg-primary-darkBlue text-white text-xs border-b border-gray-600 flex flex-col sm:flex-row overflow-hidden">
             <div className="w-full sm:w-7/12 flex flex-col sm:flex-row">
-
               {footerLinks.map((el, i) => (
-                <div className="w-full sm:w-1/5 flex flex-col gap-2 my-3 sm:my-6 ml-5" key={i}>
-                  <h2 className="text-primary-grey mb-2 uppercase">{el.title}</h2>
+                <div
+                  className="w-full sm:w-1/5 flex flex-col gap-2 my-3 sm:my-6 ml-5"
+                  key={i}
+                >
+                  <h2 className="text-primary-grey mb-2 uppercase">
+                    {el.title}
+                  </h2>
                   {el.links.map((item, i) => (
-                    <a href={item.redirect} target="_blank" rel="noreferrer" className="hover:underline" key={i}>{item.name}</a>
+                    <a
+                      href={item.redirect}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:underline"
+                      key={i}
+                    >
+                      {item.name}
+                    </a>
                   ))}
-
                 </div>
               ))}
-
             </div>
 
             <div className="border-gray-600 h-36 w-1 border-l mr-5 mt-6 hidden sm:block"></div>
             <div className="w-full sm:w-5/12 my-6 mx-5 sm:mx-0 flex flex-col sm:flex-row gap-2 sm:gap-0 justify-between">
               <div className="w-full sm:w-1/2">
                 <h2 className="text-primary-grey">Mail Us:</h2>
-                <p className="mt-2 leading-5">Omjinshop Internet Private Limited,<br />
+                <p className="mt-2 leading-5">
+                  Omjinshop Internet Private Limited,
+                  <br />
                   Buildings Alyssa, Begonia &<br />
-                  Clove Embassy Tech Village,<br />
-                  Outer Ring Road, Devarabeesanahalli Village,<br />
-                  Bengaluru, 560103,<br />
+                  Clove Embassy Tech Village,
+                  <br />
+                  Outer Ring Road, Devarabeesanahalli Village,
+                  <br />
+                  Bengaluru, 560103,
+                  <br />
                   Karnataka, India
                 </p>
               </div>
 
               <div className="w-full sm:w-1/2">
-                <h2 className="text-primary-grey">Registered Office Address:</h2>
-                <p className="mt-2 leading-5">Omjinshop Internet Private Limited,<br />
+                <h2 className="text-primary-grey">
+                  Registered Office Address:
+                </h2>
+                <p className="mt-2 leading-5">
+                  Omjinshop Internet Private Limited,
+                  <br />
                   Buildings Alyssa, Begonia &<br />
-                  Clove Embassy Tech Village,<br />
-                  Outer Ring Road, Devarabeesanahalli Village,<br />
-                  Bengaluru, 560103,<br />
+                  Clove Embassy Tech Village,
+                  <br />
+                  Outer Ring Road, Devarabeesanahalli Village,
+                  <br />
+                  Bengaluru, 560103,
+                  <br />
                   Karnataka, India <br />
-                  CIN : U51109KA2012PTC066107<br />
-                  Telephone: <a className="text-primary-blue" href="tel:18002029898">1800 202 9898</a>
+                  CIN : U51109KA2012PTC066107
+                  <br />
+                  Telephone:{' '}
+                  <a
+                    className="text-primary-blue"
+                    href="tel:18002029898"
+                  >
+                    1800 202 9898
+                  </a>
                 </p>
               </div>
             </div>
-
-          </footer>
+          </footer> */}
           {/* <!-- footer ends --> */}
-
-          <div className="px-16 py-6 w-full bg-primary-darkBlue hidden sm:flex justify-between items-center text-sm text-white">
-            <a href="https://seller.omjinshop.com/sell-online" target="_blank" rel="noreferrer" className="flex items-center gap-2">
-              <span className="text-yellow-400"><WorkIcon sx={{ fontSize: "20px" }} /></span> Sell On Omjinshop
-            </a>
-            <a href="https://brands.omjinshop.com" target="_blank" rel="noreferrer" className="flex items-center gap-2">
-              <span className="text-yellow-400"><StarsIcon sx={{ fontSize: "20px" }} /></span> Advertise
-            </a>
-            <a href="https://www.omjinshop.com/the-gift-card-store" rel="noreferrer" target="_blank" className="flex items-center gap-2">
-              <span className="text-yellow-400"><CardGiftcardIcon sx={{ fontSize: "20px" }} /></span> Gift Cards
-            </a>
-            <a href="https://www.omjinshop.com/helpcentre" target="_blank" rel="noreferrer" className="flex items-center gap-2">
-              <span className="text-yellow-400"><HelpIcon sx={{ fontSize: "20px" }} /></span> Help Center
-            </a>
-
-            <span>&copy; 2007-{new Date().getFullYear()} Omjinshop.com</span>
-            <img draggable="false" src={paymentMethods} alt="Card Payment" />
-          </div>
         </>
       )}
     </>
-  )
+  );
 };
 
 export default Footer;

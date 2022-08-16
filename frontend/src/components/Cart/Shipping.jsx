@@ -14,17 +14,14 @@ import MetaData from '../Layouts/MetaData';
 import states from '../../utils/states';
 
 const Shipping = () => {
-
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
-
     const { cartItems } = useSelector((state) => state.cart);
     const { shippingInfo } = useSelector((state) => state.cart);
-
     const [address, setAddress] = useState(shippingInfo.address);
     const [city, setCity] = useState(shippingInfo.city);
-    const [country, setCountry] = useState('IN');
+    const [country] = useState('IN');
     const [state, setState] = useState(shippingInfo.state);
     const [pincode, setPincode] = useState(shippingInfo.pincode);
     const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
