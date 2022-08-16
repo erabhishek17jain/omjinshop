@@ -5,8 +5,6 @@
 #{$p}
 --------------------------------------------------------------*/
 
-
-
 .dash {
   &__box {
     &--bg-white {
@@ -14,7 +12,7 @@
     }
 
     &--border {
-      border:1px solid #eee;
+      border: 1px solid #eee;
     }
 
     &--bg-grey {
@@ -34,10 +32,10 @@
     }
   }
 
-   // Padding-1
-    &__pad-1 {
-      padding: 26px 20px;
-    }
+  // Padding-1
+  &__pad-1 {
+    padding: 26px 20px;
+  }
 
   &__pad-2 {
     padding: 24px;
@@ -47,24 +45,20 @@
     padding: 26px;
   }
 
-
-
-
-    &__f-list {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      > li {
-        padding: 4px 0;
-        > a {
-          font-size: 13px;
-          display: block;
-          color: $g-black;
-        }
+  &__f-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    > li {
+      padding: 4px 0;
+      > a {
+        font-size: 13px;
+        display: block;
+        color: $g-black;
       }
     }
   }
-
+}
 
 .dash-l-r {
   display: flex;
@@ -72,12 +66,10 @@
   justify-content: space-between;
 }
 
-
 .dash-active {
   font-weight: 600;
   color: $g-black;
 }
-
 
 // Some Widgets
 .dash {
@@ -88,11 +80,10 @@
     text-align: center;
     > li {
       border-bottom: 1px solid #eee;
-
     }
   }
 
-  &__w-wrap{
+  &__w-wrap {
     padding: 18px 0;
   }
 
@@ -106,32 +97,25 @@
     margin-bottom: 8px;
   }
   &__w-icon-style-1 {
-    background-color: rgba(#ff4500,.14);
+    background-color: rgba(#fe0100, 0.14);
     > i {
-      color: #ff4500;
+      color: #fe0100;
     }
   }
 
   &__w-icon-style-2 {
-    background-color: rgba(#009444,.14);
+    background-color: rgba(#009444, 0.14);
     > i {
       color: #009444;
     }
   }
 
-
   &__w-icon-style-3 {
-    background-color: rgba(#3185FC,.14);
+    background-color: rgba(#3185fc, 0.14);
     > i {
-      color: #3185FC;
+      color: #3185fc;
     }
   }
-
-
-
-
-
-
 
   &__w-text {
     display: block;
@@ -149,11 +133,8 @@
   }
 }
 
-
-
 // Components like basic text, link, h2
 .dash {
-
   &__h1 {
     line-height: 1;
     color: $g-brand-secondary-color;
@@ -165,7 +146,6 @@
     font-size: 14px;
     color: $g-brand-secondary-color;
   }
-
 
   &__text {
     display: block;
@@ -180,14 +160,13 @@
     color: $g-text-color;
   }
 
-
   // div
   &__link {
-  > a {
-    font-size: 13px;
-    font-weight: 600;
-    transition: color 0.5s linear;
-  }
+    > a {
+      font-size: 13px;
+      font-weight: 600;
+      transition: color 0.5s linear;
+    }
     &--brand {
       > a {
         color: $g-brand-color;
@@ -212,20 +191,12 @@
   }
 }
 
-
-
-
-
 // Table
-.dash  {
-
+.dash {
   &__table-wrap {
     height: 300px;
     overflow: auto;
   }
-
-
-
 
   &__table {
     width: 100%;
@@ -235,11 +206,12 @@
       background-color: #fbfbfb;
     }
 
-    th,td {
+    th,
+    td {
       padding: 20px;
       text-align: center;
       font-weight: 600;
-      color:$g-brand-secondary-color;
+      color: $g-brand-secondary-color;
     }
 
     th {
@@ -258,7 +230,6 @@
         }
       }
     }
-
   }
   &__table-img-wrap {
     background-color: $g-card-bg-color;
@@ -268,23 +239,19 @@
     height: 40px;
     img {
       display: block;
-      min-width: 40px;// Remember img-fluid class is necessary to addss
+      min-width: 40px; // Remember img-fluid class is necessary to addss
     }
-
   }
-
-
 }
-
-
-
 
 // Edit My Profile
 .dash-edit-p {
   width: 100%;
 
-  .btn,.input-text,.select-box {
-   border-radius: 6px;
+  .btn,
+  .input-text,
+  .select-box {
+    border-radius: 6px;
   }
 
   .input-text {
@@ -295,7 +262,6 @@
     font-weight: 600;
     padding: 16px 46px;
   }
-
 }
 
 // My Profile
@@ -306,13 +272,12 @@
   padding: 14px 18px;
   font-size: 13px;
   border-radius: 6px;
-  width:12rem;
-
+  width: 12rem;
 }
 
 // Manage Order
 .manage-o {
-// It could be add on div or span
+  // It could be add on div or span
   &__text {
     font-size: 13px;
     font-weight: 600;
@@ -323,15 +288,10 @@
     font-weight: 600;
   }
 
-
   &__header {
     padding-bottom: 14px;
     border-bottom: 1px solid #eee;
   }
-
-
-
-
 
   &__icon {
     font-weight: 600;
@@ -339,14 +299,12 @@
     color: $g-brand-secondary-color;
   }
 
-
-
   &__timeline {
-    padding-top:40px;
-      [class*="col-"] {
-        padding: 0;
-        text-align: center;
-  }
+    padding-top: 40px;
+    [class*='col-'] {
+      padding: 0;
+      text-align: center;
+    }
   }
 }
 
@@ -355,32 +313,30 @@
   flex-wrap: wrap;
 }
 
-
-
 .timeline-l-i {
-  position: relative;// For Circle
+  position: relative; // For Circle
   // Each portion icon line
   border-radius: 3px;
   border-top: 3px solid #eee;
 
   .timeline-circle {
-    position: absolute;// Relative to border-bottom
+    position: absolute; // Relative to border-bottom
     width: 18px;
     height: 18px;
     background: $g-white;
     border: 2px solid #eee;
-    margin: auto;// Horizontal & Vertical Center
+    margin: auto; // Horizontal & Vertical Center
     top: 0;
     left: 0;
     bottom: 0;
     right: 0;
     &:before {
-      content: "";
+      content: '';
       display: block;
       width: 8px;
       height: 8px;
       background-color: #eee;
-      margin: auto;// Horizontal & Vertical Center
+      margin: auto; // Horizontal & Vertical Center
       position: absolute;
       top: 0;
       left: 0;
@@ -390,26 +346,15 @@
   }
 }
 
-
-
-
-
-
-
-
 .timeline-l-i.timeline-l-i--finish {
-  border-color:#6B5AED;
+  border-color: #6b5aed;
   .timeline-circle {
-    border-color: #6B5AED;
+    border-color: #6b5aed;
     &:before {
-      background-color: #6B5AED;
+      background-color: #6b5aed;
     }
   }
 }
-
-
-
-
 
 .timeline-text {
   margin-top: 20px;
@@ -420,11 +365,6 @@
   color: $g-brand-secondary-color;
 }
 
-
-
-
-
-
 // Description
 
 .manage-o__description {
@@ -433,18 +373,14 @@
   justify-content: space-between;
 }
 
-
-
 .description__container {
   display: flex;
   align-items: center;
 }
 
-
-
 .description__img-wrap {
-    width: 90px;
-    height: 90px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: inline-block;
   vertical-align: middle;
@@ -456,14 +392,12 @@
   }
 }
 
-
 .description-title {
   margin-left: 12px;
   font-size: 14px;
   font-weight: 600;
   color: $g-brand-secondary-color;
 }
-
 
 // Address Book
 .dash__address-header {
@@ -486,12 +420,13 @@
       background-color: #fbfbfb;
     }
 
-    th,td {
+    th,
+    td {
       padding: 20px;
       min-width: 200px;
       text-align: left;
       font-weight: 600;
-      color:$g-brand-secondary-color;
+      color: $g-brand-secondary-color;
     }
 
     th {
@@ -510,13 +445,8 @@
         }
       }
     }
-
   }
-
-
 }
-
-
 
 .address-book-edit {
   display: inline-block;
@@ -525,7 +455,6 @@
   padding: 6px 12px;
   border-radius: 6px;
 }
-
 
 // Make default Address Book Page
 
@@ -542,11 +471,14 @@
 .dash-address-manipulation {
   width: 100%;
 
-  .btn,.input-text,.select-box {
+  .btn,
+  .input-text,
+  .select-box {
     border-radius: 6px;
   }
 
-  .input-text,.select-box  {
+  .input-text,
+  .select-box {
     width: 100%;
   }
 
@@ -560,11 +492,12 @@
 .dash-track-order {
   width: 100%;
 
-  .btn,.input-text {
+  .btn,
+  .input-text {
     border-radius: 6px;
   }
 
-  .input-text  {
+  .input-text {
     width: 100%;
   }
 
@@ -572,9 +505,7 @@
     font-weight: 600;
     padding: 16px 46px;
   }
-
 }
-
 
 // My Order Form
 .m-order {
@@ -586,16 +517,15 @@
   }
 
   label {
-      color: $g-brand-secondary-color;
-      font-size: 13px;
-      font-weight: 600;
+    color: $g-brand-secondary-color;
+    font-size: 13px;
+    font-weight: 600;
   }
 
   .select-box {
     border-radius: 6px;
   }
 }
-
 
 .m-order__list {
   background-color: $g-white;
@@ -611,8 +541,6 @@
   }
 }
 
-
-
 .manage-o__badge {
   display: inline-block;
   text-align: center;
@@ -622,23 +550,22 @@
   font-weight: 600;
   background-color: transparent;
   border-radius: 32px;
-
 }
 
 .badge {
   &--processing {
     background-color: rgba(49, 133, 252, 0.14);
-    color: #3185FC;
+    color: #3185fc;
   }
 
   &--shipped {
     background-color: rgba(0, 148, 68, 0.14);
-  color: #009444;
+    color: #009444;
   }
 
   &--delivered {
     background-color: rgba(255, 69, 0, 0.14);
-    color: #ff4500;
+    color: #fe0100;
   }
 }
 
@@ -648,7 +575,7 @@
   }
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .dash__address-header {
     display: block;
 
@@ -661,7 +588,7 @@
   }
 }
 
-@media (max-width:575px) {
+@media (max-width: 575px) {
   .dash-l-r {
     display: block;
   }
@@ -675,9 +602,7 @@
     display: block;
   }
 
- .description-title {
-   margin: 12px 0;
- }
-
+  .description-title {
+    margin: 12px 0;
+  }
 }
-

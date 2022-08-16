@@ -80,7 +80,6 @@
   }
 }
 
-
 /*
   * Row modifier class
  */
@@ -113,15 +112,15 @@
 /* Twitter */
 
 .s-tw--bgcolor-hover:hover {
-  background-color: #38A1F3;
+  background-color: #38a1f3;
 }
 
 .s-tw--color-hover:hover {
-  color: #38A1F3;
+  color: #38a1f3;
 }
 
 .s-tw--color {
-  color: #38A1F3;
+  color: #38a1f3;
 }
 
 /* instagram */
@@ -139,27 +138,27 @@
 
 /* youtube */
 .s-youtube--bgcolor-hover:hover {
-  background-color: #ED3833;
+  background-color: #ed3833;
 }
 
 .s-youtube--color-hover:hover {
-  color: #ED3833;
+  color: #ed3833;
 }
 .s-youtube--color {
-  color: #ED3833;
+  color: #ed3833;
 }
 
 /* linkedin */
 .s-linked--bgcolor-hover:hover {
-  background-color: #0077B5;
+  background-color: #0077b5;
 }
 
 .s-linked--color-hover:hover {
-  color: #0077B5;
+  color: #0077b5;
 }
 
 .s-linked--color {
-  color: #0077B5;
+  color: #0077b5;
 }
 
 /* googleplus */
@@ -203,7 +202,6 @@
     width: 8px;
   }
 
-
   // Track
   &::-webkit-scrollbar-track {
     background: #eee;
@@ -219,7 +217,6 @@
     background: #555;
   }
 }
-
 
 /*
   * Global Rating Style apply on any div that has `i` element as children
@@ -237,7 +234,7 @@
 .gl-rating-style-2 {
   > i {
     margin-left: 2px;
-    color: #ff4500;
+    color: #fe0100;
     &:first-child {
       margin-left: 0;
     }
@@ -247,45 +244,44 @@
 /*
   * Signup, Login Social Buttons
  */
-  .gl-s-api {
-    width: 80%;
-    margin: 0 auto;
-    &__btn {
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      display: block;
-      width: 100%;
-      padding: 12px;
-      color: $g-white;
-      font-size: 14px;
-      font-weight: 600;
-      transition: background-color 0.5s linear;
+.gl-s-api {
+  width: 80%;
+  margin: 0 auto;
+  &__btn {
+    border: none;
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    width: 100%;
+    padding: 12px;
+    color: $g-white;
+    font-size: 14px;
+    font-weight: 600;
+    transition: background-color 0.5s linear;
 
-      &:focus {
-        outline: 0;
-      }
-      span {
-        margin-left: 10px;
-      }
+    &:focus {
+      outline: 0;
     }
-
-    &__btn--fb {
-      background-color: #4267b2;
-      &:hover {
-        background-color: darken(#4267b2,5%);
-      }
+    span {
+      margin-left: 10px;
     }
-    &__btn--gplus {
-      background-color: #dd4b39;
-      &:hover {
-        background-color: darken(#dd4b39,5%);
-      }
-    }
-
   }
 
- /*
+  &__btn--fb {
+    background-color: #4267b2;
+    &:hover {
+      background-color: darken(#4267b2, 5%);
+    }
+  }
+  &__btn--gplus {
+    background-color: #dd4b39;
+    &:hover {
+      background-color: darken(#dd4b39, 5%);
+    }
+  }
+}
+
+/*
  * Inline Maker 1
   */
 .gl-inline {
@@ -293,7 +289,7 @@
   flex-wrap: nowrap;
   align-items: center;
   div {
-    flex:1;
+    flex: 1;
     margin-right: 14px;
     &:last-child {
       margin-right: 0;
@@ -317,7 +313,7 @@
   display: flex;
   align-items: center;
   .select-box {
-    flex: 1;// Because of this property all select boxes automatically fill space that a wrapper has.
+    flex: 1; // Because of this property all select boxes automatically fill space that a wrapper has.
     margin-right: 8px;
     &:last-child {
       margin-right: 0;
@@ -332,14 +328,14 @@
   color: $g-brand-color;
   transition: color 0.5s linear;
   &:hover {
-    color: darken($g-brand-color,1%);
+    color: darken($g-brand-color, 1%);
   }
 }
 
 .gl-h1 {
   color: $g-brand-secondary-color;
   font-size: 18px;
-  margin-bottom: 8px;// has margin-bottom
+  margin-bottom: 8px; // has margin-bottom
 }
 
 .gl-text {
@@ -349,7 +345,7 @@
 }
 
 .gl-label {
-  margin-bottom: 8px;// has margin-bottom
+  margin-bottom: 8px; // has margin-bottom
   display: block;
   color: $g-brand-secondary-color;
   font-size: 13px;
@@ -360,23 +356,22 @@
 * Global Tag
  */
 .gl-tag {
-    // because of flex
-    margin-right: 8px;
-    display: inline-block; // important tag
-    margin-bottom: 10px;
-    padding: 5px 13px;
-    font-size: 12px;
-    font-weight: 600;
-    border-radius: 22px;
-    &:last-child {
-      margin-right: 0;
-    }
+  // because of flex
+  margin-right: 8px;
+  display: inline-block; // important tag
+  margin-bottom: 10px;
+  padding: 5px 13px;
+  font-size: 12px;
+  font-weight: 600;
+  border-radius: 22px;
+  &:last-child {
+    margin-right: 0;
   }
+}
 
 /*
 * Global Modal Classes
  */
-
 
 .gl-modal-h1 {
   margin-bottom: 8px;
@@ -387,13 +382,10 @@
   font-weight: 600;
 }
 
-
 .gl-modal-text {
   color: #a0a0a0;
   font-size: 13px;
 }
-
-
 
 .gl-modal-btn-group {
   display: flex;
@@ -406,13 +398,7 @@
   }
 }
 
-
-
-
-
-
-
-@media (max-width:575px) {
+@media (max-width: 575px) {
   .gl-inline {
     display: block;
     div {
@@ -425,8 +411,6 @@
     display: block;
   }
 
-
-
   // Birthday
   .gl-dob {
     display: block;
@@ -435,7 +419,7 @@
       margin-bottom: 8px;
       margin-right: 0;
       &:last-child {
-        margin:0;
+        margin: 0;
       }
     }
   }
@@ -450,9 +434,6 @@
     box-shadow: 0 0 0 0 #bdc3c7;
   }
   100% {
-    box-shadow: 0 0 0 1.5em rgba(189, 195, 199, 0);// 24px
+    box-shadow: 0 0 0 1.5em rgba(189, 195, 199, 0); // 24px
   }
 }
-
-
-

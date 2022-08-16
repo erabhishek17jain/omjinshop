@@ -22,17 +22,23 @@ import bannerMega9 from '../../../assets/images/banners/banner-mega-9.jpg';
 import product3 from '../../../assets/images/product/electronic/product3.jpg';
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector(
     (state) => state.user
   );
-
   const { cartItems } = useSelector((state) => state.cart);
-
   const [togglePrimaryDropDown, setTogglePrimaryDropDown] =
     useState(false);
   const [toggleSecondaryDropDown, setToggleSecondaryDropDown] =
     useState(false);
   const [openMegaMenu, setOpenMegaMenu] = useState(false);
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    navigate('/login');
+    enqueueSnackbar('Logout Successfully', { variant: 'success' });
+  };
 
   return (
     <>
@@ -40,26 +46,10 @@ const Header = () => {
         <nav className="primary-nav primary-nav-wrapper--border">
           <div className="container">
             <div className="primary-nav">
-              <a
-                className="main-logo"
-                href="index.html"
-                style={{ width: '150px' }}
-              >
+              <Link className="main-logo" to="/">
                 <img src={logo1} alt="" />
-              </a>
-              <form className="main-form">
-                <label htmlFor="main-search"></label>
-                <input
-                  className="input-text input-text--border-radius input-text--style-1"
-                  type="text"
-                  id="main-search"
-                  placeholder="Search"
-                />
-                <button
-                  className="btn btn--icon fas fa-search main-search-button"
-                  type="submit"
-                ></button>
-              </form>
+              </Link>
+              <Searchbar />
               <div className="menu-init" id="navigation">
                 <button
                   className="btn btn--icon toggle-button toggle-button--secondary fas fa-cogs"
@@ -77,37 +67,39 @@ const Header = () => {
                       <a>
                         <i className="far fa-user-circle"></i>
                       </a>
-
                       <span className="js-menu-toggle"></span>
                       <ul style={{ width: 120 }}>
-                        <li>
-                          <a href="dashboard.html">
-                            <i className="fas fa-user-circle u-s-m-r-6"></i>
-
-                            <span>Account</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="signup.html">
-                            <i className="fas fa-user-plus u-s-m-r-6"></i>
-
-                            <span>Signup</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="signin.html">
-                            <i className="fas fa-lock u-s-m-r-6"></i>
-
-                            <span>Signin</span>
-                          </a>
-                        </li>
-                        <li>
-                          <a href="signup.html">
-                            <i className="fas fa-lock-open u-s-m-r-6"></i>
-
-                            <span>Signout</span>
-                          </a>
-                        </li>
+                        {isAuthenticated ? (
+                          <>
+                            <li>
+                              <Link to="/">
+                                <i className="fas fa-user-circle u-s-m-r-6"></i>
+                                <span>Account</span>
+                              </Link>
+                            </li>
+                            <li>
+                              <a href="#" onClick={handleLogout}>
+                                <i className="fas fa-lock-open u-s-m-r-6"></i>
+                                <span>Signout</span>
+                              </a>
+                            </li>
+                          </>
+                        ) : (
+                          <>
+                            <li>
+                              <Link to="/">
+                                <i className="fas fa-user-plus u-s-m-r-6"></i>
+                                <span>Signup</span>
+                              </Link>
+                            </li>
+                            <li>
+                              <Link to="/">
+                                <i className="fas fa-lock u-s-m-r-6"></i>
+                                <span>Signin</span>
+                              </Link>
+                            </li>
+                          </>
+                        )}
                       </ul>
                     </li>
                     <li
@@ -192,6 +184,12 @@ const Header = () => {
           <div className="container">
             <div className="secondary-nav">
               <div className="menu-init" id="navigation1">
+                <button
+                  class="btn btn--icon toggle-mega-text toggle-button"
+                  type="button"
+                >
+                  M
+                </button>
                 <div className="ah-lg-mode">
                   <span className="ah-close">✕ Close</span>
                   <ul className="ah-list">
