@@ -313,9 +313,7 @@ Box Module
  */
 body {
   color: #7f7f7f;
-  font-family: 'Open Sans', -apple-system, system-ui,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
+  font-family: 'Open Sans', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
 }
 
 /*--------------------------------------------------------------
@@ -965,8 +963,7 @@ body {
   box-shadow: 1px 2px 8px 0 rgba(36, 37, 38, 0.08);
   background-color: #ffffff;
   color: #333333;
-  transition: background-color 0.3s linear, border-color 0.3s linear,
-    color 0.3s linear;
+  transition: background-color 0.3s linear, border-color 0.3s linear, color 0.3s linear;
 }
 .btn--e-white-brand-shadow:hover {
   border-color: #fe0100;
@@ -984,6 +981,11 @@ body {
 .btn--e-brand-shadow:hover {
   border-color: #fa4400;
   background-color: #fa4400;
+}
+
+.our-product {
+  text-align: center;
+  margin: 20px auto;
 }
 
 /* Countdown Component */
@@ -1399,11 +1401,9 @@ input::-ms-clear {
 .x-product {
   padding: 20px;
   border-radius: 6px;
-  transition: -webkit-transform 0.3s
-    cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-    -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.06);
 }
 .x-product .row {
@@ -1609,11 +1609,9 @@ input::-ms-clear {
   border-radius: 15px;
   overflow: hidden;
   background-color: #ffffff;
-  transition: -webkit-transform 0.3s
-    cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-    -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   box-shadow: 2px 2px 8px 3px rgba(36, 37, 38, 0.08);
 }
 .product-r__container {
@@ -1740,8 +1738,7 @@ input::-ms-clear {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.06);
   transition: -webkit-transform 0.7s ease-in-out;
   transition: transform 0.7s ease-in-out;
-  transition: transform 0.7s ease-in-out,
-    -webkit-transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
 }
 .product-bs__container {
   padding: 20px;
@@ -1863,8 +1860,7 @@ input::-ms-clear {
   background-color: #fbfbfb;
   transition: -webkit-transform 0.7s ease-in-out;
   transition: transform 0.7s ease-in-out;
-  transition: transform 0.7s ease-in-out,
-    -webkit-transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
 }
 .product-short:hover {
   -webkit-transform: translateY(-8px);
@@ -1978,18 +1974,12 @@ input::-ms-clear {
   animation: mypulse 1s;
 }
 
-.check-box
-  input:checked
-  ~ .check-box__state.check-box__state--primary
-  label:before {
+.check-box input:checked ~ .check-box__state.check-box__state--primary label:before {
   border-color: #fe0100;
   background-color: #ffffff;
 }
 
-.check-box
-  input:checked
-  ~ .check-box__state.check-box__state--primary
-  label:after {
+.check-box input:checked ~ .check-box__state.check-box__state--primary label:after {
   -webkit-transform: scale(0.4);
   transform: scale(0.4);
   background-color: #fe0100;
@@ -2037,18 +2027,12 @@ input::-ms-clear {
   animation: mypulse 1s;
 }
 
-.radio-box
-  input:checked
-  ~ .radio-box__state.radio-box__state--primary
-  label:before {
+.radio-box input:checked ~ .radio-box__state.radio-box__state--primary label:before {
   border-color: #fe0100;
   background-color: #ffffff;
 }
 
-.radio-box
-  input:checked
-  ~ .radio-box__state.radio-box__state--primary
-  label:after {
+.radio-box input:checked ~ .radio-box__state.radio-box__state--primary label:after {
   -webkit-transform: scale(0.4);
   transform: scale(0.4);
   background-color: #fe0100;
@@ -2861,11 +2845,9 @@ input::-ms-clear {
 .promotion-o {
   position: relative;
   display: block;
-  transition: -webkit-transform 0.3s
-    cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-    -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .promotion-o__content {
   position: absolute;
@@ -3063,8 +3045,7 @@ input::-ms-clear {
 .banner-bg {
   padding: 7em 0;
   position: relative;
-  background: #f5f5f5 url(../images/banners/banner-bg.jpg) repeat
-    fixed center center;
+  background: #f5f5f5 url(../images/banners/banner-bg.jpg) repeat fixed center center;
   background-size: cover;
 }
 .banner-bg__wrap {
@@ -3268,8 +3249,7 @@ input::-ms-clear {
   background-color: #fbfbfb;
   transition: -webkit-transform 0.7s ease-in-out;
   transition: transform 0.7s ease-in-out;
-  transition: transform 0.7s ease-in-out,
-    -webkit-transform 0.7s ease-in-out;
+  transition: transform 0.7s ease-in-out, -webkit-transform 0.7s ease-in-out;
 }
 .team-member__wrap {
   position: relative;
@@ -3399,11 +3379,9 @@ input::-ms-clear {
 .contact-o {
   background-color: #ffffff;
   padding: 23px;
-  transition: -webkit-transform 0.3s
-    cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55),
-    -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55), -webkit-transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   border: 2px solid #f5f5f5;
   box-shadow: 0 6px 15px 0 rgba(36, 37, 38, 0.08);
 }
@@ -3542,6 +3520,14 @@ input::-ms-clear {
   color: #333333;
   font-size: 14px;
   font-weight: 600;
+}
+.p__price_green {
+  text-align: center;
+  display: block;
+  color: #333333;
+  font-size: 14px;
+  font-weight: 600;
+  color: green;
 }
 .table-p__input-counter-wrap {
   text-align: center;
@@ -4152,8 +4138,7 @@ input::-ms-clear {
   right: 12px;
   transition: -webkit-transform 0.5s ease-in-out;
   transition: transform 0.5s ease-in-out;
-  transition: transform 0.5s ease-in-out,
-    -webkit-transform 0.5s ease-in-out;
+  transition: transform 0.5s ease-in-out, -webkit-transform 0.5s ease-in-out;
 }
 
 .faq__question.collapsed:before {
@@ -4950,8 +4935,7 @@ input::-ms-clear {
 .bp--img .bp__thumbnail img {
   transition: -webkit-transform 0.6s ease-in-out;
   transition: transform 0.6s ease-in-out;
-  transition: transform 0.6s ease-in-out,
-    -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
   -webkit-transform: scale(1);
   transform: scale(1);
 }
@@ -5058,8 +5042,7 @@ input::-ms-clear {
 .bp-mini--img .bp-mini__thumbnail img {
   transition: -webkit-transform 0.6s ease-in-out;
   transition: transform 0.6s ease-in-out;
-  transition: transform 0.6s ease-in-out,
-    -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
   -webkit-transform: scale(1);
   transform: scale(1);
 }
@@ -6153,8 +6136,7 @@ input::-ms-clear {
   padding: 8px 16px;
   display: block;
   font-size: 14px;
-  transition: background-color 110ms ease-in-out,
-    color 110ms ease-in-out;
+  transition: background-color 110ms ease-in-out, color 110ms ease-in-out;
   color: #7f7f7f;
 }
 
@@ -6538,6 +6520,14 @@ input::-ms-clear {
 .is-grid-active .product-m__wishlist a:hover {
   color: #fe0100;
 }
+.is-grid-active .product-m__wishlist-heart {
+  text-align: right;
+}
+.is-grid-active .product-m__wishlist-heart a {
+  font-size: 16px;
+  color: #fe0100;
+  transition: color 110ms ease-in-out;
+}
 .is-grid-active .product-m__preview-description {
   margin-bottom: 8px;
   font-size: 12px;
@@ -6826,9 +6816,7 @@ input::-ms-clear {
 
 /* Tootip styles */
 .tooltip {
-  font-family: 'Open Sans', -apple-system, system-ui,
-    BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
-    sans-serif;
+  font-family: 'Open Sans', -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   font-size: 12px;
   font-weight: 600;
 }
@@ -7600,8 +7588,7 @@ input::-ms-clear {
 }
 .owl-carousel.primary-style-1 button.owl-dot.active,
 .owl-carousel.primary-style-1 button.owl-dot:hover {
-  background: transparent
-    linear-gradient(-180deg, #fe0100 0%, #ff6a33 100%);
+  background: transparent linear-gradient(-180deg, #fe0100 0%, #ff6a33 100%);
 }
 
 .owl-carousel.primary-style-2 .owl-dots {

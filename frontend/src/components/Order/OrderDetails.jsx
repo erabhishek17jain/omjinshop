@@ -7,9 +7,9 @@ import Loader from '../Layouts/Loader';
 import TrackStepper from './TrackStepper';
 import MinCategory from '../Layouts/MinCategory';
 import MetaData from '../Layouts/MetaData';
+import React from 'react';
 
 const OrderDetails = () => {
-
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
     const params = useParams();
@@ -18,7 +18,7 @@ const OrderDetails = () => {
 
     useEffect(() => {
         if (error) {
-            enqueueSnackbar(error, { variant: "error" });
+            enqueueSnackbar(error, { variant: 'error' });
             dispatch(clearErrors());
         }
         dispatch(getOrderDetails(params.id));
@@ -27,14 +27,14 @@ const OrderDetails = () => {
     return (
         <>
             <MetaData title="Order Details | Omjinshop" />
-
             <MinCategory />
             <main className="w-full mt-14 sm:mt-4">
-                {loading ? <Loader /> : (
+                {loading ? (
+                    <Loader />
+                ) : (
                     <>
                         {order && order.user && order.shippingInfo && (
                             <div className="flex flex-col gap-4 max-w-6xl mx-auto">
-
                                 <div className="flex bg-white shadow rounded-sm min-w-full">
                                     <div className="sm:w-1/2 border-r">
                                         <div className="flex flex-col gap-3 my-8 mx-10">
@@ -53,41 +53,36 @@ const OrderDetails = () => {
                                     </div>
                                 </div>
 
-                                {order.orderItems && order.orderItems.map((item) => {
+                                {order.orderItems &&
+                                    order.orderItems.map((item) => {
+                                        const { _id, image, name, price, quantity } = item;
 
-                                    const { _id, image, name, price, quantity } = item;
-
-                                    return (
-                                        <div className="flex flex-col sm:flex-row min-w-full shadow rounded-sm bg-white px-2 py-5" key={_id}>
-
-                                            <div className="flex flex-col sm:flex-row sm:w-1/2 gap-2">
-                                                <div className="w-full sm:w-32 h-20">
-                                                    <img draggable="false" className="h-full w-full object-contain" src={image} alt={name} />
+                                        return (
+                                            <div className="flex flex-col sm:flex-row min-w-full shadow rounded-sm bg-white px-2 py-5" key={_id}>
+                                                <div className="flex flex-col sm:flex-row sm:w-1/2 gap-2">
+                                                    <div className="w-full sm:w-32 h-20">
+                                                        <img draggable="false" className="h-full w-full object-contain" src={image} alt={name} />
+                                                    </div>
+                                                    <div className="flex flex-col gap-1 overflow-hidden">
+                                                        <p className="text-sm">{name.length > 60 ? `${name.substring(0, 60)}...` : name}</p>
+                                                        <p className="text-xs text-gray-600 mt-2">Quantity: {quantity}</p>
+                                                        <p className="text-xs text-gray-600">Price: ₹{price.toLocaleString()}</p>
+                                                        <span className="font-medium">Total: ₹{(quantity * price).toLocaleString()}</span>
+                                                    </div>
                                                 </div>
-                                                <div className="flex flex-col gap-1 overflow-hidden">
-                                                    <p className="text-sm">{name.length > 60 ? `${name.substring(0, 60)}...` : name}</p>
-                                                    <p className="text-xs text-gray-600 mt-2">Quantity: {quantity}</p>
-                                                    <p className="text-xs text-gray-600">Price: ₹{price.toLocaleString()}</p>
-                                                    <span className="font-medium">Total: ₹{(quantity * price).toLocaleString()}</span>
+
+                                                <div className="flex flex-col w-full sm:w-1/2">
+                                                    <h3 className="font-medium sm:text-center">Order Status</h3>
+                                                    <TrackStepper
+                                                        orderOn={order.createdAt}
+                                                        shippedAt={order.shippedAt}
+                                                        deliveredAt={order.deliveredAt}
+                                                        activeStep={order.orderStatus === 'Delivered' ? 2 : order.orderStatus === 'Shipped' ? 1 : 0}
+                                                    />
                                                 </div>
                                             </div>
-
-                                            <div className="flex flex-col w-full sm:w-1/2">
-                                                <h3 className="font-medium sm:text-center">Order Status</h3>
-                                                <TrackStepper
-                                                    orderOn={order.createdAt}
-                                                    shippedAt={order.shippedAt}
-                                                    deliveredAt={order.deliveredAt}
-                                                    activeStep={
-                                                        order.orderStatus === "Delivered" ? 2 : order.orderStatus === "Shipped" ? 1 : 0
-                                                    }
-                                                />
-                                            </div>
-
-                                        </div>
-                                    )
-                                })
-                                }
+                                        );
+                                    })}
                             </div>
                         )}
                     </>

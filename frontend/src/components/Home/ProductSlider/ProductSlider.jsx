@@ -1,3 +1,4 @@
+import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Slider from 'react-slick';
@@ -6,7 +7,6 @@ import { settings } from '../DealSlider/DealSlider';
 import Product from './Product';
 
 const ProductSlider = ({ title, tagline }) => {
-
     const { loading, products } = useSelector((state) => state.products);
 
     return (
@@ -17,17 +17,16 @@ const ProductSlider = ({ title, tagline }) => {
                     <h1 className="text-xl font-medium">{title}</h1>
                     <p className="text-sm text-gray-400">{tagline}</p>
                 </div>
-                <Link to="/products" className="bg-primary-blue text-xs font-medium text-white px-5 py-2.5 rounded-sm shadow-lg uppercase">view all</Link>
+                <Link to="/products" className="bg-primary-blue text-xs font-medium text-white px-5 py-2.5 rounded-sm shadow-lg uppercase">
+                    view all
+                </Link>
             </div>
             <hr />
-            {loading ? null :
+            {loading ? null : (
                 <Slider {...settings} className="flex items-center justify-between p-1">
-                    {products && getRandomProducts(products, 12).map((product) => (
-                        <Product {...product} key={product._id} />
-                    ))}
+                    {products && getRandomProducts(products, 12).map((product) => <Product {...product} key={product._id} />)}
                 </Slider>
-            }
-
+            )}
         </section>
     );
 };

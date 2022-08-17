@@ -6,227 +6,175 @@ import { clearErrors, loginUser } from '../../actions/userAction';
 import { useSnackbar } from 'notistack';
 import BackdropLoader from '../Layouts/BackdropLoader';
 import MetaData from '../Layouts/MetaData';
+import React from 'react';
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const { enqueueSnackbar } = useSnackbar();
-  const location = useLocation();
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { enqueueSnackbar } = useSnackbar();
+    const location = useLocation();
 
-  const { loading, isAuthenticated, error } = useSelector(
-    (state) => state.user
-  );
+    const { loading, isAuthenticated, error } = useSelector((state) => state.user);
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    dispatch(loginUser(email, password));
-  };
+    const handleLogin = (e) => {
+        e.preventDefault();
+        dispatch(loginUser(email, password));
+    };
 
-  const redirect = location.search
-    ? location.search.split('=')[1]
-    : 'account';
+    const redirect = location.search ? location.search.split('=')[1] : 'account';
 
-  useEffect(() => {
-    if (error) {
-      enqueueSnackbar(error, { variant: 'error' });
-      dispatch(clearErrors());
-    }
-    if (isAuthenticated) {
-      navigate(`/${redirect}`);
-    }
-  }, [
-    dispatch,
-    error,
-    isAuthenticated,
-    redirect,
-    navigate,
-    enqueueSnackbar,
-  ]);
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, { variant: 'error' });
+            dispatch(clearErrors());
+        }
+        if (isAuthenticated) {
+            navigate(`/${redirect}`);
+        }
+    }, [dispatch, error, isAuthenticated, redirect, navigate, enqueueSnackbar]);
 
-  return (
-    <>
-      <MetaData title="Login | Omjinshop" />
-      {loading && <BackdropLoader />}
-      <div className="app-content">
-        <div className="u-s-p-y-60">
-          <div className="section__content">
-            <div className="container">
-              <div className="breadcrumb">
-                <div className="breadcrumb__wrap">
-                  <ul className="breadcrumb__list">
-                    <li className="has-separator">
-                      <a href="index.html">Home</a>
-                    </li>
-                    <li className="is-marked">
-                      <a href="signin.html">Signin</a>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="u-s-p-b-60">
-          <div className="section__intro u-s-m-b-60">
-            <div className="container">
-              <div className="row">
-                <div className="col-lg-12">
-                  <div className="section__text-wrap">
-                    <h1 className="section__heading u-c-secondary">
-                      ALREADY REGISTERED?
-                    </h1>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="section__content">
-            <div className="container">
-              <div className="row row--center">
-                <div className="col-lg-10 col-md-12 u-s-m-b-12">
-                  <div className="l-f-o">
-                    <div className="l-f-o__pad-box">
-                      <div className="row row--center">
-                        <div className="col-lg-5 col-md-8 u-s-m-b-30">
-                          <h1 className="gl-h1">I'M NEW CUSTOMER</h1>
-
-                          <span className="gl-text u-s-m-b-30">
-                            By creating an account with our store, you
-                            will be able to move through the checkout
-                            process faster, store shipping addresses,
-                            view and track your orders in your account
-                            and more.
-                          </span>
-                          <div className="u-s-m-b-15">
-                            <Link
-                              to="/register"
-                              className="l-f-o__create-link btn--e-transparent-brand-b-2"
-                            >
-                              CREATE AN ACCOUNT
-                            </Link>
-                          </div>
-                        </div>
-                        <div className="col-lg-2 col-md-8 u-s-m-b-30"></div>
-                        <div className="col-lg-5 col-md-8 u-s-m-b-30">
-                          <h1 className="gl-h1">SIGNIN</h1>
-                          <span className="gl-text u-s-m-b-30">
-                            If you have an account with us, please log
-                            in.
-                          </span>
-                          <form
-                            className="l-f-o__form"
-                            onSubmit={handleLogin}
-                          >
-                            <div className="gl-s-api">
-                              <div className="u-s-m-b-15">
-                                <button
-                                  className="gl-s-api__btn gl-s-api__btn--fb"
-                                  type="button"
-                                >
-                                  <i className="fab fa-facebook-f"></i>
-
-                                  <span>Signin with Facebook</span>
-                                </button>
-                              </div>
-                              <div className="u-s-m-b-15">
-                                <button
-                                  className="gl-s-api__btn gl-s-api__btn--gplus"
-                                  type="button"
-                                >
-                                  <i className="fab fa-google"></i>
-
-                                  <span>Signin with Google</span>
-                                </button>
-                              </div>
-                            </div>
-                            <div className="u-s-m-b-30">
-                              <label
-                                className="gl-label"
-                                htmlFor="email"
-                              >
-                                E-MAIL *
-                              </label>
-
-                              <input
-                                className="input-text input-text--primary-style"
-                                type="text"
-                                id="email"
-                                required
-                                placeholder="Enter E-mail"
-                                onChange={(e) =>
-                                  setEmail(e.target.value)
-                                }
-                              />
-                            </div>
-                            <div className="u-s-m-b-30">
-                              <label
-                                className="gl-label"
-                                htmlFor="password"
-                              >
-                                PASSWORD *
-                              </label>
-
-                              <input
-                                className="input-text input-text--primary-style"
-                                type="text"
-                                id="password"
-                                required
-                                placeholder="Enter Password"
-                                onChange={(e) =>
-                                  setPassword(e.target.value)
-                                }
-                              />
-                            </div>
-                            <div className="gl-inline">
-                              <div className="u-s-m-b-30">
-                                <button
-                                  className="btn btn--e-transparent-brand-b-2"
-                                  type="submit"
-                                >
-                                  LOGIN
-                                </button>
-                              </div>
-                              <div className="u-s-m-b-30">
-                                <Link
-                                  to="/password/forgot"
-                                  className="gl-link"
-                                >
-                                  Lost Your Password?
-                                </Link>
-                              </div>
-                            </div>
-                            <div className="u-s-m-b-30">
-                              <div className="check-box">
-                                <input
-                                  type="checkbox"
-                                  id="remember-me"
-                                />
-                                <div className="check-box__state check-box__state--primary">
-                                  <label
-                                    className="check-box__label"
-                                    htmlFor="remember-me"
-                                  >
-                                    Remember Me
-                                  </label>
+    return (
+        <>
+            <MetaData title="Login | Omjinshop" />
+            {loading && <BackdropLoader />}
+            <div className="app-content">
+                <div className="u-s-p-y-60">
+                    <div className="section__content">
+                        <div className="container">
+                            <div className="breadcrumb">
+                                <div className="breadcrumb__wrap">
+                                    <ul className="breadcrumb__list">
+                                        <li className="has-separator">
+                                            <a href="#">Home</a>
+                                        </li>
+                                        <li className="is-marked">
+                                            <a href="#">Signin</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                              </div>
                             </div>
-                          </form>
                         </div>
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                <div className="u-s-p-b-60">
+                    <div className="section__intro u-s-m-b-60">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-12">
+                                    <div className="section__text-wrap">
+                                        <h1 className="section__heading u-c-secondary">ALREADY REGISTERED?</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="section__content">
+                        <div className="container">
+                            <div className="row row--center">
+                                <div className="col-lg-10 col-md-12 u-s-m-b-12">
+                                    <div className="l-f-o">
+                                        <div className="l-f-o__pad-box">
+                                            <div className="row row--center">
+                                                <div className="col-lg-5 col-md-8 u-s-m-b-30">
+                                                    <h1 className="gl-h1">I'M NEW CUSTOMER</h1>
 
-      {/* <main className="w-full mt-12 sm:pt-20 sm:mt-0">
+                                                    <span className="gl-text u-s-m-b-30">
+                                                        By creating an account with our store, you will be able to move through the checkout process
+                                                        faster, store shipping addresses, view and track your orders in your account and more.
+                                                    </span>
+                                                    <div className="u-s-m-b-15">
+                                                        <Link to="/register" className="l-f-o__create-link btn--e-transparent-brand-b-2">
+                                                            CREATE AN ACCOUNT
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                                <div className="col-lg-2 col-md-8 u-s-m-b-30"></div>
+                                                <div className="col-lg-5 col-md-8 u-s-m-b-30">
+                                                    <h1 className="gl-h1">SIGNIN</h1>
+                                                    <span className="gl-text u-s-m-b-30">If you have an account with us, please log in.</span>
+                                                    <form className="l-f-o__form" onSubmit={handleLogin}>
+                                                        <div className="gl-s-api">
+                                                            <div className="u-s-m-b-15">
+                                                                <button className="gl-s-api__btn gl-s-api__btn--fb" type="button">
+                                                                    <i className="fab fa-facebook-f"></i>
+
+                                                                    <span>Signin with Facebook</span>
+                                                                </button>
+                                                            </div>
+                                                            <div className="u-s-m-b-15">
+                                                                <button className="gl-s-api__btn gl-s-api__btn--gplus" type="button">
+                                                                    <i className="fab fa-google"></i>
+
+                                                                    <span>Signin with Google</span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                        <div className="u-s-m-b-30">
+                                                            <label className="gl-label" htmlFor="email">
+                                                                E-MAIL *
+                                                            </label>
+
+                                                            <input
+                                                                className="input-text input-text--primary-style"
+                                                                type="text"
+                                                                id="email"
+                                                                required
+                                                                placeholder="Enter E-mail"
+                                                                onChange={(e) => setEmail(e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="u-s-m-b-30">
+                                                            <label className="gl-label" htmlFor="password">
+                                                                PASSWORD *
+                                                            </label>
+
+                                                            <input
+                                                                className="input-text input-text--primary-style"
+                                                                type="password"
+                                                                id="password"
+                                                                required
+                                                                placeholder="Enter Password"
+                                                                onChange={(e) => setPassword(e.target.value)}
+                                                            />
+                                                        </div>
+                                                        <div className="gl-inline">
+                                                            <div className="u-s-m-b-30">
+                                                                <button className="btn btn--e-transparent-brand-b-2" type="submit">
+                                                                    LOGIN
+                                                                </button>
+                                                            </div>
+                                                            <div className="u-s-m-b-30">
+                                                                <Link to="/password/forgot" className="gl-link">
+                                                                    Lost Your Password?
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                        <div className="u-s-m-b-30">
+                                                            <div className="check-box">
+                                                                <input type="checkbox" id="remember-me" />
+                                                                <div className="check-box__state check-box__state--primary">
+                                                                    <label className="check-box__label" htmlFor="remember-me">
+                                                                        Remember Me
+                                                                    </label>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {/* <main className="w-full mt-12 sm:pt-20 sm:mt-0">
         <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
           <div className="loginSidebar bg-primary-blue p-10 pr-12 hidden sm:flex flex-col gap-4 w-2/5">
             <h1 className="font-medium text-white text-3xl">Login</h1>
@@ -301,8 +249,8 @@ const Login = () => {
           </div>
         </div>
       </main> */}
-    </>
-  );
+        </>
+    );
 };
 
 export default Login;

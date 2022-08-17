@@ -1,0 +1,16 @@
+{
+    "editor.autoClosingBrackets": "always",
+    "editor.autoClosingDelete": "always",
+    "editor.autoClosingQuotes": "always",
+    "editor.bracketPairColorization.independentColorPoolPerBracketType": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.foldingImportsByDefault": true,
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "diffEditor.codeLens": true,
+    "breadcrumbs.showConstructors": false,
+    "workbench.editor.closeOnFileDelete": true,
+    "problems.showCurrentInStatus": true,
+    "timeline.pageOnScroll": true
+}

@@ -2,9 +2,9 @@ import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 import CircleIcon from '@mui/icons-material/Circle';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../../utils/functions';
+import React from 'react';
 
 const OrderItem = (props) => {
-
     const { orderId, name, image, price, quantity, createdAt, deliveredAt, orderStatus } = props;
 
     return (
@@ -17,7 +17,6 @@ const OrderItem = (props) => {
 
             {/* <!-- order desc container --> */}
             <div className="flex flex-col sm:flex-row justify-between w-full">
-
                 <div className="flex flex-col gap-1 overflow-hidden">
                     <p className="text-sm">{name.length > 40 ? `${name.substring(0, 40)}...` : name}</p>
                     <p className="text-xs text-gray-500 mt-2">Quantity: {quantity}</p>
@@ -29,41 +28,40 @@ const OrderItem = (props) => {
 
                     <div className="flex flex-col gap-1.5">
                         <p className="text-sm font-medium flex items-center gap-1">
-                            {orderStatus === "Shipped" ? (
+                            {orderStatus === 'Shipped' ? (
                                 <>
                                     <span className="text-primary-orange pb-0.5">
-                                        <CircleIcon sx={{ fontSize: "14px" }} />
+                                        <CircleIcon sx={{ fontSize: '14px' }} />
                                     </span>
                                     Shipped
                                 </>
-                            ) : orderStatus === "Delivered" ? (
+                            ) : orderStatus === 'Delivered' ? (
                                 <>
                                     <span className="text-primary-green pb-0.5">
-                                        <CircleIcon sx={{ fontSize: "14px" }} />
+                                        <CircleIcon sx={{ fontSize: '14px' }} />
                                     </span>
                                     Delivered on {formatDate(deliveredAt)}
                                 </>
                             ) : (
                                 <>
                                     <span className="text-primary-green pb-0.5">
-                                        <RadioButtonUncheckedIcon sx={{ fontSize: "14px" }} />
+                                        <RadioButtonUncheckedIcon sx={{ fontSize: '14px' }} />
                                     </span>
                                     Ordered on {formatDate(createdAt)}
                                 </>
                             )}
                         </p>
-                        {orderStatus === "Delivered" ?
+                        {orderStatus === 'Delivered' ? (
                             <p className="text-xs ml-1">Your item has been {orderStatus}</p>
-                            : orderStatus === "Shipped" ?
-                                <p className="text-xs ml-1">Your item has been {orderStatus}</p> :
-                                <p className="text-xs ml-1">Seller has processed your order</p>
-                        }
+                        ) : orderStatus === 'Shipped' ? (
+                            <p className="text-xs ml-1">Your item has been {orderStatus}</p>
+                        ) : (
+                            <p className="text-xs ml-1">Seller has processed your order</p>
+                        )}
                     </div>
                 </div>
-
             </div>
             {/* <!-- order desc container --> */}
-
         </Link>
     );
 };

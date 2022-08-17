@@ -1,3 +1,4 @@
+import React from 'react';
 
 const FormSidebar = ({ title, tag }) => {
     return (
@@ -5,7 +6,7 @@ const FormSidebar = ({ title, tag }) => {
             <h1 className="font-medium text-white text-3xl">{title}</h1>
             <p className="text-gray-200 text-lg pr-2">{tag}</p>
         </div>
-    )
-}
+    );
+};
 
-export default FormSidebar
+export default FormSidebar;

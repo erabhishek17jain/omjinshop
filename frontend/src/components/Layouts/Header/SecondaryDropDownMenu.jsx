@@ -3,42 +3,40 @@ import BusinessCenterIcon from '@mui/icons-material/BusinessCenter';
 import LiveHelpIcon from '@mui/icons-material/LiveHelp';
 import TrendingUpIcon from '@mui/icons-material/TrendingUp';
 import DownloadIcon from '@mui/icons-material/Download';
+import React from 'react';
 
 const SecondaryDropDownMenu = () => {
-
     const navs = [
         {
-            title: "Notification Preferences",
-            icon: <NotificationsIcon sx={{ fontSize: "18px" }} />,
-            redirect: "https://www.omjinshop.com/communication-preferences/push",
+            title: 'Notification Preferences',
+            icon: <NotificationsIcon sx={{ fontSize: '18px' }} />,
+            redirect: 'https://www.omjinshop.com/communication-preferences/push',
         },
         {
-            title: "Sell on Omjinshop",
-            icon: <BusinessCenterIcon sx={{ fontSize: "18px" }} />,
-            redirect: "https://seller.omjinshop.com/sell-online",
+            title: 'Sell on Omjinshop',
+            icon: <BusinessCenterIcon sx={{ fontSize: '18px' }} />,
+            redirect: 'https://seller.omjinshop.com/sell-online',
         },
         {
-            title: "24x7 Customer Care",
-            icon: <LiveHelpIcon sx={{ fontSize: "18px" }} />,
-            redirect: "https://www.omjinshop.com/helpcentre",
+            title: '24x7 Customer Care',
+            icon: <LiveHelpIcon sx={{ fontSize: '18px' }} />,
+            redirect: 'https://www.omjinshop.com/helpcentre',
         },
         {
-            title: "Advertise",
-            icon: <TrendingUpIcon sx={{ fontSize: "18px" }} />,
-            redirect: "https://advertising.omjinshop.com",
+            title: 'Advertise',
+            icon: <TrendingUpIcon sx={{ fontSize: '18px' }} />,
+            redirect: 'https://advertising.omjinshop.com',
         },
         {
-            title: "Download App",
-            icon: <DownloadIcon sx={{ fontSize: "18px" }} />,
-            redirect: "https://www.omjinshop.com/mobile-apps",
+            title: 'Download App',
+            icon: <DownloadIcon sx={{ fontSize: '18px' }} />,
+            redirect: 'https://www.omjinshop.com/mobile-apps',
         },
-    ]
+    ];
 
     return (
         <div className="absolute w-60 -right-2 top-9 bg-white shadow-2xl rounded flex-col text-sm">
-
             {navs.map((item, i) => {
-
                 const { title, icon, redirect } = item;
 
                 return (
@@ -46,7 +44,7 @@ const SecondaryDropDownMenu = () => {
                         <span className="text-primary-blue">{icon}</span>
                         {title}
                     </a>
-                )
+                );
             })}
 
             <div className="absolute right-1/2 -top-2.5">
