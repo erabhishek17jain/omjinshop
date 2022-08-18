@@ -1,20 +1,12 @@
 import React, { useState } from 'react';
 import { useSnackbar } from 'notistack';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import Searchbar from './Searchbar';
-import logo from '../../../assets/images/logo.png';
-import PrimaryDropDownMenu from './PrimaryDropDownMenu';
-import SecondaryDropDownMenu from './SecondaryDropDownMenu';
 import logo1 from '../../../assets/images/logo/logo.png';
-import bannerMega0 from '../../../assets/images/banners/banner-mega-0.jpg';
-import product3 from '../../../assets/images/product/electronic/product3.jpg';
-import { logoutUser } from '../../../actions/userAction';
+import { logoutUser } from '../../../middleware/actions/userAction';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MegaMenu from './MegaMenu';
-import CartPopup from '../../Cart/CartPopup/CartPopup';
+import HeaderCart from '../../Cart/HeaderCart/HeaderCart';
 
 const Header = () => {
     const dispatch = useDispatch();
@@ -181,7 +173,7 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/wishlist">
+                                            <Link to="/account/wishlist">
                                                 <i className="far fa-heart"></i>
                                             </Link>
                                         </li>
@@ -190,7 +182,7 @@ const Header = () => {
                                                 <i className="fas fa-shopping-bag"></i>
                                                 <span className="total-item-round">{cartItems.length}</span>
                                             </a>
-                                            <CartPopup />
+                                            <HeaderCart />
                                         </li>
                                     </ul>
                                 </div>

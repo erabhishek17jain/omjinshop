@@ -4,7 +4,7 @@ import StarsIcon from '@mui/icons-material/Stars';
 import CardGiftcardIcon from '@mui/icons-material/CardGiftcard';
 import HelpIcon from '@mui/icons-material/Help';
 import paymentMethods from '../../../assets/images/payment-methods.svg';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const footerLinks = [
     {
@@ -130,18 +130,15 @@ const Footer = () => {
                                             <span className="outer-footer__content-title">Contact Us</span>
                                             <div className="outer-footer__text-wrap">
                                                 <i className="fas fa-home"></i>
-
-                                                <span>4247 Ashford Drive Virginia VA-20006 USA</span>
+                                                <span>301, Parasnath Apartment Samarth city Nainod Road Near Gomatgiri Indore (M.P.)</span>
                                             </div>
                                             <div className="outer-footer__text-wrap">
                                                 <i className="fas fa-phone-volume"></i>
-
-                                                <span>(+0) 900 901 904</span>
+                                                <span>(+91) - 8305053048</span>
                                             </div>
                                             <div className="outer-footer__text-wrap">
                                                 <i className="far fa-envelope"></i>
-
-                                                <span>contact@domain.com</span>
+                                                <span>contact@omjinshop.com</span>
                                             </div>
                                             <div className="outer-footer__social">
                                                 <ul>
@@ -182,19 +179,19 @@ const Footer = () => {
                                                     <div className="outer-footer__list-wrap">
                                                         <ul>
                                                             <li>
-                                                                <a href="#">Cart</a>
+                                                                <Link to="/cart">Cart</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Account</a>
+                                                                <Link to="/account">Account</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Manufacturer</a>
+                                                                <Link to="/">Manufacturer</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Finance</a>
+                                                                <Link to="/">Finance</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Shop</a>
+                                                                <Link to="/">Shop</Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -206,19 +203,19 @@ const Footer = () => {
                                                         <span className="outer-footer__content-title">Our Company</span>
                                                         <ul>
                                                             <li>
-                                                                <a href="#">About us</a>
+                                                                <Link to="/about">About us</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Contact Us</a>
+                                                                <Link to="/contact">Contact Us</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Sitemap</a>
+                                                                <Link to="/faqs">FAQs</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Delivery</a>
+                                                                <Link to="/">Delivery</Link>
                                                             </li>
                                                             <li>
-                                                                <a href="#">Store</a>
+                                                                <Link to="/">Store</Link>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -279,9 +276,9 @@ const Footer = () => {
                                     <div className="col-lg-12">
                                         <div className="lower-footer__content">
                                             <div className="lower-footer__copyright">
-                                                <span>Copyright © 2018</span>
+                                                <span>Copyright © 2022</span>
 
-                                                <a href="#">Reshop</a>
+                                                <a href="#">Om Jin Shop</a>
 
                                                 <span>All Right Reserved</span>
                                             </div>

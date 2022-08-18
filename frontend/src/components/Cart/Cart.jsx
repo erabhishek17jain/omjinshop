@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { getNavigation } from '../../utils/services';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import MetaData from '../Layouts/MetaData';
-import CartItem from './CartItem';
-import EmptyBox from './EmptyBox';
-import PriceSidebar from './PriceSidebar';
-import SaveForLaterItem from './SaveForLaterItem';
+import CartItem from './CartItem/CartItem';
+import EmptyBox from '../Layouts/EmptyBox';
+import PriceSidebar from '../User/Orders/Shipping/PriceSidebar';
+import SaveForLater from './SaveForLater/SaveForLater';
 
 const Cart = () => {
     const navigate = useNavigate();
@@ -16,99 +17,83 @@ const Cart = () => {
         navigate('/login?redirect=shipping');
     };
 
+    const [navigation] = useState([
+        { title: 'Home', path: '/' },
+        { title: 'Checkout', path: '/cart' },
+    ]);
+
     return (
         <>
             <MetaData title="Shopping Cart | Omjinshop" />
-            <div className="app-content">
-                <div className="u-s-p-y-60">
-                    <div className="section__content">
-                        <div className="container">
-                            <div className="breadcrumb">
-                                <div className="breadcrumb__wrap">
-                                    <ul className="breadcrumb__list">
-                                        <li className="has-separator">
-                                            <a href="#">Home</a>
-                                        </li>
-                                        <li className="is-marked">
-                                            <a href="#">Shopping Cart</a>
-                                        </li>
-                                    </ul>
-                                </div>
+            {getNavigation(navigation)}
+            <div className="u-s-p-b-60">
+                <div className="section__content">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                                {cartItems && cartItems.length === 0 && <EmptyBox />}
+                                {cartItems && (
+                                    <div className="table-responsive">
+                                        <table className="table-p">
+                                            <tbody>
+                                                {Array.from(cartItems).map((item) => (
+                                                    <CartItem {...item} inCart={true} />
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                )}
                             </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="u-s-p-b-60">
-                    <div className="section__content">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                                    {cartItems && cartItems.length === 0 && <EmptyBox />}
-                                    {cartItems && (
-                                        <div className="table-responsive">
-                                            <table className="table-p">
-                                                <tbody>
-                                                    {Array.from(cartItems).map((item) => (
-                                                        <CartItem {...item} inCart={true} />
-                                                    ))}
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    )}
-                                </div>
-                                <div className="col-lg-12 u-s-m-b-30">
-                                    <div className="route-box">
-                                        <div className="route-box__g1">
-                                            <a className="route-box__link" href="#">
-                                                <i className="fas fa-long-arrow-alt-left"></i>
-                                                <span>CONTINUE SHOPPING</span>
-                                            </a>
-                                        </div>
-                                        <div className="route-box__g2">
-                                            <a className="route-box__link" href="#">
-                                                <i className="fas fa-trash"></i>
-                                                <span>CLEAR CART</span>
-                                            </a>
-                                        </div>
+                            <div className="col-lg-12 u-s-m-b-30">
+                                <div className="route-box">
+                                    <div className="route-box__g1">
+                                        <a className="route-box__link" href="#">
+                                            <i className="fas fa-long-arrow-alt-left"></i>
+                                            <span>CONTINUE SHOPPING</span>
+                                        </a>
+                                    </div>
+                                    <div className="route-box__g2">
+                                        <a className="route-box__link" href="#">
+                                            <i className="fas fa-trash"></i>
+                                            <span>CLEAR CART</span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
-                            <div className="row">
-                                <div className="col-lg-8">
-                                    <div className="row">
-                                        <div className="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
-                                            {saveForLaterItems && saveForLaterItems.length === 0 && <EmptyBox />}
-                                            {saveForLaterItems && (
-                                                <div className="table-responsive">
-                                                    <table className="table-p">
-                                                        <tbody>
-                                                            {saveForLaterItems && saveForLaterItems.map((item) => <SaveForLaterItem {...item} />)}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            )}
-                                        </div>
-                                        <div className="col-lg-12 u-s-m-b-30">
-                                            <div className="route-box">
-                                                <div className="route-box__g1">
-                                                    <a className="route-box__link" href="#">
-                                                        <i className="fas fa-sync"></i>
-                                                        <span>SAVED FOR LATER ({saveForLaterItems.length})</span>
-                                                    </a>
-                                                </div>
-                                                <div className="route-box__g2">
-                                                    <a className="route-box__link" href="#">
-                                                        <i className="fas fa-trash"></i>
-                                                        <span>CLEAR ALL</span>
-                                                    </a>
-                                                </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-lg-8">
+                                <div className="row">
+                                    <div className="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
+                                        {saveForLaterItems && saveForLaterItems.length === 0 && <EmptyBox />}
+                                        {saveForLaterItems && (
+                                            <div className="table-responsive">
+                                                <table className="table-p">
+                                                    <tbody>{saveForLaterItems && saveForLaterItems.map((item) => <SaveForLater {...item} />)}</tbody>
+                                                </table>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="col-lg-12 u-s-m-b-30">
+                                        <div className="route-box">
+                                            <div className="route-box__g1">
+                                                <a className="route-box__link" href="#">
+                                                    <i className="fas fa-sync"></i>
+                                                    <span>SAVED FOR LATER ({saveForLaterItems.length})</span>
+                                                </a>
+                                            </div>
+                                            <div className="route-box__g2">
+                                                <a className="route-box__link" href="#">
+                                                    <i className="fas fa-trash"></i>
+                                                    <span>CLEAR ALL</span>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-lg-4 col-md-6 u-s-m-b-30">
-                                    <PriceSidebar cartItems={cartItems} placeOrderHandler={placeOrderHandler} />
-                                </div>
+                            </div>
+                            <div className="col-lg-4 col-md-6 u-s-m-b-30">
+                                <PriceSidebar cartItems={cartItems} placeOrderHandler={placeOrderHandler} />
                             </div>
                         </div>
                     </div>
@@ -137,7 +122,7 @@ const Cart = () => {
             </div>
             <div className="flex flex-col mt-5 shadow bg-white">
               <span className="font-medium text-lg px-2 sm:px-8 py-4 border-b">Saved For Later ({saveForLaterItems.length})</span>
-              {saveForLaterItems && saveForLaterItems.map((item) => <SaveForLaterItem {...item} />)}
+              {saveForLaterItems && saveForLaterItems.map((item) => <SaveForLater {...item} />)}
             </div>
           </div>
           <PriceSidebar cartItems={cartItems} />

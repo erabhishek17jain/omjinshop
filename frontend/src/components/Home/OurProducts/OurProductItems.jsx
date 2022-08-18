@@ -1,10 +1,6 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import Slider from 'react-slick';
-import { getRandomProducts } from '../../../utils/functions';
-import { settings } from '../DealSlider/DealSlider';
 import OurProduct from './OurProduct';
 
 const OurProductItems = ({ title, count, type }) => {

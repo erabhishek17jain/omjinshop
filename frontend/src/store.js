@@ -1,12 +1,27 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
-import { forgotPasswordReducer, profileReducer, userReducer, allUsersReducer, userDetailsReducer } from './reducers/userReducer';
-import { newProductReducer, newReviewReducer, productDetailsReducer, productReducer, productsReducer, productReviewsReducer, reviewReducer } from './reducers/productReducer';
-import { cartReducer } from './reducers/cartReducer';
-import { saveForLaterReducer } from './reducers/saveForLaterReducer';
-import { allOrdersReducer, myOrdersReducer, newOrderReducer, orderDetailsReducer, orderReducer, paymentStatusReducer } from './reducers/orderReducer';
-import { wishlistReducer } from './reducers/wishlistReducer';
+import { forgotPasswordReducer, profileReducer, userReducer, allUsersReducer, userDetailsReducer } from './middleware/reducers/userReducer';
+import {
+    newProductReducer,
+    newReviewReducer,
+    productDetailsReducer,
+    productReducer,
+    productsReducer,
+    productReviewsReducer,
+    reviewReducer,
+} from './middleware/reducers/productReducer';
+import { cartReducer } from './middleware/reducers/cartReducer';
+import { saveForLaterReducer } from './middleware/reducers/saveForLaterReducer';
+import {
+    allOrdersReducer,
+    myOrdersReducer,
+    newOrderReducer,
+    orderDetailsReducer,
+    orderReducer,
+    paymentStatusReducer,
+} from './middleware/reducers/orderReducer';
+import { wishlistReducer } from './middleware/reducers/wishlistReducer';
 
 const reducer = combineReducers({
     user: userReducer,
@@ -34,31 +49,19 @@ const reducer = combineReducers({
 
 let initialState = {
     cart: {
-        cartItems: localStorage.getItem('cartItems')
-            ? JSON.parse(localStorage.getItem('cartItems'))
-            : [],
-        shippingInfo: localStorage.getItem("shippingInfo")
-            ? JSON.parse(localStorage.getItem("shippingInfo"))
-            : {},
+        cartItems: localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [],
+        shippingInfo: localStorage.getItem('shippingInfo') ? JSON.parse(localStorage.getItem('shippingInfo')) : {},
     },
     saveForLater: {
-        saveForLaterItems: localStorage.getItem('saveForLaterItems')
-            ? JSON.parse(localStorage.getItem('saveForLaterItems'))
-            : [],
+        saveForLaterItems: localStorage.getItem('saveForLaterItems') ? JSON.parse(localStorage.getItem('saveForLaterItems')) : [],
     },
     wishlist: {
-        wishlistItems: localStorage.getItem('wishlistItems')
-            ? JSON.parse(localStorage.getItem('wishlistItems'))
-            : [],
+        wishlistItems: localStorage.getItem('wishlistItems') ? JSON.parse(localStorage.getItem('wishlistItems')) : [],
     },
 };
 
 const middleware = [thunk];
 
-const store = createStore(
-    reducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(...middleware))
-);
+const store = createStore(reducer, initialState, composeWithDevTools(applyMiddleware(...middleware)));
 
 export default store;

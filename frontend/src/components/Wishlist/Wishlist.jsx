@@ -1,36 +1,61 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
+import OrderSideBar from '../User/Orders/OrderDetails/OrderSideBar';
 import MetaData from '../Layouts/MetaData';
-import MinCategory from '../Layouts/MinCategory';
-import Sidebar from '../User/Sidebar';
+import Sidebar from '../User/Accounts/Sidebar';
 import WishlistProduct from './WishlistProduct';
+import { getNavigation } from '../../utils/services';
+import EmptyBox from '../Layouts/EmptyBox';
 
 const Wishlist = () => {
     const { wishlistItems } = useSelector((state) => state.wishlist);
 
+    const [navigation, setNavigation] = useState([
+        { title: 'Home', path: '/' },
+        { title: 'Wishlist', path: '/account/wishlist' },
+    ]);
+
     return (
         <>
-            <MetaData title="Wishlist | Omjinshop" />
-            <div className="col-lg-9 col-md-12">
+            <MetaData title="Wishlist" />
+            {getNavigation(navigation)}
+            <div className="u-s-p-b-60">
                 <div className="section__content">
-                    <div className="container">
-                        <div className="row">
-                            <div className="col-lg-12 col-md-12 col-sm-12">
-                                {wishlistItems.map((item, index) => <WishlistProduct {...item} key={index} />).reverse()}
-                            </div>
-                            <div className="col-lg-12">
-                                <div className="route-box">
-                                    <div className="route-box__g">
-                                        <a className="route-box__link" href="#">
-                                            <i className="fas fa-long-arrow-alt-left"></i>
-                                            <span>CONTINUE SHOPPING</span>
-                                        </a>
-                                    </div>
-                                    <div className="route-box__g">
-                                        <a className="route-box__link" href="#">
-                                            <i className="fas fa-trash"></i>
-                                            <span>CLEAR WISHLIST</span>
-                                        </a>
+                    <div className="dash">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-3 col-md-12">
+                                    <Sidebar activeTab={'wishlist'} />
+                                    <OrderSideBar />
+                                </div>
+                                <div className="col-lg-9 col-md-12">
+                                    <div className="section__content">
+                                        <div className="container">
+                                            <div className="row">
+                                                <div className="col-lg-12 col-md-12 col-sm-12">
+                                                    {wishlistItems && wishlistItems.length === 0 && <EmptyBox title={'wishlist'} />}
+                                                    {wishlistItems.map((item, index) => <WishlistProduct {...item} key={index} />).reverse()}
+                                                </div>
+                                                {wishlistItems && wishlistItems.length !== 0 && (
+                                                    <div className="col-lg-12">
+                                                        <div className="route-box">
+                                                            <div className="route-box__g">
+                                                                <a className="route-box__link" href="#">
+                                                                    <i className="fas fa-long-arrow-alt-left"></i>
+                                                                    <span>CONTINUE SHOPPING</span>
+                                                                </a>
+                                                            </div>
+                                                            <div className="route-box__g">
+                                                                <a className="route-box__link" href="#">
+                                                                    <i className="fas fa-trash"></i>
+                                                                    <span>CLEAR WISHLIST</span>
+                                                                </a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

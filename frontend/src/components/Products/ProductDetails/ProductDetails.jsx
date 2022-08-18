@@ -3,9 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Slider from 'react-slick';
-import { clearErrors, getProductDetails, getSimilarProducts, newReview } from '../../../actions/productAction';
+import { clearErrors, getProductDetails, getSimilarProducts, newReview } from '../../../middleware/actions/productAction';
 import { NextBtn, PreviousBtn } from '../../Home/Banner/Banner';
-import ProductSlider from '../../Home/ProductSlider/ProductSlider';
 import Loader from '../../Layouts/Loader';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import FlashOnIcon from '@mui/icons-material/FlashOn';
@@ -22,9 +21,9 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Rating from '@mui/material/Rating';
 import TextField from '@mui/material/TextField';
 import { NEW_REVIEW_RESET } from '../../../constants/productConstants';
-import { addItemsToCart } from '../../../actions/cartAction';
-import { getDeliveryDate, getDiscount } from '../../../utils/functions';
-import { addToWishlist, removeFromWishlist } from '../../../actions/wishlistAction';
+import { addItemsToCart } from '../../../middleware/actions/cartAction';
+import { getDeliveryDate, getDiscount } from '../../../utils/services';
+import { addToWishlist, removeFromWishlist } from '../../../middleware/actions/wishlistAction';
 import MinCategory from '../../Layouts/MinCategory';
 import MetaData from '../../Layouts/MetaData';
 
@@ -100,7 +99,7 @@ const ProductDetails = () => {
 
     const buyNow = () => {
         addToCartHandler();
-        navigate('/shipping');
+        navigate('/account/shipping');
     };
 
     useEffect(() => {
@@ -126,6 +125,1505 @@ const ProductDetails = () => {
 
     return (
         <>
+            <div className="u-s-p-t-90">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-5">
+                            <div className="pd-breadcrumb u-s-m-b-30">
+                                <ul className="pd-breadcrumb__list">
+                                    <li className="has-separator">
+                                        <a href="index.hml">Home</a>
+                                    </li>
+                                    <li className="has-separator">
+                                        <a href="shop-side-version-2.html">Electronics</a>
+                                    </li>
+                                    <li className="has-separator">
+                                        <a href="shop-side-version-2.html">DSLR Cameras</a>
+                                    </li>
+                                    <li className="is-marked">
+                                        <a href="shop-side-version-2.html">Nikon Cameras</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="pd u-s-m-b-30">
+                                <div className="pd-wrap">
+                                    <div id="pd-o-initiate" className="slick-initialized slick-slider">
+                                        <div className="slick-list draggable">
+                                            <div className="slick-track" style={{ opacity: 1, width: 2225 }}>
+                                                <div
+                                                    className="slick-slide slick-current slick-active"
+                                                    data-slick-index="0"
+                                                    aria-hidden="false"
+                                                    style={{ width: 445, position: 'relative', left: 0, top: 0, zIndex: 999, opacity: 1 }}
+                                                >
+                                                    <div>
+                                                        <div
+                                                            className="pd-o-img-wrap"
+                                                            data-src="images/product/product-d-1.1ade8af621f424e959fa483d03d4f322.jpg"
+                                                            style={{ width: '100%', display: 'inline-block' }}
+                                                        >
+                                                            <img
+                                                                className="u-img-fluid"
+                                                                src="images/product/product-d-1.1ade8af621f424e959fa483d03d4f322.jpg"
+                                                                data-zoom-image="images/product/product-d-1.1ade8af621f424e959fa483d03d4f322.jpg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="slick-slide"
+                                                    data-slick-index="1"
+                                                    aria-hidden="true"
+                                                    style={{ width: 445, position: 'relative', left: -445, top: 0, zIndex: 998, opacity: 0 }}
+                                                    tabindex="-1"
+                                                >
+                                                    <div>
+                                                        <div
+                                                            className="pd-o-img-wrap"
+                                                            data-src="images/product/product-d-2.69d0b1076353c1aa6a6f07ba752b762b.jpg"
+                                                            style={{ width: '100%', display: 'inline-block' }}
+                                                        >
+                                                            <img
+                                                                className="u-img-fluid"
+                                                                src="images/product/product-d-2.69d0b1076353c1aa6a6f07ba752b762b.jpg"
+                                                                data-zoom-image="images/product/product-d-2.69d0b1076353c1aa6a6f07ba752b762b.jpg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="slick-slide"
+                                                    data-slick-index="2"
+                                                    aria-hidden="true"
+                                                    style={{ width: 445, position: 'relative', left: -890, top: 0, zIndex: 998, opacity: 0 }}
+                                                    tabindex="-1"
+                                                >
+                                                    <div>
+                                                        <div
+                                                            className="pd-o-img-wrap"
+                                                            data-src="images/product/product-d-3.cbe00bd2f53599119f5ce8620b274c09.jpg"
+                                                            style={{ width: '100%', display: 'inline-block' }}
+                                                        >
+                                                            <img
+                                                                className="u-img-fluid"
+                                                                src="images/product/product-d-3.cbe00bd2f53599119f5ce8620b274c09.jpg"
+                                                                data-zoom-image="images/product/product-d-3.cbe00bd2f53599119f5ce8620b274c09.jpg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="slick-slide"
+                                                    data-slick-index="3"
+                                                    aria-hidden="true"
+                                                    style={{ width: 445, position: 'relative', left: -1335, top: 0, zIndex: 998, opacity: 0 }}
+                                                    tabindex="-1"
+                                                >
+                                                    <div>
+                                                        <div
+                                                            className="pd-o-img-wrap"
+                                                            data-src="images/product/product-d-4.32280333b4f92bdb093fc569c61bb93a.jpg"
+                                                            style={{ width: '100%', display: 'inline-block' }}
+                                                        >
+                                                            <img
+                                                                className="u-img-fluid"
+                                                                src="images/product/product-d-4.32280333b4f92bdb093fc569c61bb93a.jpg"
+                                                                data-zoom-image="images/product/product-d-4.32280333b4f92bdb093fc569c61bb93a.jpg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    className="slick-slide"
+                                                    data-slick-index="4"
+                                                    aria-hidden="true"
+                                                    style={{ width: 445, position: 'relative', left: -1780, top: 0, zIndex: 998, opacity: 0 }}
+                                                    tabindex="-1"
+                                                >
+                                                    <div>
+                                                        <div
+                                                            className="pd-o-img-wrap"
+                                                            data-src="images/product/product-d-5.09d1c09cfc871f96c471b756a71abab7.jpg"
+                                                            style={{ width: '100%', display: 'inline-block' }}
+                                                        >
+                                                            <img
+                                                                className="u-img-fluid"
+                                                                src="images/product/product-d-5.09d1c09cfc871f96c471b756a71abab7.jpg"
+                                                                data-zoom-image="images/product/product-d-5.09d1c09cfc871f96c471b756a71abab7.jpg"
+                                                                alt=""
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <span className="pd-text">Click for larger zoom</span>
+                                </div>
+                                <div className="u-s-m-t-15">
+                                    <div>
+                                        <div id="pd-o-thumbnail" className="slick-initialized slick-slider">
+                                            <div className="pt-prev slick-arrow slick-disabled" aria-disabled="true">
+                                                <i className="fas fa-angle-left"></i>
+                                            </div>
+                                            <div className="slick-list draggable">
+                                                <div
+                                                    className="slick-track"
+                                                    style={{ opacity: 1, width: 560, transform: 'translate3d(0px, 0px, 0px)' }}
+                                                >
+                                                    <div
+                                                        className="slick-slide slick-current slick-active"
+                                                        data-slick-index="0"
+                                                        aria-hidden="false"
+                                                        style={{ width: 112 }}
+                                                    >
+                                                        <div>
+                                                            <div style={{ width: '100%', display: 'inline-block' }}>
+                                                                <img
+                                                                    className="u-img-fluid"
+                                                                    src="images/product/product-d-1.1ade8af621f424e959fa483d03d4f322.jpg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="slick-slide slick-active"
+                                                        data-slick-index="1"
+                                                        aria-hidden="false"
+                                                        style={{ width: 112 }}
+                                                    >
+                                                        <div>
+                                                            <div style={{ width: '100%', display: 'inline-block' }}>
+                                                                <img
+                                                                    className="u-img-fluid"
+                                                                    src="images/product/product-d-2.69d0b1076353c1aa6a6f07ba752b762b.jpg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="slick-slide slick-active"
+                                                        data-slick-index="2"
+                                                        aria-hidden="false"
+                                                        style={{ width: 112 }}
+                                                    >
+                                                        <div>
+                                                            <div style={{ width: '100%', display: 'inline-block' }}>
+                                                                <img
+                                                                    className="u-img-fluid"
+                                                                    src="images/product/product-d-3.cbe00bd2f53599119f5ce8620b274c09.jpg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="slick-slide slick-active"
+                                                        data-slick-index="3"
+                                                        aria-hidden="false"
+                                                        style={{ width: 112 }}
+                                                    >
+                                                        <div>
+                                                            <div style={{ width: '100%', display: 'inline-block' }}>
+                                                                <img
+                                                                    className="u-img-fluid"
+                                                                    src="images/product/product-d-4.32280333b4f92bdb093fc569c61bb93a.jpg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div
+                                                        className="slick-slide"
+                                                        data-slick-index="4"
+                                                        aria-hidden="true"
+                                                        style={{ width: 112 }}
+                                                        tabindex="-1"
+                                                    >
+                                                        <div>
+                                                            <div style={{ width: '100%', display: 'inline-block' }}>
+                                                                <img
+                                                                    className="u-img-fluid"
+                                                                    src="images/product/product-d-5.09d1c09cfc871f96c471b756a71abab7.jpg"
+                                                                    alt=""
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div className="pt-next slick-arrow" aria-disabled="false">
+                                                <i className="fas fa-angle-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="col-lg-7">
+                            <div className="pd-detail">
+                                <div>
+                                    <span className="pd-detail__name">Nikon Camera 4k Lens Zoom Pro</span>
+                                </div>
+                                <div>
+                                    <div className="pd-detail__inline">
+                                        <span className="pd-detail__price">$6.99</span>
+
+                                        <span className="pd-detail__discount">(76% OFF)</span>
+                                        <del className="pd-detail__del">$28.97</del>
+                                    </div>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <div className="pd-detail__rating gl-rating-style">
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star"></i>
+                                        <i className="fas fa-star-half-alt"></i>
+
+                                        <span className="pd-detail__review u-s-m-l-4">
+                                            <a data-click-scroll="#view-review">23 Reviews</a>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <div className="pd-detail__inline">
+                                        <span className="pd-detail__stock">200 in stock</span>
+
+                                        <span className="pd-detail__left">Only 2 left</span>
+                                    </div>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <span className="pd-detail__preview-desc">
+                                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
+                                        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to
+                                        make a type specimen book.
+                                    </span>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <div className="pd-detail__inline">
+                                        <span className="pd-detail__click-wrap">
+                                            <i className="far fa-heart u-s-m-r-6"></i>
+
+                                            <a href="signin.html">Add to Wishlist</a>
+
+                                            <span className="pd-detail__click-count">(222)</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <div className="pd-detail__inline">
+                                        <span className="pd-detail__click-wrap">
+                                            <i className="far fa-envelope u-s-m-r-6"></i>
+
+                                            <a href="signin.html">Email me When the price drops</a>
+
+                                            <span className="pd-detail__click-count">(20)</span>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <ul className="pd-social-list">
+                                        <li>
+                                            <a className="s-fb--color-hover" href="#">
+                                                <i className="fab fa-facebook-f"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a className="s-tw--color-hover" href="#">
+                                                <i className="fab fa-twitter"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a className="s-insta--color-hover" href="#">
+                                                <i className="fab fa-instagram"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a className="s-wa--color-hover" href="#">
+                                                <i className="fab fa-whatsapp"></i>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a className="s-gplus--color-hover" href="#">
+                                                <i className="fab fa-google-plus-g"></i>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <form className="pd-detail__form">
+                                        <div className="u-s-m-b-15">
+                                            <span className="pd-detail__label u-s-m-b-8">Color:</span>
+                                            <div className="pd-detail__color">
+                                                <div className="color__radio">
+                                                    <input type="radio" id="jet" name="color" checked="" />
+
+                                                    <label
+                                                        className="color__radio-label"
+                                                        htmlFor="jet"
+                                                        style={{ backgroundColor: '#333333' }}
+                                                    ></label>
+                                                </div>
+                                                <div className="color__radio">
+                                                    <input type="radio" id="folly" name="color" />
+
+                                                    <label
+                                                        className="color__radio-label"
+                                                        htmlFor="folly"
+                                                        style={{ backgroundColor: '#FF0055' }}
+                                                    ></label>
+                                                </div>
+                                                <div className="color__radio">
+                                                    <input type="radio" id="yellow" name="color" />
+
+                                                    <label
+                                                        className="color__radio-label"
+                                                        htmlFor="yellow"
+                                                        style={{ backgroundColor: '#FFFF00' }}
+                                                    ></label>
+                                                </div>
+                                                <div className="color__radio">
+                                                    <input type="radio" id="granite-gray" name="color" />
+
+                                                    <label
+                                                        className="color__radio-label"
+                                                        htmlFor="granite-gray"
+                                                        style={{ backgroundColor: '#605F5E' }}
+                                                    ></label>
+                                                </div>
+                                                <div className="color__radio">
+                                                    <input type="radio" id="space-cadet" name="color" />
+
+                                                    <label
+                                                        className="color__radio-label"
+                                                        htmlFor="space-cadet"
+                                                        style={{ backgroundColor: '#1D3461' }}
+                                                    ></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="u-s-m-b-15">
+                                            <span className="pd-detail__label u-s-m-b-8">Size:</span>
+                                            <div className="pd-detail__size">
+                                                <div className="size__radio">
+                                                    <input type="radio" id="xs" name="size" checked="" />
+
+                                                    <label className="size__radio-label" htmlFor="xs">
+                                                        XS
+                                                    </label>
+                                                </div>
+                                                <div className="size__radio">
+                                                    <input type="radio" id="small" name="size" />
+
+                                                    <label className="size__radio-label" htmlFor="xxl">
+                                                        Small
+                                                    </label>
+                                                </div>
+                                                <div className="size__radio">
+                                                    <input type="radio" id="medium" name="size" />
+
+                                                    <label className="size__radio-label" htmlFor="medium">
+                                                        Medium
+                                                    </label>
+                                                </div>
+                                                <div className="size__radio">
+                                                    <input type="radio" id="large" name="size" />
+
+                                                    <label className="size__radio-label" htmlFor="xxl">
+                                                        Large
+                                                    </label>
+                                                </div>
+                                                <div className="size__radio">
+                                                    <input type="radio" id="xl" name="size" />
+
+                                                    <label className="size__radio-label" htmlFor="xl">
+                                                        XL
+                                                    </label>
+                                                </div>
+                                                <div className="size__radio">
+                                                    <input type="radio" id="xxl" name="size" />
+
+                                                    <label className="size__radio-label" htmlFor="xxl">
+                                                        XXL
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="pd-detail-inline-2">
+                                            <div className="u-s-m-b-15">
+                                                <div className="input-counter">
+                                                    <span className="input-counter__minus fas fa-minus"></span>
+
+                                                    <input
+                                                        className="input-counter__text input-counter--text-primary-style"
+                                                        type="text"
+                                                        value="1"
+                                                        data-min="1"
+                                                        data-max="1000"
+                                                    />
+
+                                                    <span className="input-counter__plus fas fa-plus"></span>
+                                                </div>
+                                            </div>
+                                            <div className="u-s-m-b-15">
+                                                <button className="btn btn--e-brand-b-2" type="submit">
+                                                    Add to Cart
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div className="u-s-m-b-15">
+                                    <span className="pd-detail__label u-s-m-b-8">Product Policy:</span>
+                                    <ul className="pd-detail__policy-list">
+                                        <li>
+                                            <i className="fas fa-check-circle u-s-m-r-8"></i>
+
+                                            <span>Buyer Protection.</span>
+                                        </li>
+                                        <li>
+                                            <i className="fas fa-check-circle u-s-m-r-8"></i>
+
+                                            <span>Full Refund if you don't receive your order.</span>
+                                        </li>
+                                        <li>
+                                            <i className="fas fa-check-circle u-s-m-r-8"></i>
+
+                                            <span>Returns accepted if product not as described.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="u-s-p-y-90">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-12">
+                            <div className="pd-tab">
+                                <div className="u-s-m-b-30">
+                                    <ul className="nav pd-tab__list">
+                                        <li className="nav-item">
+                                            <a className="nav-link active" data-toggle="tab" href="#pd-desc">
+                                                DESCRIPTION
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" data-toggle="tab" href="#pd-tag">
+                                                TAGS
+                                            </a>
+                                        </li>
+                                        <li className="nav-item">
+                                            <a className="nav-link" id="view-review" data-toggle="tab" href="#pd-rev">
+                                                REVIEWS
+                                                <span>(23)</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div className="tab-content">
+                                    <div className="tab-pane active" id="pd-desc">
+                                        <div className="pd-tab__desc">
+                                            <div className="u-s-m-b-15">
+                                                <p>
+                                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been
+                                                    the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of
+                                                    type and scrambled it to make a type specimen book. It has survived not only five centuries, but
+                                                    also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in
+                                                    the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently
+                                                    with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                                                </p>
+                                            </div>
+                                            <div className="u-s-m-b-30">
+                                                <div className="fluid-width-video-wrapper">
+                                                    <iframe
+                                                        src="https://www.youtube.com/embed/qKqSBm07KZk"
+                                                        allowfullscreen=""
+                                                        name="fitvid0"
+                                                    ></iframe>
+                                                </div>
+                                            </div>
+                                            <div className="u-s-m-b-30">
+                                                <ul>
+                                                    <li>
+                                                        <i className="fas fa-check u-s-m-r-8"></i>
+
+                                                        <span>Buyer Protection.</span>
+                                                    </li>
+                                                    <li>
+                                                        <i className="fas fa-check u-s-m-r-8"></i>
+
+                                                        <span>Full Refund if you don't receive your order.</span>
+                                                    </li>
+                                                    <li>
+                                                        <i className="fas fa-check u-s-m-r-8"></i>
+
+                                                        <span>Returns accepted if product not as described.</span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div className="u-s-m-b-15">
+                                                <h4>PRODUCT INFORMATION</h4>
+                                            </div>
+                                            <div className="u-s-m-b-15">
+                                                <div className="pd-table gl-scroll">
+                                                    <table>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>Main Material</td>
+                                                                <td>Cotton</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Color</td>
+                                                                <td>Green, Blue, Red</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Sleeves</td>
+                                                                <td>Long Sleeve</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Top Fit</td>
+                                                                <td>Regular</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Print</td>
+                                                                <td>Not Printed</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Neck</td>
+                                                                <td>Round Neck</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Pieces Count</td>
+                                                                <td>1 Piece</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Occasion</td>
+                                                                <td>Casual</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Shipping Weight (kg)</td>
+                                                                <td>0.5</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="tab-pane" id="pd-tag">
+                                        <div className="pd-tab__tag">
+                                            <h2 className="u-s-m-b-15">ADD YOUR TAGS</h2>
+                                            <div className="u-s-m-b-15">
+                                                <form>
+                                                    <input className="input-text input-text--primary-style" type="text" />
+
+                                                    <button className="btn btn--e-brand-b-2" type="submit">
+                                                        ADD TAGS
+                                                    </button>
+                                                </form>
+                                            </div>
+
+                                            <span className="gl-text">Use spaces to separate tags. Use single quotes (') for phrases.</span>
+                                        </div>
+                                    </div>
+                                    <div className="tab-pane fade" id="pd-rev">
+                                        <div className="pd-tab__rev">
+                                            <div className="u-s-m-b-30">
+                                                <div className="pd-tab__rev-score">
+                                                    <div className="u-s-m-b-8">
+                                                        <h2>23 Reviews - 4.6 (Overall)</h2>
+                                                    </div>
+                                                    <div className="gl-rating-style-2 u-s-m-b-8">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star-half-alt"></i>
+                                                    </div>
+                                                    <div className="u-s-m-b-8">
+                                                        <h4>We want to hear from you!</h4>
+                                                    </div>
+
+                                                    <span className="gl-text">Tell us what you think about this item</span>
+                                                </div>
+                                            </div>
+                                            <div className="u-s-m-b-30">
+                                                <form className="pd-tab__rev-f1">
+                                                    <div className="rev-f1__group">
+                                                        <div className="u-s-m-b-15">
+                                                            <h2>23 Review(s) for Man Ruched Floral Applique Tee</h2>
+                                                        </div>
+                                                        <div className="u-s-m-b-15">
+                                                            <label htmlFor="sort-review"></label>
+                                                            <select className="select-box select-box--primary-style" id="sort-review">
+                                                                <option selected="">Sort by: Best Rating</option>
+                                                                <option>Sort by: Worst Rating</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div className="rev-f1__review">
+                                                        <div className="review-o u-s-m-b-15">
+                                                            <div className="review-o__info u-s-m-b-8">
+                                                                <span className="review-o__name">John Doe</span>
+
+                                                                <span className="review-o__date">27 Feb 2018 10:57:43</span>
+                                                            </div>
+                                                            <div className="review-o__rating gl-rating-style u-s-m-b-8">
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="far fa-star"></i>
+
+                                                                <span>(4)</span>
+                                                            </div>
+                                                            <p className="review-o__text">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                                                has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                                                printer took a galley of type and scrambled it to make a type specimen book.
+                                                            </p>
+                                                        </div>
+                                                        <div className="review-o u-s-m-b-15">
+                                                            <div className="review-o__info u-s-m-b-8">
+                                                                <span className="review-o__name">John Doe</span>
+
+                                                                <span className="review-o__date">27 Feb 2018 10:57:43</span>
+                                                            </div>
+                                                            <div className="review-o__rating gl-rating-style u-s-m-b-8">
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="far fa-star"></i>
+
+                                                                <span>(4)</span>
+                                                            </div>
+                                                            <p className="review-o__text">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                                                has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                                                printer took a galley of type and scrambled it to make a type specimen book.
+                                                            </p>
+                                                        </div>
+                                                        <div className="review-o u-s-m-b-15">
+                                                            <div className="review-o__info u-s-m-b-8">
+                                                                <span className="review-o__name">John Doe</span>
+
+                                                                <span className="review-o__date">27 Feb 2018 10:57:43</span>
+                                                            </div>
+                                                            <div className="review-o__rating gl-rating-style u-s-m-b-8">
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="fas fa-star"></i>
+                                                                <i className="far fa-star"></i>
+
+                                                                <span>(4)</span>
+                                                            </div>
+                                                            <p className="review-o__text">
+                                                                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                                                                has been the industry's standard dummy text ever since the 1500s, when an unknown
+                                                                printer took a galley of type and scrambled it to make a type specimen book.
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div className="u-s-m-b-30">
+                                                <form className="pd-tab__rev-f2">
+                                                    <h2 className="u-s-m-b-15">Add a Review</h2>
+
+                                                    <span className="gl-text u-s-m-b-15">
+                                                        Your email address will not be published. Required fields are marked *
+                                                    </span>
+                                                    <div className="u-s-m-b-30">
+                                                        <div className="rev-f2__table-wrap gl-scroll">
+                                                            <table className="rev-f2__table">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+
+                                                                                <span>(1)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star-half-alt"></i>
+
+                                                                                <span>(1.5)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+
+                                                                                <span>(2)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star-half-alt"></i>
+
+                                                                                <span>(2.5)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+
+                                                                                <span>(3)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star-half-alt"></i>
+
+                                                                                <span>(3.5)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+
+                                                                                <span>(4)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star-half-alt"></i>
+
+                                                                                <span>(4.5)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                        <th>
+                                                                            <div className="gl-rating-style-2">
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+                                                                                <i className="fas fa-star"></i>
+
+                                                                                <span>(5)</span>
+                                                                            </div>
+                                                                        </th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-1" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-1"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-1.5" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-1.5"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-2" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-2"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-2.5" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-2.5"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-3" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-3"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-3.5" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-3.5"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-4" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-4"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-4.5" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-4.5"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <div className="radio-box">
+                                                                                <input type="radio" id="star-5" name="rating" />
+                                                                                <div className="radio-box__state radio-box__state--primary">
+                                                                                    <label className="radio-box__label" htmlFor="star-5"></label>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                    <div className="rev-f2__group">
+                                                        <div className="u-s-m-b-15">
+                                                            <label className="gl-label" htmlFor="reviewer-text">
+                                                                YOUR REVIEW *
+                                                            </label>
+                                                            <textarea className="text-area text-area--primary-style" id="reviewer-text"></textarea>
+                                                        </div>
+                                                        <div>
+                                                            <p className="u-s-m-b-30">
+                                                                <label className="gl-label" htmlFor="reviewer-name">
+                                                                    NAME *
+                                                                </label>
+
+                                                                <input
+                                                                    className="input-text input-text--primary-style"
+                                                                    type="text"
+                                                                    id="reviewer-name"
+                                                                />
+                                                            </p>
+                                                            <p className="u-s-m-b-30">
+                                                                <label className="gl-label" htmlFor="reviewer-email">
+                                                                    EMAIL *
+                                                                </label>
+
+                                                                <input
+                                                                    className="input-text input-text--primary-style"
+                                                                    type="text"
+                                                                    id="reviewer-email"
+                                                                />
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <button className="btn btn--e-brand-shadow" type="submit">
+                                                            SUBMIT
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    \
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="u-s-p-b-90">
+                <div className="section__intro u-s-m-b-46">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-lg-12">
+                                <div className="section__text-wrap">
+                                    <h1 className="section__heading u-c-secondary u-s-m-b-12">CUSTOMER ALSO VIEWED</h1>
+
+                                    <span className="section__span u-c-grey">PRODUCTS THAT CUSTOMER VIEWED</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="section__content">
+                    <div className="container">
+                        <div>
+                            <div className="owl-carousel product-slider owl-loaded owl-drag" data-item="4">
+                                <div className="owl-stage-outer">
+                                    <div
+                                        className="owl-stage"
+                                        style={{ transform: 'translate3d(0px, 0px, 0px)', transition: 'all 0s ease 0s', width: 1665 }}
+                                    >
+                                        <div className="owl-item active" style={{ width: 277.5 }}>
+                                            <div className="u-s-m-b-30">
+                                                <div className="product-o product-o--hover-on">
+                                                    <div className="product-o__wrap">
+                                                        <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <img
+                                                                className="aspect__img"
+                                                                src="images/product/electronic/product1.08a132534e9a3d225f5d3c2b8ef690da.jpg"
+                                                                alt=""
+                                                            />
+                                                        </a>
+                                                        <div className="product-o__action-wrap">
+                                                            <ul className="product-o__action-list">
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#quick-look"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Quick View"
+                                                                    >
+                                                                        <i className="fas fa-search-plus"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#add-to-cart"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Cart"
+                                                                    >
+                                                                        <i className="fas fa-plus-circle"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Wishlist"
+                                                                    >
+                                                                        <i className="fas fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Email me When the price drops"
+                                                                    >
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="product-o__category">
+                                                        <a href="shop-side-version-2.html">Electronics</a>
+                                                    </span>
+
+                                                    <span className="product-o__name">
+                                                        <a href="product-detail.html">Beats Bomb Wireless Headphone</a>
+                                                    </span>
+                                                    <div className="product-o__rating gl-rating-style">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+
+                                                        <span className="product-o__review">(20)</span>
+                                                    </div>
+
+                                                    <span className="product-o__price">
+                                                        $125.00
+                                                        <span className="product-o__discount">$160.00</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="owl-item active" style={{ width: 277.5 }}>
+                                            <div className="u-s-m-b-30">
+                                                <div className="product-o product-o--hover-on">
+                                                    <div className="product-o__wrap">
+                                                        <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <img
+                                                                className="aspect__img"
+                                                                src="images/product/electronic/product2.ea1932957badfdefe7e4a1e7d50f4ea9.jpg"
+                                                                alt=""
+                                                            />
+                                                        </a>
+                                                        <div className="product-o__action-wrap">
+                                                            <ul className="product-o__action-list">
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#quick-look"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Quick View"
+                                                                    >
+                                                                        <i className="fas fa-search-plus"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#add-to-cart"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Cart"
+                                                                    >
+                                                                        <i className="fas fa-plus-circle"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Wishlist"
+                                                                    >
+                                                                        <i className="fas fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Email me When the price drops"
+                                                                    >
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="product-o__category">
+                                                        <a href="shop-side-version-2.html">Electronics</a>
+                                                    </span>
+
+                                                    <span className="product-o__name">
+                                                        <a href="product-detail.html">Red Wireless Headphone</a>
+                                                    </span>
+                                                    <div className="product-o__rating gl-rating-style">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+
+                                                        <span className="product-o__review">(20)</span>
+                                                    </div>
+
+                                                    <span className="product-o__price">
+                                                        $125.00
+                                                        <span className="product-o__discount">$160.00</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="owl-item active" style={{ width: 277.5 }}>
+                                            <div className="u-s-m-b-30">
+                                                <div className="product-o product-o--hover-on">
+                                                    <div className="product-o__wrap">
+                                                        <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <img
+                                                                className="aspect__img"
+                                                                src="images/product/electronic/product3.207dd89cb8b11937ace9524c6c84fb78.jpg"
+                                                                alt=""
+                                                            />
+                                                        </a>
+                                                        <div className="product-o__action-wrap">
+                                                            <ul className="product-o__action-list">
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#quick-look"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Quick View"
+                                                                    >
+                                                                        <i className="fas fa-search-plus"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#add-to-cart"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Cart"
+                                                                    >
+                                                                        <i className="fas fa-plus-circle"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Wishlist"
+                                                                    >
+                                                                        <i className="fas fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Email me When the price drops"
+                                                                    >
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="product-o__category">
+                                                        <a href="shop-side-version-2.html">Electronics</a>
+                                                    </span>
+
+                                                    <span className="product-o__name">
+                                                        <a href="product-detail.html">Yellow Wireless Headphone</a>
+                                                    </span>
+                                                    <div className="product-o__rating gl-rating-style">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+
+                                                        <span className="product-o__review">(20)</span>
+                                                    </div>
+
+                                                    <span className="product-o__price">
+                                                        $125.00
+                                                        <span className="product-o__discount">$160.00</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="owl-item active" style={{ width: 277.5 }}>
+                                            <div className="u-s-m-b-30">
+                                                <div className="product-o product-o--hover-on">
+                                                    <div className="product-o__wrap">
+                                                        <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <img
+                                                                className="aspect__img"
+                                                                src="images/product/electronic/product23.0396d3b9726043121035dc21ca04667a.jpg"
+                                                                alt=""
+                                                            />
+                                                        </a>
+                                                        <div className="product-o__action-wrap">
+                                                            <ul className="product-o__action-list">
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#quick-look"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Quick View"
+                                                                    >
+                                                                        <i className="fas fa-search-plus"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#add-to-cart"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Cart"
+                                                                    >
+                                                                        <i className="fas fa-plus-circle"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Wishlist"
+                                                                    >
+                                                                        <i className="fas fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Email me When the price drops"
+                                                                    >
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="product-o__category">
+                                                        <a href="shop-side-version-2.html">Electronics</a>
+                                                    </span>
+
+                                                    <span className="product-o__name">
+                                                        <a href="product-detail.html">Razor Gear Ultra Slim 8GB Ram</a>
+                                                    </span>
+                                                    <div className="product-o__rating gl-rating-style">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+
+                                                        <span className="product-o__review">(20)</span>
+                                                    </div>
+
+                                                    <span className="product-o__price">
+                                                        $125.00
+                                                        <span className="product-o__discount">$160.00</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="owl-item" style={{ width: 277.5 }}>
+                                            <div className="u-s-m-b-30">
+                                                <div className="product-o product-o--hover-on">
+                                                    <div className="product-o__wrap">
+                                                        <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <img
+                                                                className="aspect__img"
+                                                                src="images/product/electronic/product26.b73b22477f27a27e373fe484836e94a6.jpg"
+                                                                alt=""
+                                                            />
+                                                        </a>
+                                                        <div className="product-o__action-wrap">
+                                                            <ul className="product-o__action-list">
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#quick-look"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Quick View"
+                                                                    >
+                                                                        <i className="fas fa-search-plus"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#add-to-cart"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Cart"
+                                                                    >
+                                                                        <i className="fas fa-plus-circle"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Wishlist"
+                                                                    >
+                                                                        <i className="fas fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Email me When the price drops"
+                                                                    >
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="product-o__category">
+                                                        <a href="shop-side-version-2.html">Electronics</a>
+                                                    </span>
+
+                                                    <span className="product-o__name">
+                                                        <a href="product-detail.html">Razor Gear Ultra Slim 12GB Ram</a>
+                                                    </span>
+                                                    <div className="product-o__rating gl-rating-style">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+
+                                                        <span className="product-o__review">(20)</span>
+                                                    </div>
+
+                                                    <span className="product-o__price">
+                                                        $125.00
+                                                        <span className="product-o__discount">$160.00</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="owl-item" style={{ width: 277.5 }}>
+                                            <div className="u-s-m-b-30">
+                                                <div className="product-o product-o--hover-on">
+                                                    <div className="product-o__wrap">
+                                                        <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                            <img
+                                                                className="aspect__img"
+                                                                src="images/product/electronic/product30.4a4450fc843892eecd4574ad549b11aa.jpg"
+                                                                alt=""
+                                                            />
+                                                        </a>
+                                                        <div className="product-o__action-wrap">
+                                                            <ul className="product-o__action-list">
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#quick-look"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Quick View"
+                                                                    >
+                                                                        <i className="fas fa-search-plus"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        data-modal="modal"
+                                                                        data-modal-id="#add-to-cart"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Cart"
+                                                                    >
+                                                                        <i className="fas fa-plus-circle"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Add to Wishlist"
+                                                                    >
+                                                                        <i className="fas fa-heart"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a
+                                                                        href="signin.html"
+                                                                        data-tooltip="tooltip"
+                                                                        data-placement="top"
+                                                                        title=""
+                                                                        data-original-title="Email me When the price drops"
+                                                                    >
+                                                                        <i className="fas fa-envelope"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+
+                                                    <span className="product-o__category">
+                                                        <a href="shop-side-version-2.html">Electronics</a>
+                                                    </span>
+
+                                                    <span className="product-o__name">
+                                                        <a href="product-detail.html">Razor Gear Ultra Slim 16GB Ram</a>
+                                                    </span>
+                                                    <div className="product-o__rating gl-rating-style">
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+                                                        <i className="fas fa-star"></i>
+
+                                                        <span className="product-o__review">(20)</span>
+                                                    </div>
+
+                                                    <span className="product-o__price">
+                                                        $125.00
+                                                        <span className="product-o__discount">$160.00</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="owl-nav">
+                                    <div className="p-prev">
+                                        <i className="fas fa-long-arrow-alt-left"></i>
+                                    </div>
+                                    <div className="p-next">
+                                        <i className="fas fa-long-arrow-alt-right"></i>
+                                    </div>
+                                </div>
+                                <div className="owl-dots disabled"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {loading ? (
                 <Loader />
             ) : (
@@ -452,9 +1950,9 @@ const ProductDetails = () => {
                         {/* <!-- product image & description container --> */}
 
                         {/* Sliders */}
-                        <div className="flex flex-col gap-3 mt-6">
+                        {/* <div className="flex flex-col gap-3 mt-6">
                             <ProductSlider title={'Similar Products'} tagline={'Based on the category'} />
-                        </div>
+                        </div> */}
                     </main>
                 </>
             )}

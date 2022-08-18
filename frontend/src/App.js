@@ -1,43 +1,54 @@
+import React from 'react';
 import WebFont from 'webfontloader';
 import Footer from './components/Layouts/Footer/Footer';
 import Header from './components/Layouts/Header/Header';
-import Login from './components/User/Login';
-import Register from './components/User/Register';
+import Login from './components/Authentication/Login';
+import Register from './components/Authentication/Register';
 import { Routes, Route, useLocation } from 'react-router-dom';
-import { loadUser } from './actions/userAction';
+import { loadUser } from './middleware/actions/userAction';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import UpdateProfile from './components/User/UpdateProfile';
-import UpdatePassword from './components/User/UpdatePassword';
-import ForgotPassword from './components/User/ForgotPassword';
-import ResetPassword from './components/User/ResetPassword';
+import UpdateProfile from './components/User/Accounts/UpdateProfile';
+import UpdatePassword from './components/Authentication/UpdatePassword/UpdatePassword';
+import ForgotPassword from './components/Authentication/UpdatePassword/ForgotPassword';
+import ResetPassword from './components/Authentication/UpdatePassword/ResetPassword';
 import Account from './components/User/Account';
 import ProtectedRoute from './Routes/ProtectedRoute';
 import Home from './components/Home/Home';
 import ProductDetails from './components/Products/ProductDetails/ProductDetails';
 import Products from './components/Products/Products';
 import Cart from './components/Cart/Cart';
-import Shipping from './components/Cart/Shipping';
-import OrderConfirm from './components/Cart/OrderConfirm';
-import Payment from './components/Cart/Payment';
-import OrderStatus from './components/Cart/OrderStatus';
-import OrderSuccess from './components/Cart/OrderSuccess';
-import MyOrders from './components/Order/MyOrders';
-import OrderDetails from './components/Order/OrderDetails';
+import Shipping from './components/User/Orders/Shipping/Shipping';
+import OrderConfirm from './components/User/Orders/OrderStatus/OrderConfirm';
+import Payment from './components//User/Payments/Payment';
+import OrderStatus from './components/User/Orders/OrderStatus/OrderStatus';
+import OrderSuccess from './components/User/Orders/OrderStatus/OrderSuccess';
+import MyOrders from './components/User/Orders/MyOrders';
+import OrderDetails from './components/User/Orders/OrderDetails/OrderDetails';
 import Dashboard from './components/Admin/Dashboard';
-import MainData from './components/Admin/Components/MainData';
-import OrderTable from './components/Admin/Components/Orders/OrderTable';
-import UpdateOrder from './components/Admin/Components/Orders/UpdateOrder';
-import ProductTable from './components/Admin/Components/Products/ProductTable';
-import NewProduct from './components/Admin/Components/Products/NewProduct';
-import UpdateProduct from './components/Admin/Components/Products/UpdateProduct';
-import UserTable from './components/Admin/Components/Users/UserTable';
-import UpdateUser from './components/Admin/Components/Users/UpdateUser';
-import ReviewsTable from './components/Admin/Components/Reviews/ReviewsTable';
+import MainData from './components/Admin/MainData';
+import OrderTable from './components/Admin/Orders/OrderTable';
+import UpdateOrder from './components/Admin/Orders/UpdateOrder';
+import ProductTable from './components/Admin/Products/ProductTable';
+import NewProduct from './components/Admin/Products/NewProduct';
+import UpdateProduct from './components/Admin/Products/UpdateProduct';
+import UserTable from './components/Admin/Users/UserTable';
+import UpdateUser from './components/Admin/Users/UpdateUser';
+import ReviewsTable from './components/Admin/Reviews/ReviewsTable';
 import Wishlist from './components/Wishlist/Wishlist';
-import NotFound from './components/NotFound';
-import React from 'react';
+import NotFound from './components/Layouts/NotFound';
 import TodaysOffers from './components/Home/TodaysOffers/TodaysOffers';
+import TopOffers from './components/Home/TopOffers/TopOffers';
+import TrackOrder from './components/User/Orders/TrackOrder/TrackOrder';
+import AddressBook from './components/Home/AddressBook/AddressBook';
+import AddEditAddress from './components/Home/AddressBook/AddEditAddress';
+import DefaultAddress from './components/Home/AddressBook/DefaultAddress';
+import AboutUs from './components/OmjinShop/AboutUs';
+import ContactUs from './components/OmjinShop/ContactUs';
+import FAQs from './components/OmjinShop/FAQs';
+import MyProfile from './components/User/Accounts/MyProfile';
+import PaymentOptions from './components/User/Payments/PaymentOptions';
+import ReturnAndCancel from './components/OmjinShop/ReturnAndCancel';
 
 function App() {
     const dispatch = useDispatch();
@@ -92,6 +103,10 @@ function App() {
                 <Route path="/cart" element={<Cart />} />
                 <Route path="/todaysOffers" element={<TodaysOffers />} />
                 <Route path="/topOffers" element={<TopOffers />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/faqs" element={<FAQs />} />
+                <Route path="/returnPolicy" element={<ReturnAndCancel />} />
                 <Route path="*" element={<NotFound />}></Route>
 
                 {/* User account */}
@@ -105,7 +120,25 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/wishlist"
+                    path="/account/profile"
+                    element={
+                        <ProtectedRoute>
+                            <MyProfile />
+                        </ProtectedRoute>
+                    }
+                ></Route>
+
+                <Route
+                    path="/account/update"
+                    element={
+                        <ProtectedRoute>
+                            <UpdateProfile />
+                        </ProtectedRoute>
+                    }
+                ></Route>
+
+                <Route
+                    path="/account/wishlist"
                     element={
                         <ProtectedRoute>
                             <Wishlist />
@@ -114,7 +147,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/orders"
+                    path="/account/orders"
                     element={
                         <ProtectedRoute>
                             <MyOrders />
@@ -123,7 +156,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/order/:id"
+                    path="/account/order/:id"
                     element={
                         <ProtectedRoute>
                             <OrderStatus />
@@ -132,7 +165,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/order_details/:id"
+                    path="/account/order_details/:id"
                     element={
                         <ProtectedRoute>
                             <OrderDetails />
@@ -141,7 +174,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/shipping"
+                    path="/account/shipping"
                     element={
                         <ProtectedRoute>
                             <Shipping />
@@ -150,13 +183,58 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/order/confirm"
+                    path="/account/order/confirm"
                     element={
                         <ProtectedRoute>
                             <OrderConfirm />
                         </ProtectedRoute>
                     }
                 ></Route>
+
+                <Route
+                    path="/account/trackOrder"
+                    element={
+                        <ProtectedRoute>
+                            <TrackOrder />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/account/addressBook"
+                    element={
+                        <ProtectedRoute>
+                            <AddressBook />
+                        </ProtectedRoute>
+                    }
+                ></Route>
+
+                <Route
+                    path="/account/addressBook/addEdit"
+                    element={
+                        <ProtectedRoute>
+                            <AddEditAddress />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/account/addressBook/default"
+                    element={
+                        <ProtectedRoute>
+                            <DefaultAddress />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
+                    path="/account/paymentOption"
+                    element={
+                        <ProtectedRoute>
+                            <PaymentOptions />
+                        </ProtectedRoute>
+                    }
+                />
 
                 <Route path="/orders/success" element={<OrderSuccess success={true} />} />
                 <Route path="/orders/failed" element={<OrderSuccess success={false} />} />
@@ -170,15 +248,6 @@ function App() {
                             <Payment />
                             {/* // </Elements> */}
                             {/* ) */}
-                        </ProtectedRoute>
-                    }
-                ></Route>
-
-                <Route
-                    path="/account/update"
-                    element={
-                        <ProtectedRoute>
-                            <UpdateProfile />
                         </ProtectedRoute>
                     }
                 ></Route>

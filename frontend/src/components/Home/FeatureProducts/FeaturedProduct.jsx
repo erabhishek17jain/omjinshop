@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import { getDiscount } from '../../../utils/functions';
+import { getDiscount } from '../../../utils/services';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToWishlist, removeFromWishlist } from '../../../actions/wishlistAction';
+import { addToWishlist, removeFromWishlist } from '../../../middleware/actions/wishlistAction';
 import { useSnackbar } from 'notistack';
-import { addItemsToCart } from '../../../actions/cartAction';
-import { saveForLater } from '../../../actions/saveForLaterAction';
+import { addItemsToCart } from '../../../middleware/actions/cartAction';
+import { saveForLater } from '../../../middleware/actions/saveForLaterAction';
 import React from 'react';
 
 const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, category, cuttedPrice }) => {

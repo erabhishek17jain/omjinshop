@@ -1,10 +1,8 @@
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Categories from '../Layouts/Categories';
 import Banner from './Banner/Banner';
-import DealSlider from './DealSlider/DealSlider';
-import ProductSlider from './ProductSlider/ProductSlider';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, getSliderProducts } from '../../actions/productAction';
+import { clearErrors, getSliderProducts } from '../../middleware/actions/productAction';
 import { useSnackbar } from 'notistack';
 import MetaData from '../Layouts/MetaData';
 import '../../assets/css/vendor.css';
@@ -12,24 +10,16 @@ import '../../assets/css/utility.css';
 import '../../assets/css/app.css';
 import newsletter from '../../assets/images/newsletter/newsletter.jpg';
 import product3 from '../../assets/images/product/electronic/product3.jpg';
-import preloader from '../../assets/images/preloader.png';
-import coll1 from '../../assets/images/collection/coll-1.jpg';
-import promo1 from '../../assets/images/promo/promo-img-1.jpg';
-import test1 from '../../assets/images/about/test-1.jpg';
-import post1 from '../../assets/images/blog/post-1.jpg';
-import brand1 from '../../assets/images/brand/b1.png';
 import productd1 from '../../assets/images/product/product-d-1.jpg';
 import TopTrending from './TopTrending/TopTrending';
-import DealsProducts from './DealsProducts/DealsProducts';
+import BestDeals from './BestDeals/BestDeals';
 import ShopByDeals from './ShopByDeals/ShopByDeals';
 import NewArrival from './NewArrival/NewArrival';
 import GlobalOffer from './GlobalOffer/GlobalOffer';
 import FeaturedProducts from './FeatureProducts/FeaturedProducts';
-import SpecialProducts from './OurProducts/OurProductItems';
 import InformationSection from './InformationSection/InformationSection';
 import EveryDayProducts from './EveryDayProducts/EveryDayProducts';
 import OurProducts from './OurProducts/OurProducts';
-import React from 'react';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -50,18 +40,16 @@ const Home = () => {
             <MetaData title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
             <div id="app">
                 {/* App Content */}
-                <div className="app-content">
-                    <Banner />
-                    <ShopByDeals />
-                    <TopTrending />
-                    <DealsProducts />
-                    <NewArrival />
-                    <GlobalOffer />
-                    <FeaturedProducts />
-                    <EveryDayProducts />
-                    <OurProducts />
-                    <InformationSection />
-                </div>
+                <Banner />
+                <ShopByDeals />
+                <TopTrending />
+                <BestDeals />
+                <NewArrival />
+                <GlobalOffer />
+                <FeaturedProducts />
+                <EveryDayProducts />
+                <OurProducts />
+                <InformationSection />
                 <div className="modal fade" id="quick-look">
                     <div className="modal-dialog modal-dialog-centered">
                         <div className="modal-content modal--shadow">
@@ -379,15 +367,7 @@ const Home = () => {
                 </div>
             </div>
             {/* <Categories /> */}
-            <main>
-                <Banner />
-                <DealSlider title={'Discounts for You'} />
-                {!loading && <ProductSlider title={'Suggested for You'} tagline={'Based on Your Activity'} />}
-                <DealSlider title={'Top Brands, Best Price'} />
-                {!loading && <ProductSlider title={'You May Also Like...'} tagline={'Based on Your Interest'} />}
-                <DealSlider title={'Top Offers On'} />
-                {!loading && <ProductSlider title={"Don't Miss These!"} tagline={'Inspired by your order'} />}
-            </main>
+            <main></main>
         </>
     );
 };

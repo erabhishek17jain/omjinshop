@@ -1,12 +1,12 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { getDiscount } from '../../utils/functions';
+import { getDiscount } from '../../utils/services';
 import DeleteIcon from '@mui/icons-material/Delete';
 import StarIcon from '@mui/icons-material/Star';
-import { removeFromWishlist } from '../../actions/wishlistAction';
+import { removeFromWishlist } from '../../middleware/actions/wishlistAction';
 import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { addItemsToCart } from '../../actions/cartAction';
-import React from 'react';
+import { addItemsToCart } from '../../middleware/actions/cartAction';
 
 const WishlistProduct = (props) => {
     const dispatch = useDispatch();
