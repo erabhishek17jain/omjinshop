@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import MetaData from '../Layouts/MetaData';
 import OrderSideBar from '../User/Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../User/Accounts/Sidebar';
+import Sidebar from '../Layouts/Sidebar';
 import { getNavigation } from '../../utils/services';
+import { useSelector } from 'react-redux';
 
 const ReturnAndCancel = () => {
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Track Order', path: '/account/trackOrder' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
+
     return (
         <>
-            <MetaData title="Wishlist | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Wishlist" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">

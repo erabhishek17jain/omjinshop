@@ -11,21 +11,18 @@ import SaveForLater from './SaveForLater/SaveForLater';
 const Cart = () => {
     const navigate = useNavigate();
     const { cartItems } = useSelector((state) => state.cart);
+    const { pathList } = useSelector((state) => state.path);
     const { saveForLaterItems } = useSelector((state) => state.saveForLater);
+    const { pathItems } = useSelector((state) => state.path);
 
     const placeOrderHandler = () => {
-        navigate('/login?redirect=shipping');
+        navigate('/signIn?redirect=shipping');
     };
-
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Checkout', path: '/cart' },
-    ]);
 
     return (
         <>
-            <MetaData title="Shopping Cart | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Shopping Cart" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="container">

@@ -11,18 +11,26 @@ const CartItem = ({ product, name, seller, price, cuttedPrice, image, stock, qua
     const { enqueueSnackbar } = useSnackbar();
 
     const increaseQuantity = (id, quantity, stock) => {
-        const newQty = quantity + 1;
-        if (quantity >= stock) {
-            enqueueSnackbar('Maximum Order Quantity', { variant: 'warning' });
-            return;
+        if (quantity < 10) {
+            const newQty = quantity + 1;
+            if (quantity >= stock) {
+                enqueueSnackbar('Maximum Order Quantity', { variant: 'warning' });
+                return;
+            }
+            dispatch(addItemsToCart(id, newQty));
+        } else {
+            enqueueSnackbar('Sorry we dont allow more then 10 units', { variant: 'warning' });
         }
-        dispatch(addItemsToCart(id, newQty));
     };
 
     const decreaseQuantity = (id, quantity) => {
-        const newQty = quantity - 1;
-        if (quantity <= 1) return;
-        dispatch(addItemsToCart(id, newQty));
+        if (quantity < 1) {
+            const newQty = quantity - 1;
+            if (quantity <= 1) return;
+            dispatch(addItemsToCart(id, newQty));
+        } else {
+            enqueueSnackbar('Items not avaliable in cart', { variant: 'warning' });
+        }
     };
 
     const removeCartItem = (id) => {

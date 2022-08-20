@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import MetaData from '../Layouts/MetaData';
 import { getNavigation } from '../../utils/services';
+import { useSelector } from 'react-redux';
 
 const ContactUs = () => {
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Track Order', path: '/account/trackOrder' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
+
     return (
         <>
-            <MetaData title="Wishlist | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Wishlist" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="container">
@@ -76,7 +75,7 @@ const ContactUs = () => {
                                     <div className="contact-area__heading">
                                         <h2>Get In Touch</h2>
                                     </div>
-                                    <form className="contact-f" method="post" action="index.html">
+                                    <form className="contact-f" method="post" action="#">
                                         <div className="row">
                                             <div className="col-lg-6 col-md-6 u-h-100">
                                                 <div className="u-s-m-b-30">

@@ -2,23 +2,19 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import OrderSideBar from '../User/Orders/OrderDetails/OrderSideBar';
 import MetaData from '../Layouts/MetaData';
-import Sidebar from '../User/Accounts/Sidebar';
+import Sidebar from '../Layouts/Sidebar';
 import WishlistProduct from './WishlistProduct';
 import { getNavigation } from '../../utils/services';
 import EmptyBox from '../Layouts/EmptyBox';
 
 const Wishlist = () => {
     const { wishlistItems } = useSelector((state) => state.wishlist);
-
-    const [navigation, setNavigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Wishlist', path: '/account/wishlist' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
 
     return (
         <>
             <MetaData title="Wishlist" />
-            {getNavigation(navigation)}
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">

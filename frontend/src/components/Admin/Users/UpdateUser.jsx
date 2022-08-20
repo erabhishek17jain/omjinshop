@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import { clearErrors, getUserDetails, updateUser } from '../../../middleware/actions/userAction';
-import { UPDATE_USER_RESET, REMOVE_USER_DETAILS } from '../../../constants/userConstants';
+import { UPDATE_USER_RESET, REMOVE_USER_DETAILS } from '../../../middleware/constants/userConstants';
 import Loading from '../Loading';
 import Avatar from '@mui/material/Avatar';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -72,7 +72,7 @@ const UpdateUser = () => {
 
     return (
         <>
-            <MetaData title="Admin: Update User | Omjinshop" />
+            <MetaData title="Admin: Update User" />
 
             {updateLoading && <BackdropLoader />}
 

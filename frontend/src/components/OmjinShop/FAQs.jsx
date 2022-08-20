@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import MetaData from '../Layouts/MetaData';
 import { getNavigation } from '../../utils/services';
+import { useSelector } from 'react-redux';
 
 const FAQs = () => {
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Track Order', path: '/account/trackOrder' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
+
     return (
         <>
-            <MetaData title="Wishlist | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Wishlist" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="container">
@@ -20,7 +19,7 @@ const FAQs = () => {
                                     <h3 className="faq__heading">FREQUENTLY QUESTIONS</h3>
                                     <h3 className="faq__heading">What happens when I update my email address (or mobile number)?</h3>
                                     <p className="faq__text">
-                                        Your login email id (or mobile number) changes, likewise. You'll receive all your account related
+                                        Your signIn email id (or mobile number) changes, likewise. You'll receive all your account related
                                         communication on your updated email address (or mobile number).
                                     </p>
                                 </div>

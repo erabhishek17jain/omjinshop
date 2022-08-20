@@ -1,9 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React from 'react';
 
 const MyAccount = () => {
-    const navigate = useNavigate();
     const { user } = useSelector((state) => state.user);
 
     return (
@@ -20,7 +19,7 @@ const MyAccount = () => {
                             <div className="dash__pad-3">
                                 <h2 className="dash__h2 u-s-m-b-8">PERSONAL PROFILE</h2>
                                 <div className="dash__link dash__link--secondary u-s-m-b-8">
-                                    <Link to="/account/update">Edit</Link>
+                                    <Link to="/account/profile/edit">Edit</Link>
                                 </div>
                                 <span className="dash__text">{user.name}</span>
                                 <span className="dash__text">{user.gender}</span>

@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { clearErrors, getOrderDetails, updateOrder } from '../../../middleware/actions/orderAction';
-import { UPDATE_ORDER_RESET } from '../../../constants/orderConstants';
+import { UPDATE_ORDER_RESET } from '../../../middleware/constants/orderConstants';
 import { formatDate } from '../../../utils/services';
 import TrackStepper from '../../Layouts/TrackStepper';
 import Loading from '../Loading';
@@ -47,7 +47,7 @@ const UpdateOrder = () => {
 
     return (
         <>
-            <MetaData title="Admin: Update Order | Omjinshop" />
+            <MetaData title="Admin: Update Order" />
 
             {loading ? (
                 <Loading />

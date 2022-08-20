@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { getDiscount } from '../../../utils/services';
+import { setRatings } from '../../../utils/services';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToWishlist, removeFromWishlist } from '../../../middleware/actions/wishlistAction';
 import { useSnackbar } from 'notistack';
@@ -20,39 +20,21 @@ const OurProduct = ({ _id, name, images, ratings, price, category, cuttedPrice, 
         }
     };
 
-    const setRatings = () => {
-        let ratingStar = [];
-        let ratingInt = Math.trunc(ratings);
-        let ratingDec = Number((ratings.toFixed(1) - ratingInt).toFixed(1));
-        for (let star = 0; star < 5; star++) {
-            ratingStar.push(
-                star < ratingInt ? (
-                    <i className="fas fa-star"></i>
-                ) : ratingDec > 0 && ratingInt === star ? (
-                    <i className="fas fa-star-half-alt"></i>
-                ) : (
-                    <i className="far fa-star"></i>
-                )
-            );
-        }
-        return ratingStar;
-    };
-
     return (
-        <li className="column-product__item">
+        <li className="column-product__item" key={_id}>
             <div className="product-l">
                 <div className="product-l__img-wrap">
-                    <a className="aspect aspect--bg-grey aspect--square u-d-block product-l__link" href="product-#">
+                    <Link to={`/product/${_id}`} className="aspect aspect--bg-grey aspect--square u-d-block product-l__link">
                         <img className="aspect__img" src={images[0].url} alt={name} />
-                    </a>
+                    </Link>
                 </div>
                 <div className="product-l__info-wrap">
-                    {type === 'flash' && <div className="product-l__rating gl-rating-style">{setRatings()}</div>}
+                    {type === 'flash' && <div className="product-l__rating gl-rating-style">{setRatings(ratings)}</div>}
                     <span className="product-l__category">
-                        <a href="#">{category}</a>
+                        <Link to={`/product/${category}`}>{category}</Link>
                     </span>
                     <span className="product-l__name">
-                        <a href="product-#">{name.length > 50 ? `${name.substring(0, 50)}...` : name}</a>
+                        <Link to={`/product/${_id}`}>{name.length > 50 ? `${name.substring(0, 50)}...` : name}</Link>
                     </span>
                     <span className="product-l__price">
                         ₹{cuttedPrice.toLocaleString()}

@@ -8377,7 +8377,7 @@
                     (c = this.$element.children(b).width()),
                     a.length && c <= 0 && this.preloadAutoWidthImages(a);
             }
-            this.initializeStage(), this.initializeItems(), this.registerEventHandlers(), this.leave('initializing'), this.trigger('initialized');
+            this.initializeStage(), this.initializeItems(), this.signUpEventHandlers(), this.leave('initializing'), this.trigger('initialized');
         }),
         (e.prototype.isVisible = function () {
             return !this.settings.checkVisibility || this.$element.is(':visible');
@@ -8468,7 +8468,7 @@
                     : (this.invalidate('width'), this.refresh(), this.leave('resizing'), void this.trigger('resized')))
             );
         }),
-        (e.prototype.registerEventHandlers = function () {
+        (e.prototype.signUpEventHandlers = function () {
             a.support.transition && this.$stage.on(a.support.transition.end + '.owl.core', a.proxy(this.onTransitionEnd, this)),
                 !1 !== this.settings.responsive && this.on(b, 'resize', this._handlers.onThrottledResize),
                 this.settings.mouseDrag &&
@@ -8853,7 +8853,7 @@
                     (a.each(this._plugins, function (a, b) {
                         b.onTrigger && b.onTrigger(j);
                     }),
-                    this.register({ type: e.Type.Event, name: b }),
+                    this.signUp({ type: e.Type.Event, name: b }),
                     this.$element.trigger(j),
                     this.settings && 'function' == typeof this.settings[i] && this.settings[i].call(this, j)),
                 j
@@ -8875,7 +8875,7 @@
                 }, this)
             );
         }),
-        (e.prototype.register = function (b) {
+        (e.prototype.signUp = function (b) {
             if (b.type === e.Type.Event) {
                 if ((a.event.special[b.name] || (a.event.special[b.name] = {}), !a.event.special[b.name].owl)) {
                     var c = a.event.special[b.name]._default;
@@ -8938,7 +8938,7 @@
                     ((f = new e(this, 'object' == typeof b && b)),
                     d.data('owl.carousel', f),
                     a.each(['next', 'prev', 'to', 'destroy', 'refresh', 'replace', 'add', 'remove'], function (b, c) {
-                        f.register({ type: e.Type.Event, name: c }),
+                        f.signUp({ type: e.Type.Event, name: c }),
                             f.$element.on(
                                 c + '.owl.carousel.core',
                                 a.proxy(function (a) {
@@ -9124,7 +9124,7 @@
                 (this._playing = null),
                 (this._handlers = {
                     'initialized.owl.carousel': a.proxy(function (a) {
-                        a.namespace && this._core.register({ type: 'state', name: 'playing', tags: ['interacting'] });
+                        a.namespace && this._core.signUp({ type: 'state', name: 'playing', tags: ['interacting'] });
                     }, this),
                     'resize.owl.carousel': a.proxy(function (a) {
                         a.namespace && this._core.settings.video && this.isInFullScreen() && a.preventDefault();
@@ -9848,7 +9848,7 @@
                 (n.keyHandler = i.proxy(n.keyHandler, n)),
                 (n.instanceUid = e++),
                 (n.htmlExpr = /^(?:\s*(<[\w\W]+>)[^>]*)$/),
-                n.registerBreakpoints(),
+                n.signUpBreakpoints(),
                 n.init(!0);
         };
     })()).prototype.activateADA = function () {
@@ -10641,7 +10641,7 @@
                 s.init(),
                 e || s.changeSlide({ data: { message: 'index', index: t } }, !1);
         }),
-        (e.prototype.registerBreakpoints = function () {
+        (e.prototype.signUpBreakpoints = function () {
             var e,
                 t,
                 o,
@@ -10665,7 +10665,7 @@
                 (e.slideCount = e.$slides.length),
                 e.currentSlide >= e.slideCount && 0 !== e.currentSlide && (e.currentSlide = e.currentSlide - e.options.slidesToScroll),
                 e.slideCount <= e.options.slidesToShow && (e.currentSlide = 0),
-                e.registerBreakpoints(),
+                e.signUpBreakpoints(),
                 e.setProps(),
                 e.setupInfinite(),
                 e.buildArrows(),

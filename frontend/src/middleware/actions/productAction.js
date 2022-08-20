@@ -31,7 +31,7 @@ import {
     SLIDER_PRODUCTS_REQUEST,
     SLIDER_PRODUCTS_SUCCESS,
     SLIDER_PRODUCTS_FAIL,
-} from '../../constants/productConstants';
+} from '../constants/productConstants';
 
 // Get All Products --- Filter/Search/Sort
 export const getProducts =
@@ -157,7 +157,6 @@ export const createProduct = (productData) => async (dispatch) => {
         dispatch({ type: NEW_PRODUCT_REQUEST });
         const config = { header: { 'Content-Type': 'application/json' } };
         const { data } = await axios.post('/api/v1/admin/product/new', productData, config);
-
         dispatch({
             type: NEW_PRODUCT_SUCCESS,
             payload: data,
@@ -246,4 +245,23 @@ export const deleteReview = (reviewId, productId) => async (dispatch) => {
 // Clear All Errors
 export const clearErrors = () => (dispatch) => {
     dispatch({ type: CLEAR_ERRORS });
+};
+
+// New/Update Review
+export const newTags = (tagsData) => async (dispatch) => {
+    try {
+        dispatch({ type: NEW_REVIEW_REQUEST });
+        const config = { header: { 'Content-Type': 'application/json' } };
+        const { data } = await axios.put('/api/v1/review', tagsData, config);
+
+        dispatch({
+            type: NEW_REVIEW_SUCCESS,
+            payload: data.success,
+        });
+    } catch (error) {
+        dispatch({
+            type: NEW_REVIEW_FAIL,
+            payload: error.response.data.message,
+        });
+    }
 };

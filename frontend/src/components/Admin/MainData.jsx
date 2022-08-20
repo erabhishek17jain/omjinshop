@@ -6,7 +6,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllOrders } from '../../middleware/actions/orderAction';
 import { getAllUsers } from '../../middleware/actions/userAction';
 import { categories } from '../../utils/constants';
-import MetaData from '../../components/Layouts/MetaData';
+import MetaData from '../Layouts/MetaData';
+import { Link } from 'react-router-dom';
 
 const MainData = () => {
     const dispatch = useDispatch();
@@ -106,48 +107,52 @@ const MainData = () => {
         ],
     };
 
+    const boxdata = [
+        { title: 'Total Sales Amount', value: totalAmount?.toLocaleString(), icon: 'fas fa-rupee-sign' },
+        { title: 'Total Orders', value: orders?.length, icon: 'fa fa-shopping-cart' },
+        { title: 'Total Products', value: products?.length, icon: 'far fa-list-alt' },
+        { title: 'Total Users', value: users?.length, icon: 'fa fa-user' },
+    ];
+
     return (
         <>
-            <MetaData title="Admin Dashboard | Omjinshop" />
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-6">
-                <div className="flex flex-col bg-purple-600 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
-                    <h4 className="text-gray-100 font-medium">Total Sales Amount</h4>
-                    <h2 className="text-2xl font-bold">₹{totalAmount?.toLocaleString()}</h2>
-                </div>
-                <div className="flex flex-col bg-red-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
-                    <h4 className="text-gray-100 font-medium">Total Orders</h4>
-                    <h2 className="text-2xl font-bold">{orders?.length}</h2>
-                </div>
-                <div className="flex flex-col bg-yellow-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
-                    <h4 className="text-gray-100 font-medium">Total Products</h4>
-                    <h2 className="text-2xl font-bold">{products?.length}</h2>
-                </div>
-                <div className="flex flex-col bg-green-500 text-white gap-2 rounded-xl shadow-lg hover:shadow-xl p-6">
-                    <h4 className="text-gray-100 font-medium">Total Users</h4>
-                    <h2 className="text-2xl font-bold">{users?.length}</h2>
-                </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full">
-                <div className="bg-white rounded-xl h-auto w-full shadow-lg p-2">
-                    <Line data={lineState} />
-                </div>
-
-                <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-                    <span className="font-medium uppercase text-gray-800">Order Status</span>
-                    <Pie data={pieState} />
+            <MetaData title="Admin Dashboard" />
+            <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
+                <div className="dash__pad-1">
+                    <ul className="dash__w-list row">
+                        {boxdata.map((el, index) => (
+                            <div class="col-lg-3 col-md-12">
+                                <li>
+                                    <div className="dash__w-wrap">
+                                        <span className={`dash__w-icon dash__w-icon-style-${index + 1}`}>
+                                            <i className={el.icon}></i>
+                                        </span>
+                                        <span className="dash__w-text">
+                                            {index == 0 && '₹'}
+                                            {el.value}
+                                        </span>
+                                        <span className="dash__w-name">{el.title}</span>
+                                    </div>
+                                </li>
+                            </div>
+                        ))}
+                    </ul>
                 </div>
             </div>
-
-            <div className="flex flex-col sm:flex-row justify-between gap-3 sm:gap-8 min-w-full mb-6">
-                <div className="bg-white rounded-xl h-auto w-full shadow-lg p-2">
-                    <Bar data={barState} />
-                </div>
-
-                <div className="bg-white rounded-xl shadow-lg p-4 text-center">
-                    <span className="font-medium uppercase text-gray-800">Stock Status</span>
-                    <Doughnut data={doughnutState} />
+            <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
+                <div className="dash__pad-1 row">
+                    <div class="col-lg-8 col-md-12">
+                        <Bar data={barState} />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <Pie data={pieState} />
+                    </div>
+                    <div class="col-lg-8 col-md-12">
+                        <Line data={lineState} />
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <Doughnut data={doughnutState} />
+                    </div>
                 </div>
             </div>
         </>

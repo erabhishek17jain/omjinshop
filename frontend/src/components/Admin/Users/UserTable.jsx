@@ -1,19 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { clearErrors, deleteUser, getAllUsers } from '../../../middleware/actions/userAction';
-import { DELETE_USER_RESET } from '../../../constants/userConstants';
+import { DELETE_USER_RESET } from '../../../middleware/constants/userConstants';
 import Actions from '../Actions';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
-
+import Sidebar from '../../Layouts/Sidebar';
+import { getNavigation } from '../../../utils/services';
 const UserTable = () => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
-
     const { users, error } = useSelector((state) => state.users);
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.profile);
+    const { pathItems } = useSelector((state) => state.path);
 
     useEffect(() => {
         if (error) {
@@ -46,6 +47,8 @@ const UserTable = () => {
                     <div className="flex items-center gap-2">
                         <div className="w-10 h-10 rounded-full">
                             <img
+                                width={45}
+                                height={45}
                                 draggable="false"
                                 src={params.row.avatar}
                                 alt={params.row.name}
@@ -91,8 +94,8 @@ const UserTable = () => {
             },
         },
         {
-            field: 'registeredOn',
-            headerName: 'Registered On',
+            field: 'signUpedOn',
+            headerName: 'Sign Uped On',
             type: 'date',
             minWidth: 150,
             flex: 0.2,
@@ -121,28 +124,41 @@ const UserTable = () => {
                 email: item.email,
                 gender: item.gender.toUpperCase(),
                 role: item.role,
-                registeredOn: new Date(item.createdAt).toISOString().substring(0, 10),
+                signUpedOn: new Date(item.createdAt).toISOString().substring(0, 10),
             });
         });
 
     return (
         <>
-            <MetaData title="Admin Users | Omjinshop" />
+            <MetaData title="Admin Users" />
 
             {loading && <BackdropLoader />}
 
-            <h1 className="text-lg font-medium uppercase">users</h1>
-            <div className="bg-white rounded-xl shadow-lg w-full" style={{ height: 470 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    disableSelectionOnClick
-                    sx={{
-                        boxShadow: 0,
-                        border: 0,
-                    }}
-                />
+            {getNavigation(pathItems)}
+            <div className="u-s-p-b-60">
+                <div className="section__content">
+                    <div className="dash">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-3 col-md-12">
+                                    <Sidebar activeTab={'adDashboard'} />
+                                </div>
+                                <div className="col-lg-9 col-md-12 pd-detail__form">
+                                    <DataGrid
+                                        rows={rows}
+                                        columns={columns}
+                                        pageSize={10}
+                                        disableSelectionOnClick
+                                        sx={{
+                                            boxShadow: 0,
+                                            border: 0,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

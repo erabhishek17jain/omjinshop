@@ -47,13 +47,13 @@ const ResetPassword = () => {
             enqueueSnackbar('Password Updated Successfully', {
                 variant: 'success',
             });
-            navigate('/login');
+            navigate('/signIn');
         }
     }, [dispatch, error, success, navigate, enqueueSnackbar]);
 
     return (
         <>
-            <MetaData title="Password Reset | Omjinshop" />
+            <MetaData title="Password Reset" />
 
             {loading && <BackdropLoader />}
             <main className="w-full mt-12 sm:pt-20 sm:mt-0">
@@ -61,7 +61,7 @@ const ResetPassword = () => {
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
                     <FormSidebar title="Reset Password" tag="Get access to your Orders, Wishlist and Recommendations" />
 
-                    {/* <!-- login column --> */}
+                    {/* <!-- signIn column --> */}
                     <div className="flex-1 overflow-hidden">
                         <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Reset Password</h2>
 
@@ -115,13 +115,13 @@ const ResetPassword = () => {
                             </form>
                             {/* <!-- input container --> */}
 
-                            <Link to="/register" className="font-medium text-sm text-primary-blue">
+                            <Link to="/signUp" className="font-medium text-sm text-primary-blue">
                                 New to Omjinshop? Create an account
                             </Link>
                         </div>
                         {/* <!-- edit info container --> */}
                     </div>
-                    {/* <!-- login column --> */}
+                    {/* <!-- signIn column --> */}
                 </div>
                 {/* <!-- row --> */}
             </main>

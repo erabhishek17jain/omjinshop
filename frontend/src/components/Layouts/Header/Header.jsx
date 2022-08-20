@@ -2,26 +2,46 @@ import React, { useState } from 'react';
 import { useSnackbar } from 'notistack';
 import Searchbar from './Searchbar';
 import logo1 from '../../../assets/images/logo/logo.png';
-import { logoutUser } from '../../../middleware/actions/userAction';
-import { Link, useNavigate } from 'react-router-dom';
+import { signOutUser } from '../../../middleware/actions/userAction';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import MegaMenu from './MegaMenu';
 import HeaderCart from '../../Cart/HeaderCart/HeaderCart';
+import { setPath } from '../../../middleware/actions/pathAction';
 
 const Header = () => {
+    const location = useLocation();
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const { isAuthenticated, user } = useSelector((state) => state.user);
+    const { pathItems } = useSelector((state) => state.path);
     const { cartItems } = useSelector((state) => state.cart);
-    const [togglePrimaryDropDown, setTogglePrimaryDropDown] = useState(false);
-    const [toggleSecondaryDropDown, setToggleSecondaryDropDown] = useState(false);
     const [openMegaMenu, setOpenMegaMenu] = useState(false);
+    const profile = { title: 'Profile', path: '/account/profile', tab: 'profile' };
+    const signIn = { title: 'SignIn', path: '/signIn/', tab: 'signIn' };
+    const signUp = { title: 'Sign Up', path: '/signUp/', tab: 'signUp' };
 
-    const handleLogout = () => {
-        dispatch(logoutUser());
-        navigate('/login');
-        enqueueSnackbar('Logout Successfully', { variant: 'success' });
+    const handleSignout = () => {
+        dispatch(signOutUser());
+        navigate('/signIn');
+        enqueueSnackbar('Signout Successfully', { variant: 'success' });
+    };
+
+    const redirectTo = (e, path, i) => {
+        e.preventDefault();
+        let newPath = pathItems;
+        if (newPath.length === i) {
+            newPath[newPath.length - 1] = path;
+        } else if (newPath.length < i) {
+            newPath.push(path);
+        } else if (newPath.length > i) {
+            newPath.splice(i, newPath.length - 1);
+            newPath[newPath.length - 1] = path;
+        }
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
     };
 
     return (
@@ -48,13 +68,13 @@ const Header = () => {
                                                 {isAuthenticated ? (
                                                     <>
                                                         <li>
-                                                            <Link to="/account">
+                                                            <a href="#" onClick={(e) => redirectTo(e, profile, profile.path.split('/').length - 1)}>
                                                                 <i className="fas fa-user-circle u-s-m-r-6"></i>
                                                                 <span>{user.name && user.name.split(' ', 1)}</span>
-                                                            </Link>
+                                                            </a>
                                                         </li>
                                                         <li>
-                                                            <a href="#" onClick={handleLogout}>
+                                                            <a href="#" onClick={handleSignout}>
                                                                 <i className="fas fa-lock-open u-s-m-r-6"></i>
                                                                 <span>Signout</span>
                                                             </a>
@@ -63,16 +83,16 @@ const Header = () => {
                                                 ) : (
                                                     <>
                                                         <li>
-                                                            <Link to="/login">
+                                                            <a href="#" onClick={(e) => redirectTo(e, signIn, signIn.path.split('/').length - 1)}>
                                                                 <i className="fas fa-lock u-s-m-r-6"></i>
                                                                 <span>Signin</span>
-                                                            </Link>
+                                                            </a>
                                                         </li>
                                                         <li>
-                                                            <Link to="/register">
+                                                            <a href="#" onClick={(e) => redirectTo(e, signUp, signUp.path.split('/').length - 1)}>
                                                                 <i className="fas fa-user-plus u-s-m-r-6"></i>
                                                                 <span>Signup</span>
-                                                            </Link>
+                                                            </a>
                                                         </li>
                                                     </>
                                                 )}
@@ -85,7 +105,7 @@ const Header = () => {
                                         </li>
                                         <li data-tooltip="tooltip" data-placement="left" title="Whatsapp">
                                             <a href="https://api.whatsapp.com/send?phone=918305053048&forceIntent=true">
-                                                <i className="fas fa-map-marker-alt"></i>
+                                                <i className="fa fa-whatsapp"></i>
                                             </a>
                                         </li>
                                         <li data-tooltip="tooltip" data-placement="left" title="Mail">
@@ -119,6 +139,7 @@ const Header = () => {
                         </div>
                     </div>
                 </nav>
+                {/* {location.pathname.indexOf('admin') === -1 && ( */}
                 <nav className="secondary-nav-wrapper">
                     <div className="container">
                         <div className="secondary-nav">
@@ -173,7 +194,7 @@ const Header = () => {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link to="/account/wishlist">
+                                            <Link to="/signIn?redirect=account/wishlist">
                                                 <i className="far fa-heart"></i>
                                             </Link>
                                         </li>
@@ -190,90 +211,8 @@ const Header = () => {
                         </div>
                     </div>
                 </nav>
+                {/* )} */}
             </header>
-
-            {/* <header className="bg-primary-blue fixed top-0 py-2.5 w-full z-10">
-        <div className="w-full sm:w-9/12 px-1 sm:px-4 m-auto flex justify-between items-center relative">
-          <div className="flex items-center flex-1">
-            <Link className="h-7 mr-1 sm:mr-4" to="/">
-              <img
-                draggable="false"
-                className="h-full w-full object-contain"
-                src={logo}
-                alt="Omjinshop Logo"
-              />
-            </Link>
-
-            <Searchbar />
-          </div>
-          <div className="flex items-center justify-between ml-1 sm:ml-0 gap-0.5 sm:gap-7 relative">
-            {isAuthenticated === false ? (
-              <Link
-                to="/login"
-                className="px-3 sm:px-9 py-0.5 text-primary-blue bg-white border font-medium rounded-sm cursor-pointer"
-              >
-                Login
-              </Link>
-            ) : (
-              <span
-                className="userDropDown flex items-center text-white font-medium gap-1 cursor-pointer"
-                onClick={() =>
-                  setTogglePrimaryDropDown(!togglePrimaryDropDown)
-                }
-              >
-                {user.name && user.name.split(' ', 1)}
-                <span>
-                  {togglePrimaryDropDown ? (
-                    <ExpandLessIcon sx={{ fontSize: '16px' }} />
-                  ) : (
-                    <ExpandMoreIcon sx={{ fontSize: '16px' }} />
-                  )}
-                </span>
-              </span>
-            )}
-
-            {togglePrimaryDropDown && (
-              <PrimaryDropDownMenu
-                setTogglePrimaryDropDown={setTogglePrimaryDropDown}
-                user={user}
-              />
-            )}
-
-            <span
-              className="moreDropDown hidden sm:flex items-center text-white font-medium gap-1 cursor-pointer"
-              onClick={() =>
-                setToggleSecondaryDropDown(!toggleSecondaryDropDown)
-              }
-            >
-              More
-              <span>
-                {toggleSecondaryDropDown ? (
-                  <ExpandLessIcon sx={{ fontSize: '16px' }} />
-                ) : (
-                  <ExpandMoreIcon sx={{ fontSize: '16px' }} />
-                )}
-              </span>
-            </span>
-
-            {toggleSecondaryDropDown && <SecondaryDropDownMenu />}
-
-            <Link
-              to="/cart"
-              className="flex items-center text-white font-medium gap-2 relative"
-            >
-              <span>
-                <ShoppingCartIcon />
-              </span>
-              {cartItems.length > 0 && (
-                <div className="w-5 h-5 p-2 bg-red-500 text-xs rounded-full absolute -top-2 left-3 flex justify-center items-center border">
-                  {cartItems.length}
-                </div>
-              )}
-              Cart
-            </Link>
-          </div>
-        </div>
-      </header> */}
         </>
     );
 };

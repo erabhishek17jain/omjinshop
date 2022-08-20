@@ -2,7 +2,7 @@ import FeaturedProduct from './FeaturedProduct';
 import { useSelector } from 'react-redux';
 import React from 'react';
 
-const FeaturedProducts = () => {
+const FeaturedProducts = (props) => {
     const { loading, products } = useSelector((state) => state.products);
     return (
         <div className="u-s-p-y-60">
@@ -11,8 +11,8 @@ const FeaturedProducts = () => {
                     <div className="row">
                         <div className="col-lg-12">
                             <div className="section__text-wrap">
-                                <h1 className="section__heading u-c-secondary u-s-m-b-12">FEATURED PRODUCTS</h1>
-                                <span className="section__span u-c-silver">FIND NEW FEATURED PRODUCTS</span>
+                                <h1 className="section__heading u-c-secondary u-s-m-b-12">{props.title}</h1>
+                                <span className="section__span u-c-silver">{props.subTitle}</span>
                             </div>
                         </div>
                     </div>

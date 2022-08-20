@@ -1,98 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import { orderColumns } from '../../../../utils/constants';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
+import { formatDate } from '../../../../utils/services';
 
 const RecentOrders = () => {
+    const rows = [];
+    const [pageSize, setPageSize] = useState(10);
+    const { orders, error } = useSelector((state) => state.allOrders);
+
+    orders &&
+        orders.forEach((order) => {
+            rows.unshift({
+                id: order._id,
+                itemsQty: order.orderItems.length,
+                amount: order.totalPrice,
+                orderOn: formatDate(order.createdAt),
+                status: order.orderStatus,
+            });
+        });
+
     return (
-        <div className="dash__box dash__box--shadow dash__box--bg-white dash__box--radius">
-            <h2 className="dash__h2 u-s-p-xy-20">RECENT ORDERS</h2>
-            <div className="dash__table-wrap gl-scroll">
-                <table className="dash__table">
-                    <thead>
-                        <tr>
-                            <th>Order #</th>
-                            <th>Placed On</th>
-                            <th>Items</th>
-                            <th>Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>3054231326</td>
-                            <td>26/13/2016</td>
-                            <td>
-                                <div className="dash__table-img-wrap">
-                                    <img
-                                        className="u-img-fluid"
-                                        src="images/product/electronic/product3.207dd89cb8b11937ace9524c6c84fb78.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                            </td>
-                            <td>
-                                <div className="dash__table-total">
-                                    <span>$126.00</span>
-                                    <div className="dash__link dash__link--brand">
-                                        <a href="">MANAGE</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3054231326</td>
-                            <td>26/13/2016</td>
-                            <td>
-                                <div className="dash__table-img-wrap">
-                                    <img
-                                        className="u-img-fluid"
-                                        src="images/product/electronic/product14.46bbd6ed7b0726681ab8d21232aaab26.jpg"
-                                        alt=""
-                                    />
-                                </div>
-                            </td>
-                            <td>
-                                <div className="dash__table-total">
-                                    <span>$126.00</span>
-                                    <div className="dash__link dash__link--brand">
-                                        <a href="">MANAGE</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3054231326</td>
-                            <td>26/13/2016</td>
-                            <td>
-                                <div className="dash__table-img-wrap">
-                                    <img className="u-img-fluid" src="images/product/men/product8.fda61b76f0c528c66aaa2f5cd3865e69.jpg" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div className="dash__table-total">
-                                    <span>$126.00</span>
-                                    <div className="dash__link dash__link--brand">
-                                        <a href="">MANAGE</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>3054231326</td>
-                            <td>26/13/2016</td>
-                            <td>
-                                <div className="dash__table-img-wrap">
-                                    <img className="u-img-fluid" src="images/product/women/product10.abd927893b11e83d808f6230a8cb997f.jpg" alt="" />
-                                </div>
-                            </td>
-                            <td>
-                                <div className="dash__table-total">
-                                    <span>$126.00</span>
-                                    <div className="dash__link dash__link--brand">
-                                        <a href="">MANAGE</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
+            <div className="dash__pad-1" style={{ height: '576px' }}>
+                <DataGrid
+                    rows={rows}
+                    columns={orderColumns}
+                    pagination
+                    pageSize={pageSize}
+                    onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                    rowsPerPageOptions={[10, 20]}
+                    disableSelectionOnClick
+                    // components={{ Toolbar: GridToolbar }}
+                    sx={{
+                        boxShadow: 0,
+                        border: 0,
+                    }}
+                />
             </div>
         </div>
     );

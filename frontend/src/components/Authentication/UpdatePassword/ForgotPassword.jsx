@@ -98,7 +98,7 @@ const ForgotPassword = () => {
                                             </div>
                                             <div className="u-s-m-b-30">
                                                 <a className="gl-link" href="#">
-                                                    Back to Login
+                                                    Back to SignIn
                                                 </a>
                                             </div>
                                         </form>
@@ -124,7 +124,7 @@ const ForgotPassword = () => {
         //                 tag="Enter the email address associated with your account."
         //             />
 
-        //             {/* <!-- login column --> */}
+        //             {/* <!-- signIn column --> */}
         //             <div className="flex-1 overflow-hidden">
         //                 <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Forgot Password</h2>
 
@@ -155,12 +155,12 @@ const ForgotPassword = () => {
         //                     </form>
         //                     {/* <!-- input container --> */}
 
-        //                     <Link to="/register" className="font-medium text-sm text-primary-blue">New to Omjinshop? Create an account</Link>
+        //                     <Link to="/signUp" className="font-medium text-sm text-primary-blue">New to Omjinshop? Create an account</Link>
         //                 </div>
         //                 {/* <!-- edit info container --> */}
 
         //             </div>
-        //             {/* <!-- login column --> */}
+        //             {/* <!-- signIn column --> */}
         //         </div>
         //         {/* <!-- row --> */}
 

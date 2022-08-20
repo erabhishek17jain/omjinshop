@@ -356,7 +356,7 @@ const Footer = () => {
 
               <div className="w-full sm:w-1/2">
                 <h2 className="text-primary-grey">
-                  Registered Office Address:
+                  Sign Uped Office Address:
                 </h2>
                 <p className="mt-2 leading-5">
                   Omjinshop Internet Private Limited,

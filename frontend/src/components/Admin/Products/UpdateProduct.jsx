@@ -5,7 +5,7 @@ import MenuItem from '@mui/material/MenuItem';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useNavigate, useParams } from 'react-router-dom';
-import { REMOVE_PRODUCT_DETAILS, UPDATE_PRODUCT_RESET } from '../../../constants/productConstants';
+import { REMOVE_PRODUCT_DETAILS, UPDATE_PRODUCT_RESET } from '../../../middleware/constants/productConstants';
 import { clearErrors, getProductDetails, updateProduct } from '../../../middleware/actions/productAction';
 import ImageIcon from '@mui/icons-material/Image';
 import BackdropLoader from '../../Layouts/BackdropLoader';
@@ -182,7 +182,7 @@ const UpdateProduct = () => {
 
     return (
         <>
-            <MetaData title="Admin: Update Product | Omjinshop" />
+            <MetaData title="Admin: Update Product" />
 
             {loading && <BackdropLoader />}
             {updateLoading && <BackdropLoader />}

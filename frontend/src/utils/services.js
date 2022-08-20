@@ -39,3 +39,21 @@ export const getNavigation = (navigation) => {
         </div>
     );
 };
+
+export const setRatings = (ratings, startCount = 5) => {
+    let ratingStar = [];
+    let ratingInt = Math.trunc(ratings);
+    let ratingDec = Number((ratings.toFixed(1) - ratingInt).toFixed(1));
+    for (let star = 0; star < startCount; star++) {
+        ratingStar.push(
+            star < ratingInt ? (
+                <i className="fas fa-star"></i>
+            ) : ratingDec > 0 && ratingInt === star ? (
+                <i className="fas fa-star-half-alt"></i>
+            ) : (
+                <i className="far fa-star"></i>
+            )
+        );
+    }
+    return ratingStar;
+};

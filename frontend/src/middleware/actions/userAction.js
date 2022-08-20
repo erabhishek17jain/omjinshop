@@ -35,11 +35,11 @@ import {
     ALL_USERS_FAIL,
     ALL_USERS_SUCCESS,
     ALL_USERS_REQUEST,
-} from '../../constants/userConstants';
+} from '../constants/userConstants';
 import axios from 'axios';
 
-// Login User
-export const loginUser = (email, password) => async (dispatch) => {
+// SignIn User
+export const signInUser = (email, password) => async (dispatch) => {
     try {
         dispatch({ type: LOGIN_USER_REQUEST });
 
@@ -49,7 +49,7 @@ export const loginUser = (email, password) => async (dispatch) => {
             },
         };
 
-        const { data } = await axios.post('/api/v1/login', { email, password }, config);
+        const { data } = await axios.post('/api/v1/signIn', { email, password }, config);
 
         dispatch({
             type: LOGIN_USER_SUCCESS,
@@ -63,8 +63,8 @@ export const loginUser = (email, password) => async (dispatch) => {
     }
 };
 
-// Register User
-export const registerUser = (userData) => async (dispatch) => {
+// Sign Up User
+export const signUpUser = (userData) => async (dispatch) => {
     try {
         dispatch({ type: REGISTER_USER_REQUEST });
 
@@ -74,7 +74,7 @@ export const registerUser = (userData) => async (dispatch) => {
             },
         };
 
-        const { data } = await axios.post('/api/v1/register', userData, config);
+        const { data } = await axios.post('/api/v1/signUp', userData, config);
 
         dispatch({
             type: REGISTER_USER_SUCCESS,
@@ -107,10 +107,10 @@ export const loadUser = () => async (dispatch) => {
     }
 };
 
-// Logout User
-export const logoutUser = () => async (dispatch) => {
+// Signout User
+export const signOutUser = () => async (dispatch) => {
     try {
-        await axios.get('/api/v1/logout');
+        await axios.get('/api/v1/signOut');
         dispatch({ type: LOGOUT_USER_SUCCESS });
     } catch (error) {
         dispatch({

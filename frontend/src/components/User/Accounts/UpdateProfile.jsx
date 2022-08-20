@@ -5,14 +5,15 @@ import { useSnackbar } from 'notistack';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, loadUser, updateProfile } from '../../../middleware/actions/userAction';
-import { UPDATE_PROFILE_RESET } from '../../../constants/userConstants';
+import { UPDATE_PROFILE_RESET } from '../../../middleware/constants/userConstants';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import MetaData from '../../Layouts/MetaData';
 import OrderSideBar from '../Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../Accounts/Sidebar';
+import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
 import Datetime from 'react-datetime';
 import './../../../../node_modules/react-datetime/css/react-datetime.css';
+import { setPath } from '../../../middleware/actions/pathAction';
 
 const UpdateProfile = () => {
     const dispatch = useDispatch();
@@ -25,14 +26,11 @@ const UpdateProfile = () => {
     const [avatarPreview, setAvatarPreview] = useState('');
     const [birthDate, setBirthDate] = useState(new Date());
     const [dateView, setDateView] = useState(false);
-
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Edit Profile', path: '/account/update' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
 
     const { user } = useSelector((state) => state.user);
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
+    const profile = { title: 'Profile', path: '/account/profile', tab: 'profile' };
 
     const updateProfileHandler = (e) => {
         e.preventDefault();
@@ -43,7 +41,9 @@ const UpdateProfile = () => {
         formData.set('gender', gender);
         formData.set('avatar', avatar);
 
-        dispatch(updateProfile(formData));
+        dispatch(updateProfile(formData)).then(() => {
+            redirectTo('', profile, profile.path.split('/').length - 1);
+        });
     };
 
     const handleUpdateDataChange = (e) => {
@@ -55,8 +55,31 @@ const UpdateProfile = () => {
                 setAvatar(reader.result);
             }
         };
-
         reader.readAsDataURL(e.target.files[0]);
+    };
+
+    const redirectTo = (e, path, i) => {
+        if (e !== '') e.preventDefault();
+        let newPath = pathItems;
+        if (newPath.length === i) {
+            newPath[newPath.length - 1] = path;
+        } else if (newPath.length < i) {
+            newPath.pop();
+            if (path.path.indexOf('order') !== -1) {
+                newPath.push({ title: 'Orders', path: '/account/orders', tab: 'adOrders' });
+            } else if (path.path.indexOf('profile') !== -1) {
+                newPath.push({ title: 'Profile', path: '/account/profile', tab: 'profile' });
+            } else if (path.path.indexOf('addressBook') !== -1) {
+                newPath.push({ title: 'Address Book', path: '/account/addressBook', tab: 'adReviews' });
+            }
+            newPath.push(path);
+        } else if (newPath.length > i) {
+            newPath.splice(i, newPath.length - 1);
+            newPath[newPath.length - 1] = path;
+        }
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
     };
 
     useEffect(() => {
@@ -83,7 +106,7 @@ const UpdateProfile = () => {
         <>
             <MetaData title="Edit Profile" />
             {loading && <BackdropLoader />}
-            {getNavigation(navigation)}
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">
@@ -223,8 +246,9 @@ const UpdateProfile = () => {
                                                                             accept="image/*"
                                                                             onChange={handleUpdateDataChange}
                                                                             className="hidden"
+                                                                            style={{ display: 'none' }}
                                                                         />
-                                                                        CHOOSE FILE AVATAR
+                                                                        CHOOSE FILE
                                                                     </label>
                                                                 </div>
                                                             </div>
@@ -232,9 +256,13 @@ const UpdateProfile = () => {
                                                         <button className="btn btn--e-brand-b-2" type="submit">
                                                             SAVE
                                                         </button>
-                                                        <Link to="/account/profile" className="btn btn--e-transparent-brand-b-2 u-s-m-l-15">
+                                                        <a
+                                                            href="#"
+                                                            onClick={(e) => redirectTo(e, profile, profile.path.split('/').length - 1)}
+                                                            className="btn btn--e-transparent-brand-b-2 u-s-m-l-15"
+                                                        >
                                                             CANCEL
-                                                        </Link>
+                                                        </a>
                                                     </form>
                                                 </div>
                                             </div>
@@ -252,13 +280,13 @@ const UpdateProfile = () => {
                 {/* <!-- row --> */}
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
                     {/* <!-- sidebar column  --> */}
-                    <div className="loginSidebar bg-primary-blue px-9 py-10 hidden sm:flex flex-col gap-4 w-2/5">
+                    <div className="signInSidebar bg-primary-blue px-9 py-10 hidden sm:flex flex-col gap-4 w-2/5">
                         <h1 className="font-medium text-white text-3xl">Looks like you're new here!</h1>
                         <p className="text-gray-200 text-lg pr-2">Sign up with your mobile number to get started</p>
                     </div>
                     {/* <!-- sidebar column  --> */}
 
-                    {/* <!-- signup column --> */}
+                    {/* <!-- signUp column --> */}
                     <div className="flex-1 overflow-hidden">
                         <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Update Profile</h2>
                         {/* <!-- personal info procedure container --> */}
@@ -332,7 +360,7 @@ const UpdateProfile = () => {
                         </form>
                         {/* <!-- personal info procedure container --> */}
                     </div>
-                    {/* <!-- signup column --> */}
+                    {/* <!-- signUp column --> */}
                 </div>
                 {/* <!-- row --> */}
             </main>

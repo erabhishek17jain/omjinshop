@@ -32,7 +32,7 @@ const HeaderCart = () => {
                             </span>
                         </div>
                         <div className="mini-action">
-                            <Link className="mini-link btn--e-brand-b-2" to="/login?redirect=shipping">
+                            <Link className="mini-link btn--e-brand-b-2" to="/signIn?redirect=account/shipping">
                                 PROCEED TO CHECKOUT
                             </Link>
                             <Link to="/cart" className="mini-link btn--e-transparent-secondary-b-2">

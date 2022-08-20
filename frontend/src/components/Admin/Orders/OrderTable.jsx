@@ -1,20 +1,23 @@
-import React, { useEffect } from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+import React, { useEffect, useState } from 'react';
+import { DataGrid, GridToolbar } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { clearErrors, deleteOrder, getAllOrders } from '../../../middleware/actions/orderAction';
-import { DELETE_ORDER_RESET } from '../../../constants/orderConstants';
-import Actions from '../Actions';
-import { formatDate } from '../../../utils/services';
+import { DELETE_ORDER_RESET } from '../../../middleware/constants/orderConstants';
+import { formatDate, getNavigation } from '../../../utils/services';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
+import Sidebar from '../../Layouts/Sidebar';
+import { orderColumns } from '../../../utils/constants';
 
 const OrderTable = () => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
+    const [pageSize, setPageSize] = useState(10);
     const { orders, error } = useSelector((state) => state.allOrders);
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.order);
+    const { pathItems } = useSelector((state) => state.path);
 
     useEffect(() => {
         if (error) {
@@ -36,69 +39,6 @@ const OrderTable = () => {
         dispatch(deleteOrder(id));
     };
 
-    const columns = [
-        {
-            field: 'id',
-            headerName: 'Order ID',
-            minWidth: 200,
-            flex: 1,
-        },
-        {
-            field: 'status',
-            headerName: 'Status',
-            minWidth: 150,
-            flex: 0.2,
-            renderCell: (params) => {
-                return (
-                    <>
-                        {params.row.status === 'Delivered' ? (
-                            <span className="text-sm bg-green-100 p-1 px-2 font-medium rounded-full text-green-800">{params.row.status}</span>
-                        ) : params.row.status === 'Shipped' ? (
-                            <span className="text-sm bg-yellow-100 p-1 px-2 font-medium rounded-full text-yellow-800">{params.row.status}</span>
-                        ) : (
-                            <span className="text-sm bg-purple-100 p-1 px-2 font-medium rounded-full text-purple-800">{params.row.status}</span>
-                        )}
-                    </>
-                );
-            },
-        },
-        {
-            field: 'itemsQty',
-            headerName: 'Items Qty',
-            type: 'number',
-            minWidth: 100,
-            flex: 0.1,
-        },
-        {
-            field: 'amount',
-            headerName: 'Amount',
-            type: 'number',
-            minWidth: 200,
-            flex: 0.2,
-            renderCell: (params) => {
-                return <span>₹{params.row.amount.toLocaleString()}</span>;
-            },
-        },
-        {
-            field: 'orderOn',
-            headerName: 'Order On',
-            type: 'date',
-            minWidth: 200,
-            flex: 0.5,
-        },
-        {
-            field: 'actions',
-            headerName: 'Actions',
-            minWidth: 100,
-            flex: 0.3,
-            type: 'number',
-            sortable: false,
-            renderCell: (params) => {
-                return <Actions editRoute={'order'} deleteHandler={deleteOrderHandler} id={params.row.id} name={undefined} />;
-            },
-        },
-    ];
-
     const rows = [];
 
     orders &&
@@ -112,24 +52,73 @@ const OrderTable = () => {
             });
         });
 
+    const delivered = 0;
+    const shipped = 0;
+    const inProcess = 0;
+
+    const boxdata = [
+        { title: 'Total Orders', value: orders?.length, icon: 'fa fa-shopping-cart' },
+        { title: 'Orders Shipped', value: shipped, icon: 'fab fa-first-order' },
+        { title: 'Orders In Process', value: inProcess, icon: 'fa fa-spinner' },
+        { title: 'Orders Delivered', value: delivered, icon: 'fas fa-times' },
+    ];
     return (
         <>
-            <MetaData title="Admin Orders | Omjinshop" />
+            <MetaData title="Admin Orders" />
 
             {loading && <BackdropLoader />}
-
-            <h1 className="text-lg font-medium uppercase">orders</h1>
-            <div className="bg-white rounded-xl shadow-lg w-full" style={{ height: 470 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    disableSelectionOnClick
-                    sx={{
-                        boxShadow: 0,
-                        border: 0,
-                    }}
-                />
+            {getNavigation(pathItems)}
+            <div className="u-s-p-b-60">
+                <div className="section__content">
+                    <div className="dash">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-3 col-md-12">
+                                    <Sidebar activeTab={'adDashboard'} />
+                                </div>
+                                <div className="col-lg-9 col-md-12">
+                                    <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
+                                        <div className="dash__pad-1">
+                                            <ul className="dash__w-list row">
+                                                {boxdata.map((el, index) => (
+                                                    <div class="col-lg-3 col-md-12">
+                                                        <li>
+                                                            <div className="dash__w-wrap">
+                                                                <span className={`dash__w-icon dash__w-icon-style-${index + 1}`}>
+                                                                    <i className={el.icon}></i>
+                                                                </span>
+                                                                <span className="dash__w-text">₹{el.value}</span>
+                                                                <span className="dash__w-name">{el.title}</span>
+                                                            </div>
+                                                        </li>
+                                                    </div>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
+                                        <div className="dash__pad-1" style={{ height: '576px' }}>
+                                            <DataGrid
+                                                rows={rows}
+                                                columns={orderColumns}
+                                                pagination
+                                                pageSize={pageSize}
+                                                onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                                                rowsPerPageOptions={[10, 20]}
+                                                disableSelectionOnClick
+                                                components={{ Toolbar: GridToolbar }}
+                                                sx={{
+                                                    boxShadow: 0,
+                                                    border: 0,
+                                                }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

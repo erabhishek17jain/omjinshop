@@ -15,9 +15,9 @@ const ProductEmpty = () => {
 
                                     <span className="empty__text-2">
                                         Related searches:
-                                        <a href="shop-side-version-2.html">men's clothing</a>
-                                        <a href="shop-side-version-2.html">mobiles &amp; tablets</a>
-                                        <a href="shop-side-version-2.html">books &amp; audible</a>
+                                        <a href="#">men's clothing</a>
+                                        <a href="#">mobiles &amp; tablets</a>
+                                        <a href="#">books &amp; audible</a>
                                     </span>
                                     <form className="empty__search-form">
                                         <label htmlFor="search-label"></label>

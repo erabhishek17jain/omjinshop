@@ -4,12 +4,12 @@ import { useSnackbar } from 'notistack';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, loadUser, updatePassword } from '../../../middleware/actions/userAction';
-import { UPDATE_PASSWORD_RESET } from '../../../constants/userConstants';
+import { UPDATE_PASSWORD_RESET } from '../../../middleware/constants/userConstants';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import MetaData from '../../Layouts/MetaData';
 import FormSidebar from '../../../components/Layouts/FormSidebar';
 import OrderSideBar from '../../User/Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../../User/Accounts/Sidebar';
+import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
 
 const UpdatePassword = () => {
@@ -22,11 +22,7 @@ const UpdatePassword = () => {
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
-    const [navigation, setNavigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Track Order', path: '/account/trackOrder' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
 
     const updatePasswordSubmitHandler = (e) => {
         e.preventDefault();
@@ -64,8 +60,8 @@ const UpdatePassword = () => {
 
     return (
         <>
-            <MetaData title="Password Update | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Password Update" />
+            {getNavigation(pathItems)}
             <div class="u-s-p-b-60">
                 <div class="section__intro u-s-m-b-60">
                     <div class="container">
@@ -113,8 +109,8 @@ const UpdatePassword = () => {
                                                     </button>
                                                 </div>
                                                 <div class="u-s-m-b-30">
-                                                    <a class="gl-link" href="signin.html">
-                                                        Back to Login
+                                                    <a class="gl-link" href="#">
+                                                        Back to SignIn
                                                     </a>
                                                 </div>
                                             </form>
@@ -132,7 +128,7 @@ const UpdatePassword = () => {
                 <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
                     <FormSidebar title="Looks like you want to update password!" tag="Enter your current and new password to update" />
 
-                    {/* <!-- signup column --> */}
+                    {/* <!-- signUp column --> */}
                     <div className="flex-1 overflow-hidden">
                         <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Update Password</h2>
                         {/* <!-- personal info procedure container --> */}
@@ -185,7 +181,7 @@ const UpdatePassword = () => {
                         </form>
                         {/* <!-- personal info procedure container --> */}
                     </div>
-                    {/* <!-- signup column --> */}
+                    {/* <!-- signUp column --> */}
                 </div>
                 {/* <!-- row --> */}
             </main>

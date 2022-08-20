@@ -2,8 +2,8 @@ import React from 'react';
 import WebFont from 'webfontloader';
 import Footer from './components/Layouts/Footer/Footer';
 import Header from './components/Layouts/Header/Header';
-import Login from './components/Authentication/Login';
-import Register from './components/Authentication/Register';
+import SignIn from './components/Authentication/SignIn';
+import SignUp from './components/Authentication/SignUp';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { loadUser } from './middleware/actions/userAction';
 import { useEffect } from 'react';
@@ -25,8 +25,6 @@ import OrderStatus from './components/User/Orders/OrderStatus/OrderStatus';
 import OrderSuccess from './components/User/Orders/OrderStatus/OrderSuccess';
 import MyOrders from './components/User/Orders/MyOrders';
 import OrderDetails from './components/User/Orders/OrderDetails/OrderDetails';
-import Dashboard from './components/Admin/Dashboard';
-import MainData from './components/Admin/MainData';
 import OrderTable from './components/Admin/Orders/OrderTable';
 import UpdateOrder from './components/Admin/Orders/UpdateOrder';
 import ProductTable from './components/Admin/Products/ProductTable';
@@ -49,6 +47,7 @@ import FAQs from './components/OmjinShop/FAQs';
 import MyProfile from './components/User/Accounts/MyProfile';
 import PaymentOptions from './components/User/Payments/PaymentOptions';
 import ReturnAndCancel from './components/OmjinShop/ReturnAndCancel';
+import Dashboard from './components/Admin/Dashboard';
 
 function App() {
     const dispatch = useDispatch();
@@ -95,8 +94,8 @@ function App() {
             <Header />
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/register" element={<Register />} />
+                <Route path="/signIn" element={<SignIn />} />
+                <Route path="/signUp" element={<SignUp />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/products/:keyword" element={<Products />} />
@@ -129,7 +128,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/update"
+                    path="/account/profile/edit"
                     element={
                         <ProtectedRoute>
                             <UpdateProfile />
@@ -253,7 +252,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/password/update"
+                    path="/account/profile/update"
                     element={
                         <ProtectedRoute>
                             <UpdatePassword />
@@ -261,7 +260,7 @@ function App() {
                     }
                 ></Route>
 
-                <Route path="/password/forgot" element={<ForgotPassword />} />
+                <Route path="/account/profile/forgot" element={<ForgotPassword />} />
                 <Route path="/password/reset/:token" element={<ResetPassword />} />
 
                 {/* Admin account */}
@@ -269,9 +268,7 @@ function App() {
                     path="/admin/dashboard"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={0}>
-                                <MainData />
-                            </Dashboard>
+                            <Dashboard />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -280,9 +277,7 @@ function App() {
                     path="/admin/orders"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={1}>
-                                <OrderTable />
-                            </Dashboard>
+                            <OrderTable />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -291,9 +286,7 @@ function App() {
                     path="/admin/order/:id"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={1}>
-                                <UpdateOrder />
-                            </Dashboard>
+                            <UpdateOrder />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -302,20 +295,16 @@ function App() {
                     path="/admin/products"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={2}>
-                                <ProductTable />
-                            </Dashboard>
+                            <ProductTable />
                         </ProtectedRoute>
                     }
                 ></Route>
 
                 <Route
-                    path="/admin/new_product"
+                    path="/admin/newProduct"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={3}>
-                                <NewProduct />
-                            </Dashboard>
+                            <NewProduct />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -324,9 +313,7 @@ function App() {
                     path="/admin/product/:id"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={2}>
-                                <UpdateProduct />
-                            </Dashboard>
+                            <UpdateProduct />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -335,9 +322,7 @@ function App() {
                     path="/admin/users"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={4}>
-                                <UserTable />
-                            </Dashboard>
+                            <UserTable />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -346,9 +331,7 @@ function App() {
                     path="/admin/user/:id"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={4}>
-                                <UpdateUser />
-                            </Dashboard>
+                            <UpdateUser />
                         </ProtectedRoute>
                     }
                 ></Route>
@@ -357,9 +340,7 @@ function App() {
                     path="/admin/reviews"
                     element={
                         <ProtectedRoute isAdmin={true}>
-                            <Dashboard activeTab={5}>
-                                <ReviewsTable />
-                            </Dashboard>
+                            <ReviewsTable />
                         </ProtectedRoute>
                     }
                 ></Route>

@@ -21,6 +21,7 @@ const Shipping = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const { cartItems } = useSelector((state) => state.cart);
+    const { pathItems } = useSelector((state) => state.path);
     const { shippingInfo } = useSelector((state) => state.cart);
 
     const [address, setAddress] = useState(shippingInfo.address);
@@ -29,11 +30,6 @@ const Shipping = () => {
     const [state, setState] = useState(shippingInfo.state);
     const [pincode, setPincode] = useState(shippingInfo.pincode);
     const [phoneNo, setPhoneNo] = useState(shippingInfo.phoneNo);
-
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Checkout', path: '/cart' },
-    ]);
 
     const shippingSubmit = (e) => {
         e.preventDefault();
@@ -57,7 +53,7 @@ const Shipping = () => {
 
     return (
         <>
-            {getNavigation(navigation)}
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="container">
@@ -68,7 +64,7 @@ const Shipping = () => {
                                         <span className="msg__text">
                                             Returning customer?
                                             <a className="gl-link" href="#return-customer" data-toggle="collapse">
-                                                Click here to login
+                                                Click here to signIn
                                             </a>
                                         </span>
                                         <div className="collapse" id="return-customer" data-parent="#checkout-msg-group">
@@ -77,26 +73,26 @@ const Shipping = () => {
                                                 <form className="l-f__form">
                                                     <div className="gl-inline">
                                                         <div className="u-s-m-b-15">
-                                                            <label className="gl-label" htmlFor="login-email">
+                                                            <label className="gl-label" htmlFor="signIn-email">
                                                                 E-MAIL *
                                                             </label>
 
                                                             <input
                                                                 className="input-text input-text--primary-style"
                                                                 type="text"
-                                                                id="login-email"
+                                                                id="signIn-email"
                                                                 placeholder="Enter E-mail"
                                                             />
                                                         </div>
                                                         <div className="u-s-m-b-15">
-                                                            <label className="gl-label" htmlFor="login-password">
+                                                            <label className="gl-label" htmlFor="signIn-password">
                                                                 PASSWORD *
                                                             </label>
 
                                                             <input
                                                                 className="input-text input-text--primary-style"
                                                                 type="text"
-                                                                id="login-password"
+                                                                id="signIn-password"
                                                                 placeholder="Enter Password"
                                                             />
                                                         </div>
@@ -108,7 +104,7 @@ const Shipping = () => {
                                                             </button>
                                                         </div>
                                                         <div className="u-s-m-b-15">
-                                                            <a className="gl-link" href="lost-password.html">
+                                                            <a className="gl-link" href="#">
                                                                 Lost Your Password?
                                                             </a>
                                                         </div>
@@ -317,7 +313,7 @@ const Shipping = () => {
                                             </div>
                                             <div className="collapse u-s-m-b-15" id="create-account">
                                                 <span className="gl-text u-s-m-b-15">
-                                                    Create an account by entering the information below. If you are a returning customer please login
+                                                    Create an account by entering the information below. If you are a returning customer please signIn
                                                     at the top of the page.
                                                 </span>
                                                 <div>
@@ -364,7 +360,7 @@ const Shipping = () => {
                                                         </div>
                                                         <div className="o-card__info-wrap">
                                                             <span className="o-card__name">
-                                                                <a href="product-detail.html">Yellow Wireless Headphone</a>
+                                                                <a href="#">Yellow Wireless Headphone</a>
                                                             </span>
 
                                                             <span className="o-card__quantity">Quantity x 1</span>
@@ -386,7 +382,7 @@ const Shipping = () => {
                                                         </div>
                                                         <div className="o-card__info-wrap">
                                                             <span className="o-card__name">
-                                                                <a href="product-detail.html">Nikon DSLR Camera 4k</a>
+                                                                <a href="#">Nikon DSLR Camera 4k</a>
                                                             </span>
 
                                                             <span className="o-card__quantity">Quantity x 1</span>
@@ -408,7 +404,7 @@ const Shipping = () => {
                                                         </div>
                                                         <div className="o-card__info-wrap">
                                                             <span className="o-card__name">
-                                                                <a href="product-detail.html">New Dress D Nice Elegant</a>
+                                                                <a href="#">New Dress D Nice Elegant</a>
                                                             </span>
 
                                                             <span className="o-card__quantity">Quantity x 1</span>
@@ -430,7 +426,7 @@ const Shipping = () => {
                                                         </div>
                                                         <div className="o-card__info-wrap">
                                                             <span className="o-card__name">
-                                                                <a href="product-detail.html">New Fashion D Nice Elegant</a>
+                                                                <a href="#">New Fashion D Nice Elegant</a>
                                                             </span>
 
                                                             <span className="o-card__quantity">Quantity x 1</span>

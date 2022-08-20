@@ -16,9 +16,13 @@ const SaveForLater = ({ product, name, seller, price, cuttedPrice, image, stock,
     };
 
     const moveToCartHandler = (id, quantity) => {
-        dispatch(addItemsToCart(id, quantity));
-        removeFromSaveForLaterHandler(id);
-        enqueueSnackbar('Product Added To Cart', { variant: 'success' });
+        if (quantity < 10) {
+            dispatch(addItemsToCart(id, quantity));
+            removeFromSaveForLaterHandler(id);
+            enqueueSnackbar('Product Added To Cart', { variant: 'success' });
+        } else {
+            enqueueSnackbar('Sorry we dont allow more then 10 units', { variant: 'warning' });
+        }
     };
 
     return (

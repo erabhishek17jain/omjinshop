@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import MetaData from '../../Layouts/MetaData';
 import OrderSideBar from '../../User/Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../../User/Accounts/Sidebar';
+import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
+import { useSelector } from 'react-redux';
 
 const AddressBook = () => {
-    const [navigation, setNavigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Address Book', path: '/account/addressBook' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
     return (
         <>
-            <MetaData title="Wishlist | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Wishlist" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">
@@ -29,11 +27,11 @@ const AddressBook = () => {
                                                 <h1 className="dash__h1">Address Book</h1>
                                                 <div>
                                                     <span className="dash__link dash__link--black u-s-m-r-8">
-                                                        <a href="dash-address-make-default.html">Make default shipping address</a>
+                                                        <a href="#">Make default shipping address</a>
                                                     </span>
 
                                                     <span className="dash__link dash__link--black">
-                                                        <a href="dash-address-make-default.html">Make default shipping address</a>
+                                                        <a href="#">Make default shipping address</a>
                                                     </span>
                                                 </div>
                                             </div>
@@ -55,10 +53,7 @@ const AddressBook = () => {
                                                 <tbody>
                                                     <tr>
                                                         <td>
-                                                            <a
-                                                                className="address-book-edit btn--e-transparent-platinum-b-2"
-                                                                href="dash-address-edit.html"
-                                                            >
+                                                            <a className="address-book-edit btn--e-transparent-platinum-b-2" href="#">
                                                                 Edit
                                                             </a>
                                                         </td>
@@ -73,10 +68,7 @@ const AddressBook = () => {
                                                     </tr>
                                                     <tr>
                                                         <td>
-                                                            <a
-                                                                className="address-book-edit btn--e-transparent-platinum-b-2"
-                                                                href="dash-address-edit.html"
-                                                            >
+                                                            <a className="address-book-edit btn--e-transparent-platinum-b-2" href="#">
                                                                 Edit
                                                             </a>
                                                         </td>
@@ -91,7 +83,7 @@ const AddressBook = () => {
                                         </div>
                                     </div>
                                     <div>
-                                        <a className="dash__custom-link btn--e-brand-b-2" href="dash-address-add.html">
+                                        <a className="dash__custom-link btn--e-brand-b-2" href="#">
                                             <i className="fas fa-plus u-s-m-r-8"></i>
 
                                             <span>Add New Address</span>

@@ -63,7 +63,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/men/product6.7f91aa6e9e8819bdb41444ac1e4493c1.jpg"
@@ -89,10 +89,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Men Clothing</a>
+                                                    <a href="#">Men Clothing</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">New Fashion B Nice Elegant</a>
+                                                    <a href="#">New Fashion B Nice Elegant</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -129,7 +129,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/women/product5.662122237caef6717465b3580ad4b2a7.jpg"
@@ -155,10 +155,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Women Clothing</a>
+                                                    <a href="#">Women Clothing</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">New Dress A Nice Elegant</a>
+                                                    <a href="#">New Dress A Nice Elegant</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -195,7 +195,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/women/product6.7e8a898c9c3ff885d0a6fad0df4573aa.jpg"
@@ -221,10 +221,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Women Clothing</a>
+                                                    <a href="#">Women Clothing</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">New Dress B Nice Elegant</a>
+                                                    <a href="#">New Dress B Nice Elegant</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -261,7 +261,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/women/product7.f939e64d3f67d7fcad0948b418fcec7a.jpg"
@@ -287,10 +287,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Women Clothing</a>
+                                                    <a href="#">Women Clothing</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">New Dress C Nice Elegant</a>
+                                                    <a href="#">New Dress C Nice Elegant</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -327,7 +327,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/men/product9.99a4d4aa5f55fbc5e41bd3d007587ed1.jpg"
@@ -353,10 +353,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Men Clothing</a>
+                                                    <a href="#">Men Clothing</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">New Fashion E Nice Elegant</a>
+                                                    <a href="#">New Fashion E Nice Elegant</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -393,7 +393,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/men/product10.3a31b578ab6d0f0b3b26a204935c6e1f.jpg"
@@ -419,10 +419,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Men Clothing</a>
+                                                    <a href="#">Men Clothing</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">New Fashion F Nice Elegant</a>
+                                                    <a href="#">New Fashion F Nice Elegant</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -459,7 +459,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/electronic/product2.ea1932957badfdefe7e4a1e7d50f4ea9.jpg"
@@ -485,10 +485,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Electronics</a>
+                                                    <a href="#">Electronics</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">Red Wireless Headphone</a>
+                                                    <a href="#">Red Wireless Headphone</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -525,7 +525,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/electronic/product3.207dd89cb8b11937ace9524c6c84fb78.jpg"
@@ -551,10 +551,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Electronics</a>
+                                                    <a href="#">Electronics</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">Yellow Wireless Headphone</a>
+                                                    <a href="#">Yellow Wireless Headphone</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -594,7 +594,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/electronic/product4.279fab007a14c3ddb6502e68504c3ad7.jpg"
@@ -620,10 +620,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Electronics</a>
+                                                    <a href="#">Electronics</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">Hover Skateboard Scooter</a>
+                                                    <a href="#">Hover Skateboard Scooter</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -663,7 +663,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/electronic/product5.d64c6669989febaa19da24fa1615ce0a.jpg"
@@ -689,10 +689,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Electronics</a>
+                                                    <a href="#">Electronics</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">Hover Red Skateboard Scooter</a>
+                                                    <a href="#">Hover Red Skateboard Scooter</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -732,7 +732,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/electronic/product6.230bad1839e2b89163f8fd71bef6a4c8.jpg"
@@ -758,10 +758,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Electronics</a>
+                                                    <a href="#">Electronics</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">Canon DSLR Camera 4k</a>
+                                                    <a href="#">Canon DSLR Camera 4k</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -801,7 +801,7 @@ const TopOffers = () => {
                                     <div class="col-lg-3 col-md-4 col-sm-6">
                                         <div class="product-m">
                                             <div class="product-m__thumb">
-                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="product-detail.html">
+                                                <a class="aspect aspect--bg-grey aspect--square u-d-block" href="#">
                                                     <img
                                                         class="aspect__img"
                                                         src="images/product/electronic/product7.118dd93d7ea34fc4c98b954592b34adc.jpg"
@@ -827,10 +827,10 @@ const TopOffers = () => {
                                             </div>
                                             <div class="product-m__content">
                                                 <div class="product-m__category">
-                                                    <a href="shop-side-version-2.html">Electronics</a>
+                                                    <a href="#">Electronics</a>
                                                 </div>
                                                 <div class="product-m__name">
-                                                    <a href="product-detail.html">Nikon DSLR Camera 4k</a>
+                                                    <a href="#">Nikon DSLR Camera 4k</a>
                                                 </div>
                                                 <div class="product-m__rating gl-rating-style">
                                                     <i class="fas fa-star"></i>
@@ -872,19 +872,19 @@ const TopOffers = () => {
                             <div class="u-s-p-y-60">
                                 <ul class="shop-p__pagination">
                                     <li class="is-active">
-                                        <a href="shop-grid-full.html">1</a>
+                                        <a href="#">1</a>
                                     </li>
                                     <li>
-                                        <a href="shop-grid-full.html">2</a>
+                                        <a href="#">2</a>
                                     </li>
                                     <li>
-                                        <a href="shop-grid-full.html">3</a>
+                                        <a href="#">3</a>
                                     </li>
                                     <li>
-                                        <a href="shop-grid-full.html">4</a>
+                                        <a href="#">4</a>
                                     </li>
                                     <li>
-                                        <a class="fas fa-angle-right" href="shop-grid-full.html"></a>
+                                        <a class="fas fa-angle-right" href="#"></a>
                                     </li>
                                 </ul>
                             </div>

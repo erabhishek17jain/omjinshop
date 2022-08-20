@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MetaData from '../../Layouts/MetaData';
 import OrderSideBar from '../../User/Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../../User/Accounts/Sidebar';
+import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
+import { useSelector } from 'react-redux';
 
 const DefaultAddress = () => {
-    const [navigation, setNavigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Default Address', path: '/account/addressBook/default' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
+
     return (
         <>
-            <MetaData title="Wishlist | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="Default Address" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">

@@ -1,21 +1,47 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MetaData from '../../Layouts/MetaData';
 import OrderSideBar from '../Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../Accounts/Sidebar';
+import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { setPath } from '../../../middleware/actions/pathAction';
 
 const MyProfile = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { user } = useSelector((state) => state.user);
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Profile', path: '/account/profile' },
-    ]);
+    const { pathItems } = useSelector((state) => state.path);
+    const changePass = { title: 'Profile', path: '/account/profile', tab: 'profile' };
+    const editProfile = { title: 'Edit Profile', path: '/account/profile/edit', tab: 'editProfile' };
+
+    const redirectTo = (e, path, i) => {
+        e.preventDefault();
+        let newPath = pathItems;
+        if (newPath.length === i) {
+            newPath[newPath.length - 1] = path;
+        } else if (newPath.length < i) {
+            newPath.pop();
+            if (path.path.indexOf('order') !== -1) {
+                newPath.push({ title: 'Orders', path: '/account/orders', tab: 'adOrders' });
+            } else if (path.path.indexOf('profile') !== -1) {
+                newPath.push({ title: 'Profile', path: '/account/profile', tab: 'profile' });
+            } else if (path.path.indexOf('addressBook') !== -1) {
+                newPath.push({ title: 'Address Book', path: '/account/addressBook', tab: 'adReviews' });
+            }
+            newPath.push(path);
+        } else if (newPath.length > i) {
+            newPath.splice(i, newPath.length - 1);
+            newPath[newPath.length - 1] = path;
+        }
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
+    };
     return (
         <>
             <MetaData title="Profile" />
-            {getNavigation(navigation)}
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">
@@ -47,11 +73,13 @@ const MyProfile = () => {
                                                                 </div>
                                                                 <div className="col-lg-4 u-s-m-b-30">
                                                                     <h2 className="dash__h2 u-s-m-b-8">Phone</h2>
-                                                                    <span className="dash__text">{user.name}</span>
+                                                                    <span className="dash__text">{user.mobile}</span>
                                                                 </div>
                                                                 <div className="col-lg-4 u-s-m-b-30">
                                                                     <h2 className="dash__h2 u-s-m-b-8">Birthday</h2>
-                                                                    <span className="dash__text">{user.name}</span>
+                                                                    <span className="dash__text">
+                                                                        {new Date(user.birthDate).toLocaleDateString('en-GB')}
+                                                                    </span>
                                                                 </div>
                                                                 <div className="col-lg-4 u-s-m-b-30">
                                                                     <h2 className="dash__h2 u-s-m-b-8">Gender</h2>
@@ -59,29 +87,27 @@ const MyProfile = () => {
                                                                 </div>
                                                             </div>
                                                             <div className="row">
-                                                                <div className="col-lg-12">
-                                                                    <div className="dash__link dash__link--secondary u-s-m-b-30">
-                                                                        <a data-modal="modal" data-modal-id="#dash-newsletter">
-                                                                            Subscribe Newsletter
-                                                                        </a>
-                                                                    </div>
-                                                                </div>
                                                                 <div className="u-s-m-b-16">
-                                                                    <Link
-                                                                        to="/account/update"
+                                                                    <a
+                                                                        href="#"
+                                                                        onClick={(e) =>
+                                                                            redirectTo(e, editProfile, editProfile.path.split('/').length - 1)
+                                                                        }
                                                                         className="dash__custom-link btn--e-transparent-brand-b-2"
                                                                     >
                                                                         Edit Profile
-                                                                    </Link>
+                                                                    </a>
                                                                 </div>
                                                                 <div className="u-s-m-l-16">
-                                                                    <Link
-                                                                        to="/password/update"
-                                                                        className="dash__custom-link btn--e-brand-b-2"
+                                                                    <a
                                                                         href="#"
+                                                                        onClick={(e) =>
+                                                                            redirectTo(e, changePass, changePass.path.split('/').length - 1)
+                                                                        }
+                                                                        className="dash__custom-link btn--e-brand-b-2"
                                                                     >
                                                                         Change Password
-                                                                    </Link>
+                                                                    </a>
                                                                 </div>
                                                             </div>
                                                         </div>

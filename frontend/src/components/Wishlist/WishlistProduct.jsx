@@ -1,8 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { getDiscount } from '../../utils/services';
-import DeleteIcon from '@mui/icons-material/Delete';
-import StarIcon from '@mui/icons-material/Star';
 import { removeFromWishlist } from '../../middleware/actions/wishlistAction';
 import { useDispatch } from 'react-redux';
 import { useSnackbar } from 'notistack';
@@ -50,14 +47,14 @@ const WishlistProduct = (props) => {
                         </div>
                         <div className="w-r__info">
                             <div className="product-l__rating gl-rating-style">
-                                {setRatings()}
+                                {setRatings(ratings)}
                                 <span className="product-o__review">({reviews})</span>
                             </div>
                             <span className="w-r__name">
-                                <a href="#">{name.length > 85 ? `${name.substring(0, 85)}...` : name}</a>
+                                <Link to={`/product/${product}`}>{name.length > 85 ? `${name.substring(0, 85)}...` : name}</Link>
                             </span>
                             <span className="w-r__category">
-                                <a href="#">{category}</a>
+                                <Link to={`/products/${category}`}>{category}</Link>
                             </span>
                             <span className="w-r__price">
                                 ₹{cuttedPrice.toLocaleString()}

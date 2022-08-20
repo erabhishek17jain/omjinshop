@@ -11,7 +11,7 @@ import { useParams } from 'react-router-dom';
 import { clearErrors, getProducts } from '../../middleware/actions/productAction';
 import Loader from '../Layouts/Loader';
 import MinCategory from '../Layouts/MinCategory';
-import Product from './SingleProduct/Product';
+import Product from './SingleProduct/SingleProduct';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import StarIcon from '@mui/icons-material/Star';
@@ -61,7 +61,7 @@ const Products = () => {
 
     return (
         <>
-            <MetaData title="All Products | Omjinshop" />
+            <MetaData title="All Products" />
             <div className="u-s-p-y-90">
                 <div className="container">
                     <div className="row">

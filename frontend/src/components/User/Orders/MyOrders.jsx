@@ -5,8 +5,8 @@ import { useSnackbar } from 'notistack';
 import MetaData from '../../Layouts/MetaData';
 import React from 'react';
 import OrderSideBar from '../Orders/OrderDetails/OrderSideBar';
-import Sidebar from '../Accounts/Sidebar';
-import { getNavigation } from '../../../utils/services';
+import Sidebar from '../../Layouts/Sidebar';
+import { formatDate, getNavigation } from '../../../utils/services';
 import { FormControl, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import Loader from '../../Layouts/Loader';
 import OrderItem from '../../User/Orders/OrderDetails/OrderItem';
@@ -23,12 +23,7 @@ const MyOrders = () => {
     const [orderTime, setOrderTime] = useState(0);
     const [search, setSearch] = useState('');
     const [filteredOrders, setFilteredOrders] = useState([]);
-
-    const [navigation, setNavigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'Orders', path: '/account/orders' },
-    ]);
-
+    const { pathItems } = useSelector((state) => state.path);
     const { orders, loading, error } = useSelector((state) => state.myOrders);
 
     useEffect(() => {
@@ -93,8 +88,8 @@ const MyOrders = () => {
 
     return (
         <>
-            <MetaData title="My Orders | Omjinshop" />
-            {getNavigation(navigation)}
+            <MetaData title="My Orders" />
+            {getNavigation(pathItems)}
             <div className="u-s-p-b-60">
                 <div className="section__content">
                     <div className="dash">
@@ -103,7 +98,7 @@ const MyOrders = () => {
                                 <div className="col-lg-3 col-md-12">
                                     <Sidebar activeTab={'profile'} />
                                     <OrderSideBar />
-                                </div>{' '}
+                                </div>
                                 <div className="col-lg-9 col-md-12">
                                     <div className="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
                                         <div className="dash__pad-2">
@@ -125,50 +120,57 @@ const MyOrders = () => {
                                                 </div>
                                             </form>
                                             <div className="m-order__list">
-                                                <div className="m-order__get">
-                                                    <div className="manage-o__header u-s-m-b-30">
-                                                        <div className="dash-l-r">
-                                                            <div>
-                                                                <div className="manage-o__text-2 u-c-secondary">Order #305423126</div>
-                                                                <div className="manage-o__text u-c-silver">Placed on 26 Oct 2016 09:08:37</div>
-                                                            </div>
-                                                            <div>
-                                                                <div className="dash__link dash__link--brand">
-                                                                    <a href="dash-manage-order.html">MANAGE</a>
+                                                {orders &&
+                                                    orders.forEach((order) => {
+                                                        <div className="m-order__get">
+                                                            <div className="manage-o__header u-s-m-b-30">
+                                                                <div className="dash-l-r">
+                                                                    <div>
+                                                                        <div className="manage-o__text-2 u-c-secondary">Order #305423126</div>
+                                                                        <div className="manage-o__text u-c-silver">
+                                                                            Placed on {formatDate(order.createdAt)}
+                                                                        </div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <div className="dash__link dash__link--brand">
+                                                                            <a href="#">MANAGE</a>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div className="manage-o__description">
-                                                        <div className="description__container">
-                                                            <div className="description__img-wrap">
-                                                                <img
-                                                                    className="u-img-fluid"
-                                                                    src="images/product/electronic/product3.207dd89cb8b11937ace9524c6c84fb78.jpg"
-                                                                    alt=""
-                                                                />
+                                                            <div className="manage-o__description">
+                                                                <div className="description__container">
+                                                                    <div className="description__img-wrap">
+                                                                        <img
+                                                                            className="u-img-fluid"
+                                                                            src="images/product/electronic/product3.207dd89cb8b11937ace9524c6c84fb78.jpg"
+                                                                            alt=""
+                                                                        />
+                                                                    </div>
+                                                                    <div className="description-title">Yellow Wireless Headphone</div>
+                                                                </div>
+                                                                <div className="description__info-wrap">
+                                                                    <div>
+                                                                        <span className="manage-o__badge badge--processing">{order.orderStatus}</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <span className="manage-o__text-2 u-c-silver">
+                                                                            Quantity:
+                                                                            <span className="manage-o__text-2 u-c-secondary">
+                                                                                {order.orderItems.length}
+                                                                            </span>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <span className="manage-o__text-2 u-c-silver">
+                                                                            Total:
+                                                                            <span className="manage-o__text-2 u-c-secondary">{order.totalPrice}</span>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
                                                             </div>
-                                                            <div className="description-title">Yellow Wireless Headphone</div>
-                                                        </div>
-                                                        <div className="description__info-wrap">
-                                                            <div>
-                                                                <span className="manage-o__badge badge--processing">Processing</span>
-                                                            </div>
-                                                            <div>
-                                                                <span className="manage-o__text-2 u-c-silver">
-                                                                    Quantity:
-                                                                    <span className="manage-o__text-2 u-c-secondary">1</span>
-                                                                </span>
-                                                            </div>
-                                                            <div>
-                                                                <span className="manage-o__text-2 u-c-silver">
-                                                                    Total:
-                                                                    <span className="manage-o__text-2 u-c-secondary">$16.00</span>
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
+                                                        </div>;
+                                                    })}
                                             </div>
                                         </div>
                                     </div>

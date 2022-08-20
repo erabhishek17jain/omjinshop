@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import Sidebar from './Accounts/Sidebar';
+import React, { useEffect } from 'react';
+import Sidebar from '../Layouts/Sidebar';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import Loader from '../Layouts/Loader';
@@ -11,14 +11,12 @@ import { getNavigation } from '../../utils/services';
 
 const Account = () => {
     const navigate = useNavigate();
-    const { user, loading, isAuthenticated } = useSelector((state) => state.user);
-    const [navigation] = useState([
-        { title: 'Home', path: '/' },
-        { title: 'My Account', path: '/account' },
-    ]);
+    const { loading, isAuthenticated } = useSelector((state) => state.user);
+    const { pathItems } = useSelector((state) => state.path);
+
     useEffect(() => {
         if (isAuthenticated === false) {
-            navigate('/login');
+            navigate('/signIn');
         }
     }, [isAuthenticated, navigate]);
 
@@ -29,7 +27,7 @@ const Account = () => {
                 <Loader />
             ) : (
                 <>
-                    {getNavigation(navigation)}
+                    {getNavigation(pathItems)}
                     <div className="u-s-p-b-60">
                         <div className="section__content">
                             <div className="dash">

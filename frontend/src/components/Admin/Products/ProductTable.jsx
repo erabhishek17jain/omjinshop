@@ -1,21 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { Link } from 'react-router-dom';
 import { clearErrors, deleteProduct, getAdminProducts } from '../../../middleware/actions/productAction';
 import Rating from '@mui/material/Rating';
-import { DELETE_PRODUCT_RESET } from '../../../constants/productConstants';
+import { DELETE_PRODUCT_RESET } from '../../../middleware/constants/productConstants';
 import Actions from '../Actions';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
+import Sidebar from '../../Layouts/Sidebar';
+import { getNavigation } from '../../../utils/services';
 
 const ProductTable = () => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
-
     const { products, error } = useSelector((state) => state.products);
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.product);
+    const [pageSize, setPageSize] = React.useState(5);
+    const { pathItems } = useSelector((state) => state.path);
 
     useEffect(() => {
         if (error) {
@@ -155,27 +158,43 @@ const ProductTable = () => {
 
     return (
         <>
-            <MetaData title="Admin Products | Omjinshop" />
+            <MetaData title="Admin Products" />
 
             {loading && <BackdropLoader />}
 
-            <div className="flex justify-between items-center">
-                <h1 className="text-lg font-medium uppercase">products</h1>
-                <Link to="/admin/new_product" className="py-2 px-4 rounded shadow font-medium text-white bg-primary-blue hover:shadow-lg">
-                    New Product
-                </Link>
-            </div>
-            <div className="bg-white rounded-xl shadow-lg w-full" style={{ height: 470 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    disableSelectIconOnClick
-                    sx={{
-                        boxShadow: 0,
-                        border: 0,
-                    }}
-                />
+            {getNavigation(pathItems)}
+            <div className="u-s-p-b-60">
+                <div className="section__content">
+                    <div className="dash">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-3 col-md-12">
+                                    <Sidebar activeTab={'adDashboard'} />
+                                </div>
+                                <div className="col-lg-9 col-md-12 ad-product">
+                                    <div style={{ textAlign: 'right' }}>
+                                        <Link to="/admin/newProduct" class="btn btn--e-brand-b-2">
+                                            Add to Cart
+                                        </Link>
+                                    </div>
+                                    <DataGrid
+                                        rows={rows}
+                                        columns={columns}
+                                        pagination
+                                        pageSize={10}
+                                        onPageSizeChange={(newPageSize) => setPageSize(newPageSize)}
+                                        rowsPerPageOptions={[5, 10, 20]}
+                                        disableSelectIconOnClick
+                                        sx={{
+                                            boxShadow: 0,
+                                            border: 0,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

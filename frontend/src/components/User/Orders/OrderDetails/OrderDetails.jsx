@@ -167,7 +167,7 @@ const OrderDetails = () => {
                     </div>
                 </div>
             </div>
-            <MetaData title="Order Details | Omjinshop" />
+            <MetaData title="Order Details" />
             <MinCategory />
             <main className="w-full mt-14 sm:mt-4">
                 {loading ? (

@@ -5,18 +5,19 @@ import { useSnackbar } from 'notistack';
 import { clearErrors, deleteReview, getAllReviews } from '../../../middleware/actions/productAction';
 import Rating from '@mui/material/Rating';
 import Actions from '../Actions';
-import { DELETE_REVIEW_RESET } from '../../../constants/productConstants';
+import { DELETE_REVIEW_RESET } from '../../../middleware/constants/productConstants';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import React from 'react';
-
+import Sidebar from '../../Layouts/Sidebar';
+import { getNavigation } from '../../../utils/services';
 const ReviewsTable = () => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
     const [productId, setProductId] = useState('');
-
     const { reviews, error } = useSelector((state) => state.reviews);
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.review);
+    const { pathItems } = useSelector((state) => state.path);
 
     useEffect(() => {
         if (productId.length === 24) {
@@ -98,30 +99,42 @@ const ReviewsTable = () => {
 
     return (
         <>
-            <MetaData title="Admin Reviews | Omjinshop" />
+            <MetaData title="Admin Reviews" />
 
             {loading && <BackdropLoader />}
-            <div className="flex justify-between items-center gap-2 sm:gap-12">
-                <h1 className="text-lg font-medium uppercase">reviews</h1>
-                <input
-                    type="text"
-                    placeholder="Product ID"
-                    value={productId}
-                    onChange={(e) => setProductId(e.target.value)}
-                    className="outline-none border-0 rounded p-2 w-full shadow hover:shadow-lg"
-                />
-            </div>
-            <div className="bg-white rounded-xl shadow-lg w-full" style={{ height: 450 }}>
-                <DataGrid
-                    rows={rows}
-                    columns={columns}
-                    pageSize={10}
-                    disableSelectIconOnClick
-                    sx={{
-                        boxShadow: 0,
-                        border: 0,
-                    }}
-                />
+            {getNavigation(pathItems)}
+            <div className="u-s-p-b-60">
+                <div className="section__content">
+                    <div className="dash">
+                        <div className="container">
+                            <div className="row">
+                                <div className="col-lg-3 col-md-12">
+                                    <Sidebar activeTab={'adDashboard'} />
+                                </div>
+                                <div className="col-lg-9 col-md-12">
+                                    <h1 className="text-lg font-medium uppercase">reviews</h1>
+                                    <input
+                                        type="text"
+                                        placeholder="Product ID"
+                                        value={productId}
+                                        onChange={(e) => setProductId(e.target.value)}
+                                        className="outline-none border-0 rounded p-2 w-full shadow hover:shadow-lg"
+                                    />
+                                    <DataGrid
+                                        rows={rows}
+                                        columns={columns}
+                                        pageSize={10}
+                                        disableSelectIconOnClick
+                                        sx={{
+                                            boxShadow: 0,
+                                            border: 0,
+                                        }}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </>
     );

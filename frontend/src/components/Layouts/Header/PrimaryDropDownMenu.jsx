@@ -13,7 +13,7 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
-import { logoutUser } from '../../../middleware/actions/userAction';
+import { signOutUser } from '../../../middleware/actions/userAction';
 
 const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, user }) => {
     const dispatch = useDispatch();
@@ -22,10 +22,10 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, user }) => {
 
     const { wishlistItems } = useSelector((state) => state.wishlist);
 
-    const handleLogout = () => {
-        dispatch(logoutUser());
-        navigate('/login');
-        enqueueSnackbar('Logout Successfully', { variant: 'success' });
+    const handleSignout = () => {
+        dispatch(signOutUser());
+        navigate('/signIn');
+        enqueueSnackbar('Signout Successfully', { variant: 'success' });
         setTogglePrimaryDropDown(false);
     };
 
@@ -110,11 +110,11 @@ const PrimaryDropDownMenu = ({ setTogglePrimaryDropDown, user }) => {
                 );
             })}
 
-            <div className="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b cursor-pointer" onClick={handleLogout}>
+            <div className="pl-3 py-3.5 flex gap-3 items-center hover:bg-gray-50 rounded-b cursor-pointer" onClick={handleSignout}>
                 <span className="text-primary-blue">
                     <PowerSettingsNewIcon sx={{ fontSize: '18px' }} />
                 </span>
-                Logout
+                Signout
             </div>
 
             <div className="absolute right-1/2 -top-2.5">

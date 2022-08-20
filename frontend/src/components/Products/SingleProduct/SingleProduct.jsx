@@ -5,7 +5,7 @@ import { addItemsToCart } from '../../../middleware/actions/cartAction';
 import { useSnackbar } from 'notistack';
 import React from 'react';
 
-const Product = ({ _id, name, images, ratings, numOfReviews, category, description, price, cuttedPrice }) => {
+const SingleProduct = ({ _id, name, images, ratings, numOfReviews, category, description, price, cuttedPrice }) => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -99,13 +99,15 @@ const Product = ({ _id, name, images, ratings, numOfReviews, category, descripti
                     </div>
                     <div className="product-m__content">
                         <div className="product-m__category">
-                            <a href="#">{category}</a>
+                            <Link to={`/product/${category}`}>{category}</Link>
                         </div>
                         <div className="product-m__name">
-                            <a href="#">{name.length > 85 ? `${name.substring(0, 85)}...` : name}</a>
+                            <Link to={`/product/${_id}`} href="#">
+                                {name.length > 85 ? `${name.substring(0, 85)}...` : name}
+                            </Link>
                         </div>
                         <div className="product-m__rating gl-rating-style">
-                            {setRatings()}
+                            {setRatings(ratings)}
                             <span className="product-m__review">({numOfReviews})</span>
                         </div>
                         <span className="product-l__price">
@@ -135,4 +137,4 @@ const Product = ({ _id, name, images, ratings, numOfReviews, category, descripti
     );
 };
 
-export default Product;
+export default SingleProduct;

@@ -1,15 +1,25 @@
-import { Link } from 'react-router-dom';
-import { getDiscount } from '../../../utils/services';
+import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { setRatings, getDiscount } from '../../../utils/services';
 import { addToWishlist, removeFromWishlist } from '../../../middleware/actions/wishlistAction';
 import { useSnackbar } from 'notistack';
 import { addItemsToCart } from '../../../middleware/actions/cartAction';
 import { saveForLater } from '../../../middleware/actions/saveForLaterAction';
-import React from 'react';
+import AddToCartModal from '../../Layouts/Modals/AddToCartModal';
+import QuickLookModal from '../../Layouts/Modals/QuickLookModal';
+import { Link } from 'react-router-dom';
+import PriceTag from '../../Layouts/PriceTag';
+import Ratings from '../../Layouts/Ratings';
 
 const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, category, cuttedPrice }) => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
+
+    const [quickLookModal, setQuickLookModal] = useState(false);
+    const [addToCartModal, setAddToCartModal] = useState(false);
+
+    const { cartItems } = useSelector((state) => state.cart);
+    const itemInCart = cartItems.filter((i) => i.product === _id);
     const { wishlistItems } = useSelector((state) => state.wishlist);
     const itemInWishlist = wishlistItems.some((i) => i.product === _id);
 
@@ -23,32 +33,19 @@ const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
         }
     };
 
-    const moveToCartHandler = (id, quantity) => {
-        dispatch(addItemsToCart(id, quantity));
-        enqueueSnackbar('Product Added To Cart', { variant: 'success' });
-    };
-
-    const saveForLaterHandler = (id) => {
-        dispatch(saveForLater(id));
-        enqueueSnackbar('Saved For Later', { variant: 'success' });
-    };
-
-    const setRatings = () => {
-        let ratingStar = [];
-        let ratingInt = Math.trunc(ratings);
-        let ratingDec = Number((ratings.toFixed(1) - ratingInt).toFixed(1));
-        for (let star = 0; star < 5; star++) {
-            ratingStar.push(
-                star < ratingInt ? (
-                    <i className="fas fa-star"></i>
-                ) : ratingDec > 0 && ratingInt === star ? (
-                    <i className="fas fa-star-half-alt"></i>
-                ) : (
-                    <i className="far fa-star"></i>
-                )
-            );
+    const moveToCartHandler = () => {
+        if (itemInCart[0].quantity < 10) {
+            dispatch(addItemsToCart(_id, itemInCart[0].quantity + 1)).then(function (result) {
+                setAddToCartModal(true);
+            });
+        } else {
+            enqueueSnackbar('Sorry we dont allow more then 10 units', { variant: 'warning' });
         }
-        return ratingStar;
+    };
+
+    const saveForLaterHandler = () => {
+        dispatch(saveForLater(_id));
+        enqueueSnackbar('Saved For Later', { variant: 'success' });
     };
 
     return (
@@ -61,24 +58,23 @@ const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
                     <div className="product-o__action-wrap">
                         <ul className="product-o__action-list">
                             <li>
-                                <a data-modal="modal" data-modal-id="#quick-look" data-tooltip="tooltip" data-placement="top" title="Quick View">
+                                <a
+                                    id="#quick-look"
+                                    title="Quick View"
+                                    onClick={() => {
+                                        setQuickLookModal(true);
+                                    }}
+                                >
                                     <i className="fas fa-search-plus"></i>
                                 </a>
                             </li>
                             <li>
-                                <a
-                                    data-modal="modal"
-                                    data-modal-id="#add-to-cart"
-                                    data-tooltip="tooltip"
-                                    data-placement="top"
-                                    title="Add to Cart"
-                                    onClick={() => moveToCartHandler(_id, 1)}
-                                >
+                                <a title="Add to Cart" onClick={moveToCartHandler}>
                                     <i className="fas fa-plus-circle"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist" onClick={addToWishlistHandler}>
+                                <a title="Add to Wishlist" onClick={addToWishlistHandler}>
                                     <i className="fas fa-heart"></i>
                                 </a>
                             </li>
@@ -88,7 +84,7 @@ const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
                                     data-tooltip="tooltip"
                                     data-placement="top"
                                     title="Email me When the price drops"
-                                    onClick={() => saveForLaterHandler(_id)}
+                                    onClick={saveForLaterHandler}
                                 >
                                     <i className="fas fa-save"></i>
                                 </a>
@@ -96,21 +92,36 @@ const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
                         </ul>
                     </div>
                 </div>
-                <span className="product-o__category">
-                    <a href="#">{category}</a>
-                </span>
-                <span className="product-o__name">
-                    <a href="#">{name.length > 50 ? `${name.substring(0, 50)}...` : name}</a>
-                </span>
-                <div className="product-l__rating gl-rating-style">
-                    {setRatings()}
-                    <span className="product-o__review">({numOfReviews})</span>
-                </div>
-                <span className="product-o__price">
-                    ₹{cuttedPrice.toLocaleString()}
-                    <span className="product-o__discount">₹{price.toLocaleString()}</span>
-                </span>
+                <Link to={`/product/${_id}`}>
+                    <span className="product-o__category">
+                        <Link to={`/products/${category}`}>{category}</Link>
+                    </span>
+                    <span className="product-o__name">
+                        <Link to={`/product/${_id}`}>{name.length > 50 ? `${name.substring(0, 50)}...` : name}</Link>
+                    </span>
+                    <Ratings ratings={ratings} numOfReviews={numOfReviews} starCount={5} />
+                    <PriceTag type={'feature'} price={price} cuttedPrice={cuttedPrice} />
+                </Link>
             </div>
+            {addToCartModal && (
+                <AddToCartModal
+                    _id={_id}
+                    name={name}
+                    images={images[0].url}
+                    cuttedPrice={cuttedPrice}
+                    quantity={itemInCart[0].quantity}
+                    closeModal={() => {
+                        setAddToCartModal(false);
+                    }}
+                />
+            )}
+            {quickLookModal && (
+                <QuickLookModal
+                    closeModal={() => {
+                        setQuickLookModal(false);
+                    }}
+                />
+            )}
         </div>
     );
 };
