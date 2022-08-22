@@ -542,7 +542,7 @@ body {
 }
 
 /*
-  * Signup, SignIn Social Buttons
+  * Signup, Sign In Social Buttons
  */
 .gl-s-api {
     width: 80%;
@@ -597,6 +597,7 @@ body {
 }
 .gl-inline div:last-child {
     margin-right: 0;
+    text-align: right;
 }
 
 .gl-inline1 {
@@ -5534,6 +5535,7 @@ input::-ms-clear {
 .pd-breadcrumb__list > li.has-separator:after {
     content: '-';
     margin: 0 6px;
+    color: #a0a0a0;
 }
 
 .pd {
@@ -8097,7 +8099,14 @@ Additional CSS
     font-size: 14px;
 }
 
-.ad-product .btn {
+.ad-product {
+    margin-bottom: 20px;
+    height: 47px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ad-product .btn, .ad-category .btn {
     padding: 0.6rem 1.2rem;
     border-radius: 0.375rem;
     margin: 2px 0px;
@@ -8111,7 +8120,7 @@ Additional CSS
 .pd-new-image {
     height: 8rem;
     border-radius: 0.25rem;
-    border-width: 1px;
+    border: 1px solid #e1f0e5;
     gap: 0.5rem;
     display: flex;
     margin-bottom: 15px;
@@ -8124,4 +8133,8 @@ Additional CSS
     background-color: #e1f0e5;
     align-items: center;
     margin: 3px 1px 3px 2px;
+}
+
+.category-list > li ul{
+    margin: 10px 10px 10px 30px;
 }

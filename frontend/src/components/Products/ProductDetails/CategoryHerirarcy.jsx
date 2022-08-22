@@ -1,11 +1,15 @@
+import { Link } from 'react-router-dom';
+
 const CategoryHerirarcy = (props) => {
+    const catHer = props.category ? props.category.split('=') : [];
     return (
-        props.catgories &&
-        props.catgories.map((item, i) => (
-            <li className="has-separator">
-                <a href="#">{item}</a>
-            </li>
-        ))
+        <ul className='pd-breadcrumb__list'>
+            {catHer.map((item, i) => (
+                <li className={i < catHer.length - 1 ? 'has-separator' : 'is-marked'}>
+                    <Link to={`/products/${item}`}>{item}</Link>
+                </li>
+            ))}
+        </ul>
     );
 };
 export default CategoryHerirarcy;

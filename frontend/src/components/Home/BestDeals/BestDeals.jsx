@@ -10,7 +10,7 @@ const BestDeals = () => {
             <div className="section__intro u-s-m-b-46">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="section__text-wrap">
                                 <h1 className="section__heading u-c-secondary u-s-m-b-12">DEAL OF THE DAY</h1>
                                 <span className="section__span u-c-silver">BUY DEAL OF THE DAY, HURRY UP! THESE NEW PRODUCTS WILL EXPIRE SOON.</span>

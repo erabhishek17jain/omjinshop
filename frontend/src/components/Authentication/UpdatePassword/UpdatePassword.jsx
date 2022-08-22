@@ -11,6 +11,7 @@ import FormSidebar from '../../../components/Layouts/FormSidebar';
 import OrderSideBar from '../../User/Orders/OrderDetails/OrderSideBar';
 import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
+import { setPath } from '../../../middleware/actions/pathAction';
 
 const UpdatePassword = () => {
     const dispatch = useDispatch();
@@ -18,11 +19,11 @@ const UpdatePassword = () => {
     const { enqueueSnackbar } = useSnackbar();
 
     const { error, isUpdated, loading } = useSelector((state) => state.profile);
-
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const { pathItems } = useSelector((state) => state.path);
+    const profile = { title: 'Profile', path: '/account/profile', tab: 'profile' };
 
     const updatePasswordSubmitHandler = (e) => {
         e.preventDefault();
@@ -41,7 +42,33 @@ const UpdatePassword = () => {
         formData.set('newPassword', newPassword);
         formData.set('confirmPassword', confirmPassword);
 
-        dispatch(updatePassword(formData));
+        dispatch(updatePassword(formData)).then(() => {
+            redirectTo('', profile, profile.path.split('/').length - 1);
+        });
+    };
+
+    const redirectTo = (e, path, i) => {
+        if (e !== '') e.preventDefault();
+        let newPath = pathItems;
+        if (newPath.length === i) {
+            newPath[newPath.length - 1] = path;
+        } else if (newPath.length < i) {
+            newPath.pop();
+            if (path.path.indexOf('order') !== -1) {
+                newPath.push({ title: 'Orders', path: '/account/orders', tab: 'adOrders' });
+            } else if (path.path.indexOf('profile') !== -1) {
+                newPath.push({ title: 'Profile', path: '/account/profile', tab: 'profile' });
+            } else if (path.path.indexOf('addressBook') !== -1) {
+                newPath.push({ title: 'Address Book', path: '/account/addressBook', tab: 'adReviews' });
+            }
+            newPath.push(path);
+        } else if (newPath.length > i) {
+            newPath.splice(i, newPath.length - 1);
+            newPath[newPath.length - 1] = path;
+        }
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
     };
 
     useEffect(() => {
@@ -52,67 +79,88 @@ const UpdatePassword = () => {
         if (isUpdated) {
             enqueueSnackbar('Password Updated Successfully', { variant: 'success' });
             dispatch(loadUser());
-            navigate('/account');
-
+            navigate('/account/profile');
             dispatch({ type: UPDATE_PASSWORD_RESET });
         }
     }, [dispatch, error, isUpdated, navigate, enqueueSnackbar]);
 
     return (
         <>
-            <MetaData title="Password Update" />
+            <MetaData title='Password Update' />
+            {loading && <BackdropLoader />}
             {getNavigation(pathItems)}
-            <div class="u-s-p-b-60">
-                <div class="section__intro u-s-m-b-60">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="section__text-wrap">
-                                    <h1 class="section__heading u-c-secondary">FORGOT PASSWORD?</h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="section__content">
-                    <div className="dash">
-                        <div class="container">
-                            <div class="row">
-                                <div className="col-lg-3 col-md-12">
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='dash'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-lg-3 col-md-12'>
                                     <Sidebar activeTab={'profile'} />
                                     <OrderSideBar />
                                 </div>
-                                <div class="col-lg-9 col-md-8 u-s-m-b-30">
-                                    <div class="l-f-o">
-                                        <div class="l-f-o__pad-box">
-                                            <h1 class="gl-h1">PASSWORD RESET</h1>
-
-                                            <span class="gl-text u-s-m-b-30">
-                                                Enter your email or username below and we will send you a link to reset your password.
+                                <div className='col-lg-9 col-md-8 u-s-m-b-30'>
+                                    <div className='l-f-o'>
+                                        <div className='l-f-o__pad-box'>
+                                            <h1 className='gl-h1'>CHANGE PASSWORD</h1>
+                                            <span className='gl-text u-s-m-b-30'>
+                                                Looks like you want to update password! Enter your current and new password to update
                                             </span>
-                                            <form class="l-f-o__form">
-                                                <div class="u-s-m-b-30">
-                                                    <label class="gl-label" for="reset-email">
-                                                        E-MAIL *
+                                            <form className='l-f-o__form' onSubmit={updatePasswordSubmitHandler}>
+                                                <div className='u-s-m-b-30'>
+                                                    <label className='gl-label' for='current'>
+                                                        CURRENT PASSWORD *
                                                     </label>
-
                                                     <input
-                                                        class="input-text input-text--primary-style"
-                                                        type="text"
-                                                        id="reset-email"
-                                                        placeholder="Enter E-mail"
+                                                        required
+                                                        id='current'
+                                                        type='password'
+                                                        name='oldPassword'
+                                                        value={oldPassword}
+                                                        placeholder='Enter Current Password'
+                                                        onChange={(e) => setOldPassword(e.target.value)}
+                                                        className='input-text input-text--primary-style'
                                                     />
                                                 </div>
-                                                <div class="u-s-m-b-30">
-                                                    <button class="btn btn--e-transparent-brand-b-2" type="submit">
-                                                        SUBMIT
-                                                    </button>
+                                                <div className='u-s-m-b-30'>
+                                                    <label className='gl-label' for='new'>
+                                                        NEW PASSWORD *
+                                                    </label>
+                                                    <input
+                                                        required
+                                                        id='new'
+                                                        type='password'
+                                                        name='newPassword'
+                                                        value={newPassword}
+                                                        placeholder='Enter New Password'
+                                                        onChange={(e) => setNewPassword(e.target.value)}
+                                                        className='input-text input-text--primary-style'
+                                                    />
                                                 </div>
-                                                <div class="u-s-m-b-30">
-                                                    <a class="gl-link" href="#">
-                                                        Back to SignIn
-                                                    </a>
+                                                <div className='u-s-m-b-30'>
+                                                    <label className='gl-label' for='confirm'>
+                                                        CONFIRM PASSWORD *
+                                                    </label>
+                                                    <input
+                                                        required
+                                                        id='confirm'
+                                                        type='password'
+                                                        name='confirmPassword'
+                                                        value={confirmPassword}
+                                                        placeholder='Enter Confirm Password'
+                                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                                        className='input-text input-text--primary-style'
+                                                    />
                                                 </div>
+                                                <button className='btn btn--e-brand-b-2' type='submit'>
+                                                    SAVE
+                                                </button>
+                                                <a
+                                                    href='#'
+                                                    onClick={(e) => redirectTo(e, profile, profile.path.split('/').length - 1)}
+                                                    className='btn btn--e-transparent-brand-b-2 u-s-m-l-15'
+                                                >
+                                                    CANCEL
+                                                </a>
                                             </form>
                                         </div>
                                     </div>
@@ -122,69 +170,6 @@ const UpdatePassword = () => {
                     </div>
                 </div>
             </div>
-            {loading && <BackdropLoader />}
-            <main className="w-full mt-12 sm:pt-20 sm:mt-0">
-                {/* <!-- row --> */}
-                <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
-                    <FormSidebar title="Looks like you want to update password!" tag="Enter your current and new password to update" />
-
-                    {/* <!-- signUp column --> */}
-                    <div className="flex-1 overflow-hidden">
-                        <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Update Password</h2>
-                        {/* <!-- personal info procedure container --> */}
-                        <form onSubmit={updatePasswordSubmitHandler} className="p-5 sm:p-14">
-                            <div className="flex flex-col gap-4 items-start">
-                                {/* <!-- input container column --> */}
-                                <div className="flex flex-col w-full justify-between sm:flex-col gap-3 items-center">
-                                    <TextField
-                                        fullWidth
-                                        label="Current Password"
-                                        type="password"
-                                        name="oldPassword"
-                                        value={oldPassword}
-                                        onChange={(e) => setOldPassword(e.target.value)}
-                                        required
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        label="New Password"
-                                        type="password"
-                                        name="newPassword"
-                                        value={newPassword}
-                                        onChange={(e) => setNewPassword(e.target.value)}
-                                        required
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        label="Confirm New Password"
-                                        type="password"
-                                        name="confirmPassword"
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                {/* <!-- input container column --> */}
-                                <button
-                                    type="submit"
-                                    className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium"
-                                >
-                                    Update
-                                </button>
-                                <Link
-                                    className="hover:bg-gray-50 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium mb-8"
-                                    to="/account"
-                                >
-                                    Cancel
-                                </Link>
-                            </div>
-                        </form>
-                        {/* <!-- personal info procedure container --> */}
-                    </div>
-                    {/* <!-- signUp column --> */}
-                </div>
-                {/* <!-- row --> */}
-            </main>
         </>
     );
 };

@@ -41,7 +41,7 @@ const Cart = () => {
                                     </div>
                                 )}
                             </div>
-                            <div className="col-lg-12 u-s-m-b-30">
+                            <div className="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
                                 <div className="route-box">
                                     <div className="route-box__g1">
                                         <a className="route-box__link" href="#">
@@ -71,7 +71,7 @@ const Cart = () => {
                                             </div>
                                         )}
                                     </div>
-                                    <div className="col-lg-12 u-s-m-b-30">
+                                    <div className="col-lg-12 col-md-12 col-sm-12 u-s-m-b-30">
                                         <div className="route-box">
                                             <div className="route-box__g1">
                                                 <a className="route-box__link" href="#">

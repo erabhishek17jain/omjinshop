@@ -12,7 +12,7 @@ const MyProfile = () => {
     const navigate = useNavigate();
     const { user } = useSelector((state) => state.user);
     const { pathItems } = useSelector((state) => state.path);
-    const changePass = { title: 'Profile', path: '/account/profile', tab: 'profile' };
+    const changePass = { title: 'Change Password', path: '/account/profile/update', tab: 'passwordUpdate' };
     const editProfile = { title: 'Edit Profile', path: '/account/profile/edit', tab: 'editProfile' };
 
     const redirectTo = (e, path, i) => {
@@ -40,71 +40,63 @@ const MyProfile = () => {
     };
     return (
         <>
-            <MetaData title="Profile" />
+            <MetaData title='Profile' />
             {getNavigation(pathItems)}
-            <div className="u-s-p-b-60">
-                <div className="section__content">
-                    <div className="dash">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-12">
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='dash'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-lg-3 col-md-12'>
                                     <Sidebar activeTab={'profile'} />
                                     <OrderSideBar />
                                 </div>
-                                <div className="col-lg-9 col-md-12">
-                                    <div className="section__content">
-                                        <div className="container">
-                                            <div className="row">
-                                                <div className="col-lg-12 col-md-12">
-                                                    <div className="dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30">
-                                                        <div className="dash__pad-2">
-                                                            <h1 className="dash__h1 u-s-m-b-14">Profile</h1>
-                                                            <span className="dash__text u-s-m-b-30">
-                                                                Look all your info, you could customize your profile.
-                                                            </span>
-                                                            <div className="row">
-                                                                <div className="col-lg-4 u-s-m-b-30">
-                                                                    <h2 className="dash__h2 u-s-m-b-8">Full Name</h2>
-                                                                    <span className="dash__text">{user.name}</span>
+                                <div className='col-lg-9 col-md-12'>
+                                    <div className='section__content'>
+                                        <div className='container'>
+                                            <div className='row'>
+                                                <div className='col-lg-12 col-md-12 col-sm-12'>
+                                                    <div className='dash__box dash__box--shadow dash__box--radius dash__box--bg-white u-s-m-b-30'>
+                                                        <div className='dash__pad-2'>
+                                                            <h1 className='dash__h1 u-s-m-b-14'>Profile</h1>
+                                                            <span className='dash__text u-s-m-b-30'>Look all your info, you could customize your profile.</span>
+                                                            <div className='row'>
+                                                                <div className='col-lg-4 u-s-m-b-30'>
+                                                                    <h2 className='dash__h2 u-s-m-b-8'>Full Name</h2>
+                                                                    <span className='dash__text'>{user.name}</span>
                                                                 </div>
-                                                                <div className="col-lg-4 u-s-m-b-30">
-                                                                    <h2 className="dash__h2 u-s-m-b-8">E-mail</h2>
-                                                                    <span className="dash__text">{user.email}</span>
+                                                                <div className='col-lg-4 u-s-m-b-30'>
+                                                                    <h2 className='dash__h2 u-s-m-b-8'>E-mail</h2>
+                                                                    <span className='dash__text'>{user.email}</span>
                                                                 </div>
-                                                                <div className="col-lg-4 u-s-m-b-30">
-                                                                    <h2 className="dash__h2 u-s-m-b-8">Phone</h2>
-                                                                    <span className="dash__text">{user.mobile}</span>
+                                                                <div className='col-lg-4 u-s-m-b-30'>
+                                                                    <h2 className='dash__h2 u-s-m-b-8'>Phone</h2>
+                                                                    <span className='dash__text'>{user.mobile}</span>
                                                                 </div>
-                                                                <div className="col-lg-4 u-s-m-b-30">
-                                                                    <h2 className="dash__h2 u-s-m-b-8">Birthday</h2>
-                                                                    <span className="dash__text">
-                                                                        {new Date(user.birthDate).toLocaleDateString('en-GB')}
-                                                                    </span>
+                                                                <div className='col-lg-4 u-s-m-b-30'>
+                                                                    <h2 className='dash__h2 u-s-m-b-8'>Birthday</h2>
+                                                                    <span className='dash__text'>{new Date(user.birthDate).toLocaleDateString('en-GB')}</span>
                                                                 </div>
-                                                                <div className="col-lg-4 u-s-m-b-30">
-                                                                    <h2 className="dash__h2 u-s-m-b-8">Gender</h2>
-                                                                    <span className="dash__text">{user.gender}</span>
+                                                                <div className='col-lg-4 u-s-m-b-30'>
+                                                                    <h2 className='dash__h2 u-s-m-b-8'>Gender</h2>
+                                                                    <span className='dash__text'>{user.gender}</span>
                                                                 </div>
                                                             </div>
-                                                            <div className="row">
-                                                                <div className="u-s-m-b-16">
+                                                            <div className='row'>
+                                                                <div className='u-s-m-b-16'>
                                                                     <a
-                                                                        href="#"
-                                                                        onClick={(e) =>
-                                                                            redirectTo(e, editProfile, editProfile.path.split('/').length - 1)
-                                                                        }
-                                                                        className="dash__custom-link btn--e-transparent-brand-b-2"
+                                                                        href='#'
+                                                                        onClick={(e) => redirectTo(e, editProfile, editProfile.path.split('/').length - 1)}
+                                                                        className='dash__custom-link btn--e-transparent-brand-b-2'
                                                                     >
                                                                         Edit Profile
                                                                     </a>
                                                                 </div>
-                                                                <div className="u-s-m-l-16">
+                                                                <div className='u-s-m-l-16'>
                                                                     <a
-                                                                        href="#"
-                                                                        onClick={(e) =>
-                                                                            redirectTo(e, changePass, changePass.path.split('/').length - 1)
-                                                                        }
-                                                                        className="dash__custom-link btn--e-brand-b-2"
+                                                                        href='#'
+                                                                        onClick={(e) => redirectTo(e, changePass, changePass.path.split('/').length - 1)}
+                                                                        className='dash__custom-link btn--e-brand-b-2'
                                                                     >
                                                                         Change Password
                                                                     </a>

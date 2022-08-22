@@ -12,7 +12,7 @@ const TopTrending = ({ title }) => {
             <div className="section__intro u-s-m-b-16">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="section__text-wrap">
                                 <h1 className="section__heading u-c-secondary u-s-m-b-12">TOP TRENDING</h1>
                                 <span className="section__span u-c-silver">CHOOSE CATEGORY</span>
@@ -24,7 +24,7 @@ const TopTrending = ({ title }) => {
             <div className="section__content">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="filter-category-container">
                                 <div className="filter__category-wrapper">
                                     <button className="btn filter__btn filter__btn--style-1 js-checked" type="button" data-filter="*">
@@ -61,7 +61,7 @@ const TopTrending = ({ title }) => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="load-more">
                                 <button
                                     className="btn btn--e-brand"

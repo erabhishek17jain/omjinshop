@@ -3,13 +3,13 @@ import { useSelector } from 'react-redux';
 import React from 'react';
 
 const FeaturedProducts = (props) => {
-    const { loading, products } = useSelector((state) => state.products);
+    const { products } = useSelector((state) => state.products);
     return (
         <div className="u-s-p-y-60">
             <div className="section__intro u-s-m-b-46">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="section__text-wrap">
                                 <h1 className="section__heading u-c-secondary u-s-m-b-12">{props.title}</h1>
                                 <span className="section__span u-c-silver">{props.subTitle}</span>

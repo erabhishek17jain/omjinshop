@@ -4,6 +4,7 @@ import { addToWishlist, removeFromWishlist } from '../../../middleware/actions/w
 import { addItemsToCart } from '../../../middleware/actions/cartAction';
 import { useSnackbar } from 'notistack';
 import React from 'react';
+import CategoryHerirarcy from '../ProductDetails/CategoryHerirarcy';
 
 const SingleProduct = ({ _id, name, images, ratings, numOfReviews, category, description, price, cuttedPrice }) => {
     const dispatch = useDispatch();
@@ -99,7 +100,7 @@ const SingleProduct = ({ _id, name, images, ratings, numOfReviews, category, des
                     </div>
                     <div className="product-m__content">
                         <div className="product-m__category">
-                            <Link to={`/product/${category}`}>{category}</Link>
+                            <CategoryHerirarcy category={category} />
                         </div>
                         <div className="product-m__name">
                             <Link to={`/product/${_id}`} href="#">

@@ -17,6 +17,7 @@ import FeaturedProducts from './FeatureProducts/FeaturedProducts';
 import InformationSection from './InformationSection/InformationSection';
 import EveryDayProducts from './EveryDayProducts/EveryDayProducts';
 import OurProducts from './OurProducts/OurProducts';
+import { getAllCategory } from '../../middleware/actions/categoryAction';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -37,8 +38,8 @@ const Home = () => {
 
     return (
         <>
-            <MetaData title="Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!" />
-            <div id="app">
+            <MetaData title='Online Shopping Site for Mobiles, Electronics, Furniture, Grocery, Lifestyle, Books & More. Best Offers!' />
+            <div id='app'>
                 <Banner />
                 <ShopByDeals />
                 <TopTrending />
@@ -49,8 +50,8 @@ const Home = () => {
                 <EveryDayProducts />
                 <OurProducts />
                 <InformationSection />
-                <a id="topScroll" href="#top" style={{ position: 'fixed', zIndex: 100 }}>
-                    <i class="fas fa-long-arrow-alt-up"></i>
+                <a id='topScroll' href='#top' style={{ position: 'fixed', zIndex: 100 }}>
+                    <i className='fas fa-long-arrow-alt-up'></i>
                 </a>
             </div>
         </>

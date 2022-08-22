@@ -1,8 +1,6 @@
-const Product = require('../models/productModel');
+const Category = require('../models/categoryModel');
 const asyncErrorHandler = require('../middlewares/asyncErrorHandler');
-const SearchFeatures = require('../utils/searchFeatures');
 const ErrorHandler = require('../utils/errorHandler');
-const cloudinary = require('cloudinary');
 
 // Get All Category
 exports.getAllCategory = asyncErrorHandler(async (req, res, next) => {
@@ -26,10 +24,8 @@ exports.getAdminCategory = asyncErrorHandler(async (req, res, next) => {
 
 // Create Category ---ADMIN
 exports.createCategory = asyncErrorHandler(async (req, res, next) => {
-    req.body.categoryId = Date.now();
-    req.body.categoryName = req.body.name;
-
     const category = await Category.create(req.body);
+
     res.status(201).json({
         success: true,
         category,
@@ -44,7 +40,11 @@ exports.updateCategory = asyncErrorHandler(async (req, res, next) => {
         return next(new ErrorHandler('Category Not Found', 404));
     }
 
-    req.body.name = req.body.name;
+    let specs = [];
+    req.body.sub1.forEach((s) => {
+        sub1.push(JSON.parse(s));
+    });
+    req.body.sub1 = sub1;
 
     category = await Category.findByIdAndUpdate(req.params.id, req.body, {
         new: true,

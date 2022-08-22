@@ -64,31 +64,31 @@ const OrderTable = () => {
     ];
     return (
         <>
-            <MetaData title="Admin Orders" />
+            <MetaData title='Admin Orders' />
 
             {loading && <BackdropLoader />}
             {getNavigation(pathItems)}
-            <div className="u-s-p-b-60">
-                <div className="section__content">
-                    <div className="dash">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-12">
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='dash'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-lg-3 col-md-12'>
                                     <Sidebar activeTab={'adDashboard'} />
                                 </div>
-                                <div className="col-lg-9 col-md-12">
-                                    <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
-                                        <div className="dash__pad-1">
-                                            <ul className="dash__w-list row">
+                                <div className='col-lg-9 col-md-12'>
+                                    <div className='dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30'>
+                                        <div className='dash__pad-1'>
+                                            <ul className='dash__w-list row'>
                                                 {boxdata.map((el, index) => (
-                                                    <div class="col-lg-3 col-md-12">
+                                                    <div className='col-lg-3 col-md-12'>
                                                         <li>
-                                                            <div className="dash__w-wrap">
+                                                            <div className='dash__w-wrap'>
                                                                 <span className={`dash__w-icon dash__w-icon-style-${index + 1}`}>
                                                                     <i className={el.icon}></i>
                                                                 </span>
-                                                                <span className="dash__w-text">₹{el.value}</span>
-                                                                <span className="dash__w-name">{el.title}</span>
+                                                                <span className='dash__w-text'>₹{el.value}</span>
+                                                                <span className='dash__w-name'>{el.title}</span>
                                                             </div>
                                                         </li>
                                                     </div>
@@ -96,8 +96,8 @@ const OrderTable = () => {
                                             </ul>
                                         </div>
                                     </div>
-                                    <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
-                                        <div className="dash__pad-1" style={{ height: '576px' }}>
+                                    <div className='dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30'>
+                                        <div className='dash__pad-1' style={{ height: '576px' }}>
                                             <DataGrid
                                                 rows={rows}
                                                 columns={orderColumns}

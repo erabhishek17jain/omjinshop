@@ -17,7 +17,7 @@ import {
     CLEAR_ERRORS,
 } from '../constants/categoryConstants';
 
-export const categoryReducer = (state = { reviews: [] }, { type, payload }) => {
+export const categoryReducer = (state = { category: [] }, { type, payload }) => {
     switch (type) {
         case ALL_CATEGORY_REQUEST:
             return {
@@ -27,7 +27,7 @@ export const categoryReducer = (state = { reviews: [] }, { type, payload }) => {
         case ALL_CATEGORY_SUCCESS:
             return {
                 loading: false,
-                reviews: payload,
+                category: payload,
             };
         case ALL_CATEGORY_FAIL:
             return {
@@ -45,7 +45,7 @@ export const categoryReducer = (state = { reviews: [] }, { type, payload }) => {
     }
 };
 
-export const newCategoryReducer = (state = {}, { type, payload }) => {
+export const createCategoryReducer = (state = {}, { type, payload }) => {
     switch (type) {
         case NEW_CATEGORY_REQUEST:
             return {

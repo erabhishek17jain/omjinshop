@@ -13,6 +13,7 @@ import {
     DELETE_CATEGORY_FAIL,
     DELETE_CATEGORY_REQUEST,
     DELETE_CATEGORY_SUCCESS,
+    CLEAR_ERRORS,
 } from '../constants/categoryConstants';
 
 // Get Category Category ---ADMIN
@@ -51,11 +52,11 @@ export const getAdminCategory = () => async (dispatch) => {
 };
 
 // New/Update Category
-export const newCategory = (categoryData) => async (dispatch) => {
+export const createCategory = (categoryData) => async (dispatch) => {
     try {
         dispatch({ type: NEW_CATEGORY_REQUEST });
         const config = { header: { 'Content-Type': 'application/json' } };
-        const { data } = await axios.put('/api/v1/admin/category/new', categoryData, config);
+        const { data } = await axios.post('/api/v1/admin/category/new', categoryData, config);
 
         dispatch({
             type: NEW_CATEGORY_SUCCESS,
@@ -70,11 +71,11 @@ export const newCategory = (categoryData) => async (dispatch) => {
 };
 
 // Update Category ---ADMIN
-export const updateCategory = (categoryId) => async (dispatch) => {
+export const updateCategory = (id, categoryData) => async (dispatch) => {
     try {
         dispatch({ type: UPDATE_CATEGORY_REQUEST });
         const config = { header: { 'Content-Type': 'application/json' } };
-        const { data } = await axios.put(`/api/v1/admin/category/${categoryId}`, config);
+        const { data } = await axios.put(`/api/v1/admin/category/${id}`, categoryData, config);
 
         dispatch({
             type: UPDATE_CATEGORY_SUCCESS,
@@ -104,4 +105,9 @@ export const deleteCategory = (categoryId) => async (dispatch) => {
             payload: error.response.data.message,
         });
     }
+};
+
+// Clear All Errors
+export const clearErrors = () => (dispatch) => {
+    dispatch({ type: CLEAR_ERRORS });
 };

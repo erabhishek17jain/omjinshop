@@ -7,7 +7,7 @@ const NewArrival = () => {
             <div className="section__intro u-s-m-b-46">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <div className="section__text-wrap">
                                 <h1 className="section__heading u-c-secondary u-s-m-b-12">NEW ARRIVALS</h1>
                                 <span className="section__span u-c-silver">GET UP FOR NEW ARRIVALS</span>

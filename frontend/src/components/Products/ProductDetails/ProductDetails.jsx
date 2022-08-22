@@ -106,7 +106,7 @@ const ProductDetails = () => {
             <div className="u-s-p-y-90">
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-12">
+                        <div className="col-lg-12 col-md-12 col-sm-12">
                             <Box sx={{ width: '100%', typography: 'body1' }}>
                                 <TabContext value={value}>
                                     <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>

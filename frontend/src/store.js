@@ -22,7 +22,7 @@ import {
     paymentStatusReducer,
 } from './middleware/reducers/orderReducer';
 import { wishlistReducer } from './middleware/reducers/wishlistReducer';
-// import { categoryDeleteReducer, categoryReducer, categoryUpdateReducer, newCategoryReducer } from './middleware/reducers/categoryReducer';
+import { categoryDeleteReducer, categoryReducer, categoryUpdateReducer, createCategoryReducer } from './middleware/reducers/categoryReducer';
 import { pathReducer } from './middleware/reducers/pathReducer';
 
 const reducer = combineReducers({
@@ -47,10 +47,10 @@ const reducer = combineReducers({
     reviews: productReviewsReducer,
     review: reviewReducer,
     wishlist: wishlistReducer,
-    // category: categoryReducer,
-    // newCat: newCategoryReducer,
-    // updateCat: categoryUpdateReducer,
-    // deleteCat: categoryDeleteReducer,
+    category: categoryReducer,
+    newCategory: createCategoryReducer,
+    updateCategory: categoryUpdateReducer,
+    deleteCategory: categoryDeleteReducer,
     path: pathReducer,
 });
 
@@ -64,9 +64,6 @@ let initialState = {
     },
     wishlist: {
         wishlistItems: localStorage.getItem('wishlistItems') ? JSON.parse(localStorage.getItem('wishlistItems')) : [],
-    },
-    category: {
-        categoryItems: localStorage.getItem('categoryItems') ? JSON.parse(localStorage.getItem('categoryItems')) : [],
     },
     path: {
         pathItems: localStorage.getItem('pathItems') ? JSON.parse(localStorage.getItem('pathItems')) : [],

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setRatings, getDiscount } from '../../../utils/services';
 import { addToWishlist, removeFromWishlist } from '../../../middleware/actions/wishlistAction';
 import { useSnackbar } from 'notistack';
 import { addItemsToCart } from '../../../middleware/actions/cartAction';
@@ -10,8 +9,23 @@ import QuickLookModal from '../../Layouts/Modals/QuickLookModal';
 import { Link } from 'react-router-dom';
 import PriceTag from '../../Layouts/PriceTag';
 import Ratings from '../../Layouts/Ratings';
+import CategoryHerirarcy from '../../Products/ProductDetails/CategoryHerirarcy';
 
-const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, category, cuttedPrice }) => {
+const FeaturedProduct = ({
+    _id,
+    name,
+    images,
+    ratings,
+    numOfReviews,
+    price,
+    category,
+    cuttedPrice,
+    stock,
+    description,
+    brand,
+    highlights,
+    warranty,
+}) => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
 
@@ -94,7 +108,7 @@ const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
                 </div>
                 <Link to={`/product/${_id}`}>
                     <span className="product-o__category">
-                        <Link to={`/products/${category}`}>{category}</Link>
+                        <CategoryHerirarcy category={category} />
                     </span>
                     <span className="product-o__name">
                         <Link to={`/product/${_id}`}>{name.length > 50 ? `${name.substring(0, 50)}...` : name}</Link>
@@ -117,6 +131,20 @@ const FeaturedProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
             )}
             {quickLookModal && (
                 <QuickLookModal
+                    _id={_id}
+                    name={name}
+                    stock={stock}
+                    category={category}
+                    ratings={ratings}
+                    price={price}
+                    numOfReviews={numOfReviews}
+                    description={description}
+                    highlights={highlights}
+                    warranty={warranty}
+                    brand={brand}
+                    images={images[0].url}
+                    cuttedPrice={cuttedPrice}
+                    quantity={itemInCart[0].quantity}
                     closeModal={() => {
                         setQuickLookModal(false);
                     }}

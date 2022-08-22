@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Sidebar from '../Layouts/Sidebar';
 import MainData from './MainData';
 import { getNavigation } from '../../utils/services';
@@ -8,15 +8,15 @@ const Dashboard = () => {
     return (
         <>
             {getNavigation(pathItems)}
-            <div className="u-s-p-b-60">
-                <div className="section__content">
-                    <div className="dash">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-12">
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='dash'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-lg-3 col-md-12'>
                                     <Sidebar activeTab={'adDashboard'} />
                                 </div>
-                                <div className="col-lg-9 col-md-12">
+                                <div className='col-lg-9 col-md-12'>
                                     <MainData />
                                 </div>
                             </div>

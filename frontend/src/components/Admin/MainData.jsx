@@ -7,7 +7,6 @@ import { getAllOrders } from '../../middleware/actions/orderAction';
 import { getAllUsers } from '../../middleware/actions/userAction';
 import { categories } from '../../utils/constants';
 import MetaData from '../Layouts/MetaData';
-import { Link } from 'react-router-dom';
 
 const MainData = () => {
     const dispatch = useDispatch();
@@ -116,22 +115,22 @@ const MainData = () => {
 
     return (
         <>
-            <MetaData title="Admin Dashboard" />
-            <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
-                <div className="dash__pad-1">
-                    <ul className="dash__w-list row">
+            <MetaData title='Admin Dashboard' />
+            <div className='dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30'>
+                <div className='dash__pad-1'>
+                    <ul className='dash__w-list row'>
                         {boxdata.map((el, index) => (
-                            <div class="col-lg-3 col-md-12">
+                            <div className='col-lg-3 col-md-12'>
                                 <li>
-                                    <div className="dash__w-wrap">
+                                    <div className='dash__w-wrap'>
                                         <span className={`dash__w-icon dash__w-icon-style-${index + 1}`}>
                                             <i className={el.icon}></i>
                                         </span>
-                                        <span className="dash__w-text">
+                                        <span className='dash__w-text'>
                                             {index == 0 && '₹'}
                                             {el.value}
                                         </span>
-                                        <span className="dash__w-name">{el.title}</span>
+                                        <span className='dash__w-name'>{el.title}</span>
                                     </div>
                                 </li>
                             </div>
@@ -139,18 +138,18 @@ const MainData = () => {
                     </ul>
                 </div>
             </div>
-            <div className="dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30">
-                <div className="dash__pad-1 row">
-                    <div class="col-lg-8 col-md-12">
+            <div className='dash__box dash__box--bg-white dash__box--shadow dash__box--w dash__box--radius u-s-m-b-30'>
+                <div className='dash__pad-1 row'>
+                    <div className='col-lg-8 col-md-12'>
                         <Bar data={barState} />
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    <div className='col-lg-4 col-md-12'>
                         <Pie data={pieState} />
                     </div>
-                    <div class="col-lg-8 col-md-12">
+                    <div className='col-lg-8 col-md-12'>
                         <Line data={lineState} />
                     </div>
-                    <div class="col-lg-4 col-md-12">
+                    <div className='col-lg-4 col-md-12'>
                         <Doughnut data={doughnutState} />
                     </div>
                 </div>

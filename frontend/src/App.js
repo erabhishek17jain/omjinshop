@@ -35,8 +35,6 @@ import UpdateUser from './components/Admin/Users/UpdateUser';
 import ReviewsTable from './components/Admin/Reviews/ReviewsTable';
 import Wishlist from './components/Wishlist/Wishlist';
 import NotFound from './components/Layouts/NotFound';
-import TodaysOffers from './components/Home/TodaysOffers/TodaysOffers';
-import TopOffers from './components/Home/TopOffers/TopOffers';
 import TrackOrder from './components/User/Orders/TrackOrder/TrackOrder';
 import AddressBook from './components/Home/AddressBook/AddressBook';
 import AddEditAddress from './components/Home/AddressBook/AddEditAddress';
@@ -48,6 +46,7 @@ import MyProfile from './components/User/Accounts/MyProfile';
 import PaymentOptions from './components/User/Payments/PaymentOptions';
 import ReturnAndCancel from './components/OmjinShop/ReturnAndCancel';
 import Dashboard from './components/Admin/Dashboard';
+import CategoryTable from './components/Admin/Category/CategoryTable';
 
 function App() {
     const dispatch = useDispatch();
@@ -93,24 +92,22 @@ function App() {
         <>
             <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/signIn" element={<SignIn />} />
-                <Route path="/signUp" element={<SignUp />} />
-                <Route path="/products" element={<Products />} />
-                <Route path="/product/:id" element={<ProductDetails />} />
-                <Route path="/products/:keyword" element={<Products />} />
-                <Route path="/cart" element={<Cart />} />
-                <Route path="/todaysOffers" element={<TodaysOffers />} />
-                <Route path="/topOffers" element={<TopOffers />} />
-                <Route path="/about" element={<AboutUs />} />
-                <Route path="/contact" element={<ContactUs />} />
-                <Route path="/faqs" element={<FAQs />} />
-                <Route path="/returnPolicy" element={<ReturnAndCancel />} />
-                <Route path="*" element={<NotFound />}></Route>
+                <Route path='/' element={<Home />} />
+                <Route path='/signIn' element={<SignIn />} />
+                <Route path='/signUp' element={<SignUp />} />
+                <Route path='/products' element={<Products />} />
+                <Route path='/product/:id' element={<ProductDetails />} />
+                <Route path='/products/:keyword' element={<Products />} />
+                <Route path='/cart' element={<Cart />} />
+                <Route path='/about' element={<AboutUs />} />
+                <Route path='/contact' element={<ContactUs />} />
+                <Route path='/faqs' element={<FAQs />} />
+                <Route path='/returnPolicy' element={<ReturnAndCancel />} />
+                <Route path='*' element={<NotFound />}></Route>
 
                 {/* User account */}
                 <Route
-                    path="/account"
+                    path='/account'
                     element={
                         <ProtectedRoute>
                             <Account />
@@ -119,7 +116,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/profile"
+                    path='/account/profile'
                     element={
                         <ProtectedRoute>
                             <MyProfile />
@@ -128,7 +125,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/profile/edit"
+                    path='/account/profile/edit'
                     element={
                         <ProtectedRoute>
                             <UpdateProfile />
@@ -137,7 +134,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/wishlist"
+                    path='/account/wishlist'
                     element={
                         <ProtectedRoute>
                             <Wishlist />
@@ -146,7 +143,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/orders"
+                    path='/account/orders'
                     element={
                         <ProtectedRoute>
                             <MyOrders />
@@ -155,7 +152,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/order/:id"
+                    path='/account/order/:id'
                     element={
                         <ProtectedRoute>
                             <OrderStatus />
@@ -164,7 +161,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/order_details/:id"
+                    path='/account/order_details/:id'
                     element={
                         <ProtectedRoute>
                             <OrderDetails />
@@ -173,7 +170,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/shipping"
+                    path='/account/shipping'
                     element={
                         <ProtectedRoute>
                             <Shipping />
@@ -182,7 +179,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/order/confirm"
+                    path='/account/order/confirm'
                     element={
                         <ProtectedRoute>
                             <OrderConfirm />
@@ -191,7 +188,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/trackOrder"
+                    path='/account/trackOrder'
                     element={
                         <ProtectedRoute>
                             <TrackOrder />
@@ -200,7 +197,7 @@ function App() {
                 />
 
                 <Route
-                    path="/account/addressBook"
+                    path='/account/addressBook'
                     element={
                         <ProtectedRoute>
                             <AddressBook />
@@ -209,7 +206,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/addressBook/addEdit"
+                    path='/account/addressBook/addEdit'
                     element={
                         <ProtectedRoute>
                             <AddEditAddress />
@@ -218,7 +215,7 @@ function App() {
                 />
 
                 <Route
-                    path="/account/addressBook/default"
+                    path='/account/addressBook/default'
                     element={
                         <ProtectedRoute>
                             <DefaultAddress />
@@ -227,7 +224,7 @@ function App() {
                 />
 
                 <Route
-                    path="/account/paymentOption"
+                    path='/account/paymentOption'
                     element={
                         <ProtectedRoute>
                             <PaymentOptions />
@@ -235,11 +232,11 @@ function App() {
                     }
                 />
 
-                <Route path="/orders/success" element={<OrderSuccess success={true} />} />
-                <Route path="/orders/failed" element={<OrderSuccess success={false} />} />
+                <Route path='/orders/success' element={<OrderSuccess success={true} />} />
+                <Route path='/orders/failed' element={<OrderSuccess success={false} />} />
 
                 <Route
-                    path="/process/payment"
+                    path='/process/payment'
                     element={
                         <ProtectedRoute>
                             {/* // stripeApiKey && ( */}
@@ -252,7 +249,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/account/profile/update"
+                    path='/account/profile/update'
                     element={
                         <ProtectedRoute>
                             <UpdatePassword />
@@ -260,12 +257,12 @@ function App() {
                     }
                 ></Route>
 
-                <Route path="/account/profile/forgot" element={<ForgotPassword />} />
-                <Route path="/password/reset/:token" element={<ResetPassword />} />
+                <Route path='/password/reset' element={<ForgotPassword />} />
+                <Route path='/password/reset/:token' element={<ResetPassword />} />
 
                 {/* Admin account */}
                 <Route
-                    path="/admin/dashboard"
+                    path='/admin/dashboard'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <Dashboard />
@@ -274,7 +271,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/orders"
+                    path='/admin/orders'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <OrderTable />
@@ -283,7 +280,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/order/:id"
+                    path='/admin/order/:id'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <UpdateOrder />
@@ -292,7 +289,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/products"
+                    path='/admin/products'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <ProductTable />
@@ -301,7 +298,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/newProduct"
+                    path='/admin/newProduct'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <NewProduct />
@@ -310,16 +307,24 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/product/:id"
+                    path='/admin/product/:id'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <UpdateProduct />
                         </ProtectedRoute>
                     }
                 ></Route>
+                <Route
+                    path='/admin/category'
+                    element={
+                        <ProtectedRoute isAdmin={true}>
+                            <CategoryTable />
+                        </ProtectedRoute>
+                    }
+                ></Route>
 
                 <Route
-                    path="/admin/users"
+                    path='/admin/users'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <UserTable />
@@ -328,7 +333,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/user/:id"
+                    path='/admin/user/:id'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <UpdateUser />
@@ -337,7 +342,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path="/admin/reviews"
+                    path='/admin/reviews'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <ReviewsTable />

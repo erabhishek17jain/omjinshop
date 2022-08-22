@@ -44,15 +44,15 @@ const UserTable = () => {
             flex: 1,
             renderCell: (params) => {
                 return (
-                    <div className="flex items-center gap-2">
-                        <div className="w-10 h-10 rounded-full">
+                    <div className='flex items-center gap-2'>
+                        <div className='w-10 h-10 rounded-full'>
                             <img
                                 width={45}
                                 height={45}
-                                draggable="false"
+                                draggable='false'
                                 src={params.row.avatar}
                                 alt={params.row.name}
-                                className="w-full h-full rounded-full object-cover"
+                                className='w-full h-full rounded-full object-cover'
                             />
                         </div>
                         {params.row.name}
@@ -81,13 +81,9 @@ const UserTable = () => {
                 return (
                     <>
                         {params.row.role === 'admin' ? (
-                            <span className="text-sm bg-green-100 p-1 px-2 font-medium rounded-full text-green-800 capitalize">
-                                {params.row.role}
-                            </span>
+                            <span className='text-sm bg-green-100 p-1 px-2 font-medium rounded-full text-green-800 capitalize'>{params.row.role}</span>
                         ) : (
-                            <span className="text-sm bg-purple-100 p-1 px-2 font-medium rounded-full text-purple-800 capitalize">
-                                {params.row.role}
-                            </span>
+                            <span className='text-sm bg-purple-100 p-1 px-2 font-medium rounded-full text-purple-800 capitalize'>{params.row.role}</span>
                         )}
                     </>
                 );
@@ -95,7 +91,7 @@ const UserTable = () => {
         },
         {
             field: 'signUpedOn',
-            headerName: 'Sign Uped On',
+            headerName: 'Sign Up On',
             type: 'date',
             minWidth: 150,
             flex: 0.2,
@@ -130,20 +126,25 @@ const UserTable = () => {
 
     return (
         <>
-            <MetaData title="Admin Users" />
+            <MetaData title='Admin Users' />
 
             {loading && <BackdropLoader />}
 
             {getNavigation(pathItems)}
-            <div className="u-s-p-b-60">
-                <div className="section__content">
-                    <div className="dash">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-12">
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='dash'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-lg-3 col-md-12'>
                                     <Sidebar activeTab={'adDashboard'} />
                                 </div>
-                                <div className="col-lg-9 col-md-12 pd-detail__form">
+                                <div className='col-lg-9 col-md-12 pd-detail__form'>
+                                    <div className='ad-product'>
+                                        <h1 className='shop-w__h' style={{ border: 'none', paddingLeft: 0 }}>
+                                            USERS
+                                        </h1>
+                                    </div>
                                     <DataGrid
                                         rows={rows}
                                         columns={columns}

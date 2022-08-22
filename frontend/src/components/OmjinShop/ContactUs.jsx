@@ -70,7 +70,7 @@ const ContactUs = () => {
                 <div className="section__content">
                     <div className="container">
                         <div className="row">
-                            <div className="col-lg-12">
+                            <div className="col-lg-12 col-md-12 col-sm-12">
                                 <div className="contact-area u-h-100">
                                     <div className="contact-area__heading">
                                         <h2>Get In Touch</h2>
@@ -127,7 +127,7 @@ const ContactUs = () => {
                                                 </div>
                                             </div>
 
-                                            <div className="col-lg-12">
+                                            <div className="col-lg-12 col-md-12 col-sm-12">
                                                 <button className="btn btn--e-brand-b-2" type="submit">
                                                     Send Message
                                                 </button>

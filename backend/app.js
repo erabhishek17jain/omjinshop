@@ -1,4 +1,5 @@
 const express = require('express');
+
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -21,13 +22,15 @@ const user = require('./routes/userRoute');
 const product = require('./routes/productRoute');
 const order = require('./routes/orderRoute');
 const payment = require('./routes/paymentRoute');
-// const category = require('./routes/categoryRoute');
+const category = require('./routes/categoryRoute');
+const cart = require('./routes/cartRoute');
 
 app.use('/api/v1', user);
 app.use('/api/v1', product);
 app.use('/api/v1', order);
 app.use('/api/v1', payment);
-// app.use('/api/v1', category);
+app.use('/api/v1', category);
+app.use('/api/v1', cart);
 
 // deployment
 __dirname = path.resolve();

@@ -8,6 +8,8 @@ import BackdropLoader from '../../Layouts/BackdropLoader';
 import MetaData from '../../Layouts/MetaData';
 import FormSidebar from '../../../components/Layouts/FormSidebar';
 import React from 'react';
+import { setPath } from '../../../middleware/actions/pathAction';
+import { getNavigation } from '../../../utils/services';
 
 const ResetPassword = () => {
     const dispatch = useDispatch();
@@ -16,6 +18,9 @@ const ResetPassword = () => {
     const params = useParams();
 
     const { error, success, loading } = useSelector((state) => state.forgotPassword);
+    const { pathItems } = useSelector((state) => state.path);
+    const signIn = { title: 'Sign In', path: '/signIn/', tab: 'signIn' };
+    const signUp = { title: 'Sign Up', path: '/signUp/', tab: 'signUp' };
 
     const [newPassword, setNewPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
@@ -38,6 +43,30 @@ const ResetPassword = () => {
         dispatch(resetPassword(params.token, formData));
     };
 
+    const redirectTo = (e, path, i) => {
+        if (e !== '') e.preventDefault();
+        let newPath = pathItems;
+        if (newPath.length === i) {
+            newPath[newPath.length - 1] = path;
+        } else if (newPath.length < i) {
+            newPath.pop();
+            if (path.path.indexOf('order') !== -1) {
+                newPath.push({ title: 'Orders', path: '/account/orders', tab: 'adOrders' });
+            } else if (path.path.indexOf('profile') !== -1) {
+                newPath.push({ title: 'Profile', path: '/account/profile', tab: 'profile' });
+            } else if (path.path.indexOf('addressBook') !== -1) {
+                newPath.push({ title: 'Address Book', path: '/account/addressBook', tab: 'adReviews' });
+            }
+            newPath.push(path);
+        } else if (newPath.length > i) {
+            newPath.splice(i, newPath.length - 1);
+            newPath[newPath.length - 1] = path;
+        }
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
+    };
+
     useEffect(() => {
         if (error) {
             enqueueSnackbar(error, { variant: 'error' });
@@ -53,78 +82,72 @@ const ResetPassword = () => {
 
     return (
         <>
-            <MetaData title="Password Reset" />
-
+            <MetaData title='Password Reset' />
             {loading && <BackdropLoader />}
-            <main className="w-full mt-12 sm:pt-20 sm:mt-0">
-                {/* <!-- row --> */}
-                <div className="flex sm:w-4/6 sm:mt-4 m-auto mb-7 bg-white shadow-lg">
-                    <FormSidebar title="Reset Password" tag="Get access to your Orders, Wishlist and Recommendations" />
-
-                    {/* <!-- signIn column --> */}
-                    <div className="flex-1 overflow-hidden">
-                        <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Reset Password</h2>
-
-                        {/* <!-- edit info container --> */}
-                        <div className="text-center py-10 px-4 sm:px-14">
-                            {/* <!-- input container --> */}
-                            <form onSubmit={handleSubmit}>
-                                <div className="flex flex-col w-full gap-4">
-                                    <TextField
-                                        fullWidth
-                                        label="New Password"
-                                        type="password"
-                                        name="newPassword"
-                                        value={newPassword}
-                                        onChange={(e) => setNewPassword(e.target.value)}
-                                        required
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        label="Confirm New Password"
-                                        type="password"
-                                        name="confirmPassword"
-                                        value={confirmPassword}
-                                        onChange={(e) => setConfirmPassword(e.target.value)}
-                                        required
-                                    />
-
-                                    {/* <!-- button container --> */}
-                                    <div className="flex flex-col gap-2.5 mt-2 mb-32">
-                                        <p className="text-xs text-primary-grey text-left">
-                                            By continuing, you agree to Omjinshop's{' '}
-                                            <a href="https://www.omjinshop.com/pages/terms" className="text-primary-blue">
-                                                {' '}
-                                                Terms of Use
-                                            </a>{' '}
-                                            and{' '}
-                                            <a href="https://www.omjinshop.com/pages/privacypolicy" className="text-primary-blue">
-                                                {' '}
-                                                Privacy Policy.
-                                            </a>
-                                        </p>
-                                        <button
-                                            type="submit"
-                                            className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium"
-                                        >
-                                            Submit
-                                        </button>
+            {getNavigation(pathItems)}
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='container'>
+                        <div className='row row--center'>
+                            <div className='col-lg-6 col-md-8 u-s-m-b-30'>
+                                <div className='l-f-o'>
+                                    <div className='l-f-o__pad-box'>
+                                        <h1 className='gl-h1'>RESET PASSWORD</h1>
+                                        <span className='gl-text u-s-m-b-30'>
+                                            Select New Password to get access to your Orders, Wishlist and Recommendations.
+                                        </span>
+                                        <form className='l-f-o__form' onSubmit={handleSubmit}>
+                                            <div className='u-s-m-b-30'>
+                                                <label className='gl-label' htmlFor='reset-pass'>
+                                                    NEW PASSWORD *
+                                                </label>
+                                                <input
+                                                    required
+                                                    id='reset-pass'
+                                                    placeholder='New Password'
+                                                    type='password'
+                                                    name='newPassword'
+                                                    value={newPassword}
+                                                    onChange={(e) => setNewPassword(e.target.value)}
+                                                    className='input-text input-text--primary-style'
+                                                />
+                                            </div>
+                                            <div className='u-s-m-b-30'>
+                                                <label className='gl-label' htmlFor='reset-cpass'>
+                                                    CONFIRM PASSWORD *
+                                                </label>
+                                                <input
+                                                    required
+                                                    id='reset-cpass'
+                                                    placeholder='Confirm New Password'
+                                                    type='password'
+                                                    name='confirmPassword'
+                                                    value={confirmPassword}
+                                                    onChange={(e) => setConfirmPassword(e.target.value)}
+                                                    className='input-text input-text--primary-style'
+                                                />
+                                            </div>
+                                            <div className='u-s-m-b-30'>
+                                                <button className='btn btn--e-transparent-brand-b-2' type='submit'>
+                                                    SUBMIT
+                                                </button>
+                                            </div>
+                                            <div className='u-s-m-b-30'>
+                                                <a className='gl-link' href='#' onClick={(e) => redirectTo(e, signIn, signIn.path.split('/').length - 1)}>
+                                                    Back to Sign In{' '}
+                                                </a>
+                                                <a className='gl-link' href='#' onClick={(e) => redirectTo(e, signUp, signUp.path.split('/').length - 1)}>
+                                                    | Create New Account
+                                                </a>
+                                            </div>
+                                        </form>
                                     </div>
-                                    {/* <!-- button container --> */}
                                 </div>
-                            </form>
-                            {/* <!-- input container --> */}
-
-                            <Link to="/signUp" className="font-medium text-sm text-primary-blue">
-                                New to Omjinshop? Create an account
-                            </Link>
+                            </div>
                         </div>
-                        {/* <!-- edit info container --> */}
                     </div>
-                    {/* <!-- signIn column --> */}
                 </div>
-                {/* <!-- row --> */}
-            </main>
+            </div>
         </>
     );
 };

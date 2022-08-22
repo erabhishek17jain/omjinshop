@@ -158,23 +158,26 @@ const ProductTable = () => {
 
     return (
         <>
-            <MetaData title="Admin Products" />
+            <MetaData title='Admin Products' />
 
             {loading && <BackdropLoader />}
 
             {getNavigation(pathItems)}
-            <div className="u-s-p-b-60">
-                <div className="section__content">
-                    <div className="dash">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-lg-3 col-md-12">
+            <div className='u-s-p-b-60'>
+                <div className='section__content'>
+                    <div className='dash'>
+                        <div className='container'>
+                            <div className='row'>
+                                <div className='col-lg-3 col-md-12'>
                                     <Sidebar activeTab={'adDashboard'} />
                                 </div>
-                                <div className="col-lg-9 col-md-12 ad-product">
-                                    <div style={{ textAlign: 'right' }}>
-                                        <Link to="/admin/newProduct" class="btn btn--e-brand-b-2">
-                                            Add to Cart
+                                <div className='col-lg-9 col-md-12'>
+                                    <div className='ad-product'>
+                                        <h1 className='shop-w__h' style={{ border: 'none', paddingLeft: 0 }}>
+                                            PRODUCTS
+                                        </h1>
+                                        <Link to='/admin/newProduct' className='btn btn--e-brand-b-2'>
+                                            Add Product
                                         </Link>
                                     </div>
                                     <DataGrid

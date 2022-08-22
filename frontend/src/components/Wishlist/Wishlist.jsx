@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import OrderSideBar from '../User/Orders/OrderDetails/OrderSideBar';
 import MetaData from '../Layouts/MetaData';
@@ -33,7 +33,7 @@ const Wishlist = () => {
                                                     {wishlistItems.map((item, index) => <WishlistProduct {...item} key={index} />).reverse()}
                                                 </div>
                                                 {wishlistItems && wishlistItems.length !== 0 && (
-                                                    <div className="col-lg-12">
+                                                    <div className="col-lg-12 col-md-12 col-sm-12">
                                                         <div className="route-box">
                                                             <div className="route-box__g">
                                                                 <a className="route-box__link" href="#">

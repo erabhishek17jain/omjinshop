@@ -1,10 +1,11 @@
-// Categories Used In Entire App
-export const categories = ['Electronics', 'Mobiles', 'Laptops', 'Fashion', 'Appliances', 'Home'];
+// Category Used In Entire App
+export const categories = ['Electronics', 'Mobiles', 'Laptops', 'Fashion', 'Appliances', 'Home Decore'];
 
 export const baseUrl = [
     { title: 'Home', path: '/', tab: 'home' },
-    { title: 'SignIn', path: '/signIn/', tab: 'signIn' },
+    { title: 'Sign In', path: '/signIn/', tab: 'signIn' },
     { title: 'Sign Up', path: '/signUp/', tab: 'signUp' },
+    { title: 'Reset Password', path: '/password/reset', tab: 'reset' },
     { title: 'Cart', path: '/cart/', tab: 'cart' },
     { title: 'Products', path: '/products/', tab: 'products' },
     { title: 'TodaysOffers', path: '/todaysOffers/', tab: 'todaysOffers' },
@@ -21,6 +22,7 @@ export const adminSideBarUrl = [
     { title: 'Profile', path: '/account/profile', tab: 'profile' },
     { title: 'Orders', path: '/admin/orders', tab: 'adOrders' },
     { title: 'Products', path: '/admin/products', tab: 'adProducts' },
+    { title: 'Category', path: '/admin/category', tab: 'adCategory' },
     { title: 'Users', path: '/admin/users', tab: 'adUsers' },
     { title: 'Reviews', path: '/admin/reviews', tab: 'adReviews' },
     { title: 'Change Password', path: '/account/profile/update', tab: 'passwordUpdate' },
@@ -65,11 +67,11 @@ export const orderColumns = [
             return (
                 <>
                     {params.row.status === 'Delivered' ? (
-                        <span className="text-sm bg-green-100 p-1 px-2 font-medium rounded-full text-green-800">{params.row.status}</span>
+                        <span className='text-sm bg-green-100 p-1 px-2 font-medium rounded-full text-green-800'>{params.row.status}</span>
                     ) : params.row.status === 'Shipped' ? (
-                        <span className="text-sm bg-yellow-100 p-1 px-2 font-medium rounded-full text-yellow-800">{params.row.status}</span>
+                        <span className='text-sm bg-yellow-100 p-1 px-2 font-medium rounded-full text-yellow-800'>{params.row.status}</span>
                     ) : (
-                        <span className="text-sm bg-purple-100 p-1 px-2 font-medium rounded-full text-purple-800">{params.row.status}</span>
+                        <span className='text-sm bg-purple-100 p-1 px-2 font-medium rounded-full text-purple-800'>{params.row.status}</span>
                     )}
                 </>
             );

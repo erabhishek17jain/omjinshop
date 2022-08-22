@@ -80,20 +80,12 @@ exports.getUserDetails = asyncErrorHandler(async (req, res, next) => {
 // Forgot Password
 exports.forgotPassword = asyncErrorHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
-
     if (!user) {
         return next(new ErrorHandler('User Not Found', 404));
     }
-
     const resetToken = await user.getResetPasswordToken();
-
     await user.save({ validateBeforeSave: false });
-
-    // const resetPasswordUrl = `${req.protocol}://${req.get("host")}/password/reset/${resetToken}`;
     const resetPasswordUrl = `https://${req.get('host')}/password/reset/${resetToken}`;
-
-    // const message = `Your password reset token is : \n\n ${resetPasswordUrl}`;
-
     try {
         await sendEmail({
             email: user.email,
@@ -110,7 +102,6 @@ exports.forgotPassword = asyncErrorHandler(async (req, res, next) => {
     } catch (error) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpire = undefined;
-
         await user.save({ validateBeforeSave: false });
         return next(new ErrorHandler(error.message, 500));
     }
