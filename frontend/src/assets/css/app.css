@@ -6359,6 +6359,10 @@ input::-ms-clear {
     color: #ff9600;
 }
 
+.rating__check:focus .rating__check-star-wrap > i {
+    color: #000;
+}
+
 .rating__check input:checked + .rating__check-star-wrap > i {
     color: #ff9600;
 }

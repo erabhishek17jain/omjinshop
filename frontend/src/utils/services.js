@@ -47,11 +47,11 @@ export const setRatings = (ratings, startCount = 5) => {
     for (let star = 0; star < startCount; star++) {
         ratingStar.push(
             star < ratingInt ? (
-                <i className="fas fa-star"></i>
+                <i className='fas fa-star' key={star}></i>
             ) : ratingDec > 0 && ratingInt === star ? (
-                <i className="fas fa-star-half-alt"></i>
+                <i className='fas fa-star-half-alt' key={star}></i>
             ) : (
-                <i className="far fa-star"></i>
+                <i className='far fa-star' key={star}></i>
             )
         );
     }

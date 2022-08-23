@@ -40,7 +40,7 @@ exports.updateCategory = asyncErrorHandler(async (req, res, next) => {
         return next(new ErrorHandler('Category Not Found', 404));
     }
 
-    let specs = [];
+    let sub1 = [];
     req.body.sub1.forEach((s) => {
         sub1.push(JSON.parse(s));
     });

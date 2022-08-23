@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import Banner from './Banner/Banner';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, getSliderProducts } from '../../middleware/actions/productAction';
@@ -34,7 +34,7 @@ const Home = () => {
 
     useEffect(() => {
         dispatch(setPath([{ title: 'Home', path: '/' }]));
-    }, {});
+    }, []);
 
     return (
         <>

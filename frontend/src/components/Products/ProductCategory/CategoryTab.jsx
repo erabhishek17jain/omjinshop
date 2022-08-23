@@ -3,6 +3,11 @@ import { useSelector } from 'react-redux';
 const CategoryTab = (props) => {
     const { category } = useSelector((state) => state.category);
 
+    const setFilters = (e, val) => {
+        e.preventDefault();
+        props.setFilters('category', val);
+    };
+
     return (
         <div className='shop-w shop-w--style'>
             <div className='shop-w__intro-wrap'>
@@ -14,26 +19,32 @@ const CategoryTab = (props) => {
                     {category &&
                         category.map((i) => {
                             return (
-                                <li className='has-list'>
-                                    <a href='#' onClick={() => props.setFilters('category', i.main)}>
+                                <li className='has-list' key={i.main}>
+                                    <a href='#' onClick={(e) => setFilters(e, i.main)}>
                                         {i.main}
                                     </a>
                                     <span className='category-list__text u-s-m-l-6'>({i.sub1.length})</span>
                                     <span className='js-shop-category-span is-expanded fas fa-plus u-s-m-l-6'></span>
+                                    <span className='js-shop-category-span u-s-m-l-6'>
+                                        <i class='fa fa-window-close'></i>
+                                    </span>
                                     <ul style={{ display: 'block' }}>
                                         {i.sub1.map((item) => {
                                             return (
-                                                <li className='has-list'>
-                                                    <a href='#' onClick={() => props.setFilters('category', item.name)}>
+                                                <li className='has-list' key={item.name}>
+                                                    <a href='#' onClick={(e) => setFilters(e, item.name)}>
                                                         {item.name}
                                                         <span className='category-list__text u-s-m-l-6'>({item.sub2.length})</span>
                                                     </a>
                                                     <span className='js-shop-category-span fas fa-plus u-s-m-l-6'></span>
+                                                    <span className='js-shop-category-span u-s-m-l-6'>
+                                                        <i class='fa fa-window-close'></i>
+                                                    </span>
                                                     <ul style={{ display: 'block' }}>
                                                         {item.sub2.map((item) => {
                                                             return (
-                                                                <li>
-                                                                    <a href='#' onClick={() => props.setFilters('category', item)}>
+                                                                <li key={item}>
+                                                                    <a href='#' onClick={(e) => setFilters(e, item)}>
                                                                         {item}
                                                                     </a>
                                                                 </li>

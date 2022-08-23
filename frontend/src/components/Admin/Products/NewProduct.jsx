@@ -48,7 +48,7 @@ const NewProduct = () => {
     const [brand, setBrand] = useState('');
     const [images, setImages] = useState([]);
     const [imagesPreview, setImagesPreview] = useState([]);
-    const [avatarPreview, setAvatarPreview] = useState('preview.png');
+    const [avatarPreview] = useState('preview.png');
     const [logo, setLogo] = useState(null);
     const [logoPreview, setLogoPreview] = useState(null);
 
@@ -206,7 +206,7 @@ const NewProduct = () => {
                                     <Sidebar activeTab={'adDashboard'} />
                                 </div>
                                 <div className='col-lg-9 col-md-12 pd-detail__form ad-product'>
-                                    <form id='mainform' onSubmit={newProductSubmitHandler} encType='multipart/form-data' className='row pd-new'>
+                                    <form id='mainform' onSubmit={() => newProductSubmitHandler()} encType='multipart/form-data' className='row pd-new'>
                                         <div className='row'>
                                             <div className='col-lg-6 col-md-8 u-s-m-b-15'>
                                                 <div className='u-s-m-b-15'>

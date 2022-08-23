@@ -5,7 +5,7 @@ const CategoryHerirarcy = (props) => {
     return (
         <ul className='pd-breadcrumb__list'>
             {catHer.map((item, i) => (
-                <li className={i < catHer.length - 1 ? 'has-separator' : 'is-marked'}>
+                <li className={i < catHer.length - 1 ? 'has-separator' : 'is-marked'} key={i}>
                     <Link to={`/products/${item}`}>{item}</Link>
                 </li>
             ))}

@@ -10,22 +10,20 @@ const RatingsTab = (props) => {
                     {Array(5)
                         .fill('')
                         .map((el, index) => (
-                            <li>
-                                <div className='rating__check'>
-                                    <input
-                                        type='radio'
-                                        name='rating'
-                                        onChange={() => {
-                                            props.setFilters('ratings');
-                                        }}
-                                    />
+                            <li key={index} className='rating__check-star-wrap'>
+                                <div
+                                    className='rating__check'
+                                    onClick={() => {
+                                        props.setFilters('ratings', index + 1);
+                                    }}
+                                >
                                     <div className='rating__check-star-wrap'>
                                         {Array(5)
                                             .fill('')
                                             .map((el, star) => (
-                                                <i className={index < star ? 'far fa-star' : 'fas fa-star'}></i>
+                                                <i className={index < star ? 'far fa-star' : 'fas fa-star'} key={star}></i>
                                             ))}
-                                        {index > 0 && <span>& Up</span>}
+                                        {index > 0 && <span> & Up</span>}
                                     </div>
                                 </div>
                                 <span className='shop-w__total-text'>({index + 1})</span>

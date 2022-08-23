@@ -19,7 +19,7 @@ const PriceTab = (props) => {
                             id='price-min'
                             placeholder='Min'
                             value={minPrice}
-                            onClick={(e) => setMinPrice(parseInt(e.target.value))}
+                            onChange={(e) => setMinPrice(parseInt(e.target.value))}
                         />
                     </div>
                     <div>
@@ -30,7 +30,7 @@ const PriceTab = (props) => {
                             id='price-max'
                             placeholder='Max'
                             value={maxPrice}
-                            onClick={(e) => setMaxPrice(parseInt(e.target.value))}
+                            onChange={(e) => setMaxPrice(parseInt(e.target.value))}
                         />
                     </div>
                     <div>

@@ -63,7 +63,7 @@ const Header = () => {
                                 <div className='ah-lg-mode'>
                                     <span className='ah-close'>✕ Close</span>
                                     <ul className='ah-list ah-list--design1 ah-list--link-color-secondary'>
-                                        <li className='has-dropdown' data-tooltip='tooltip' data-placement='left' title='Account'>
+                                        <li className='has-dropdown' data-tooltip='tooltip' data-placement='left' title='Account' key={'account'}>
                                             <a>
                                                 <i className='far fa-user-circle'></i>
                                             </a>
@@ -71,13 +71,13 @@ const Header = () => {
                                             <ul style={{ width: 120 }}>
                                                 {isAuthenticated ? (
                                                     <>
-                                                        <li>
+                                                        <li key={user.name}>
                                                             <a href='#' onClick={(e) => redirectTo(e, profile, profile.path.split('/').length - 1)}>
                                                                 <i className='fas fa-user-circle u-s-m-r-6'></i>
                                                                 <span>{user.name && user.name.split(' ', 1)}</span>
                                                             </a>
                                                         </li>
-                                                        <li>
+                                                        <li key={'signout'}>
                                                             <a href='#' onClick={handleSignout}>
                                                                 <i className='fas fa-lock-open u-s-m-r-6'></i>
                                                                 <span>Signout</span>
@@ -86,13 +86,13 @@ const Header = () => {
                                                     </>
                                                 ) : (
                                                     <>
-                                                        <li>
+                                                        <li key={'signin'}>
                                                             <a href='#' onClick={(e) => redirectTo(e, signIn, signIn.path.split('/').length - 1)}>
                                                                 <i className='fas fa-lock u-s-m-r-6'></i>
                                                                 <span>Signin</span>
                                                             </a>
                                                         </li>
-                                                        <li>
+                                                        <li key={'signup'}>
                                                             <a href='#' onClick={(e) => redirectTo(e, signUp, signUp.path.split('/').length - 1)}>
                                                                 <i className='fas fa-user-plus u-s-m-r-6'></i>
                                                                 <span>Signup</span>
@@ -102,35 +102,35 @@ const Header = () => {
                                                 )}
                                             </ul>
                                         </li>
-                                        <li data-tooltip='tooltip' data-placement='left' title='Contact'>
+                                        <li data-tooltip='tooltip' data-placement='left' title='Contact' key={'contact'}>
                                             <a href='tel:+918305053048'>
                                                 <i className='fas fa-phone-volume'></i>
                                             </a>
                                         </li>
-                                        <li data-tooltip='tooltip' data-placement='left' title='Whatsapp'>
+                                        <li data-tooltip='tooltip' data-placement='left' title='Whatsapp' key={'whatsapp'}>
                                             <a href='https://api.whatsapp.com/send?phone=918305053048&forceIntent=true'>
                                                 <i className='fa fa-whatsapp'></i>
                                             </a>
                                         </li>
-                                        <li data-tooltip='tooltip' data-placement='left' title='Mail'>
+                                        <li data-tooltip='tooltip' data-placement='left' title='Mail' key={'mail'}>
                                             <a href='mailto:contact@domain.com'>
                                                 <i className='far fa-envelope'></i>
                                             </a>
                                         </li>
-                                        <li className='has-dropdown' data-tooltip='tooltip' data-placement='left' title='Settings'>
+                                        <li className='has-dropdown' data-tooltip='tooltip' data-placement='left' title='Settings' key={'settings'}>
                                             <a>
                                                 <i className='fas fa-user-cog'></i>
                                             </a>
                                             <span className='js-menu-toggle'></span>
                                             <ul style={{ width: 120 }}>
-                                                <li className='has-dropdown has-dropdown--ul-right-100'>
+                                                <li className='has-dropdown has-dropdown--ul-right-100' key={'language'}>
                                                     <a>
                                                         Language
                                                         <i className='fas fa-angle-down u-s-m-l-6'></i>
                                                     </a>
                                                     <span className='js-menu-toggle'></span>
                                                     <ul style={{ width: 120 }}>
-                                                        <li>
+                                                        <li key={'englisg'}>
                                                             <a className='u-c-brand'>ENGLISH</a>
                                                         </li>
                                                     </ul>
@@ -146,7 +146,15 @@ const Header = () => {
                 <nav className='secondary-nav-wrapper'>
                     <div className='container'>
                         <div className='secondary-nav'>
-                            <div className='menu-init' id='navigation1'></div>
+                            <div className='menu-init' id='navigation1'>
+                                <ul className='ah-list ah-list--design1 ah-list--design2 ah-list--link-color-secondary'>
+                                    <li>
+                                        <Link to='/products'>
+                                            <i className='fa fa-th-list'></i> &nbsp; NEW ARRIVALS
+                                        </Link>
+                                    </li>
+                                </ul>
+                            </div>
                             <div className='menu-init' id='navigation2'>
                                 <button className='btn btn--icon toggle-button toggle-button--secondary fas fa-cog' type='button'></button>
                                 <div className='ah-lg-mode'>
@@ -162,9 +170,6 @@ const Header = () => {
                                                     )
                                                 );
                                             })}
-                                        <li>
-                                            <Link to='/products'>NEW ARRIVALS</Link>
-                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -189,7 +194,7 @@ const Header = () => {
                                         </li>
                                         <li className='has-dropdown'>
                                             <a className='mini-cart-shop-link'>
-                                                <i className='fas fa-shopping-bag'></i>
+                                                <i className='fa fa-shopping-cart'></i>
                                                 <span className='total-item-round'>{cartItems.length}</span>
                                             </a>
                                             <HeaderCart />

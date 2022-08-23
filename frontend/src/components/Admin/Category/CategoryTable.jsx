@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { clearErrors, createCategory, deleteCategory, getAdminCategory, updateCategory } from '../../../middleware/actions/categoryAction';
-import { DELETE_CATEGORY_RESET } from '../../../middleware/constants/categoryConstants';
+import { DELETE_CATEGORY_RESET, NEW_CATEGORY_RESET } from '../../../middleware/constants/categoryConstants';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import Sidebar from '../../Layouts/Sidebar';
@@ -12,7 +12,7 @@ import CategoryTab from '../../Products/ProductCategory/CategoryTab';
 const CategoryTable = () => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
-    const { category, error, loading, isDeleted, error: deleteError } = useSelector((state) => state.category);
+    const { category, error, loading, success, isDeleted, error: deleteError } = useSelector((state) => state.category);
     const { pathItems } = useSelector((state) => state.path);
 
     const [main, setMain] = useState('');
@@ -36,20 +36,25 @@ const CategoryTable = () => {
                 return item.name === sub1;
             });
             if (subCat.length > 0) {
-                const subSubCat = sub1[0].sub2.filter((item) => {
+                const subSubCat = subCat[0].sub2.filter((item) => {
                     return item === sub2;
                 });
                 if (subSubCat.length > 0) {
                     enqueueSnackbar('Category already exists', { variant: 'warning' });
                 } else {
+                    let s1 = [{ name: sub1, sub2: [...subCat[0].sub2, sub2] }];
                     formData.set('main', mainCat[0].main);
-                    formData.set('sub1', [{ name: sub1, sub2: [...sub1[0].sub2, sub2] }]);
+                    s1.forEach((s) => {
+                        formData.append('sub1', JSON.stringify(s));
+                    });
                     dispatch(updateCategory(mainCat[0]._id, formData));
                 }
             } else {
                 let s1 = [...mainCat[0].sub1, { name: sub1, sub2: [sub2] }];
                 formData.set('main', mainCat[0].main);
-                formData.set('sub1', s1);
+                s1.forEach((s) => {
+                    formData.append('sub1', JSON.stringify(s));
+                });
                 dispatch(updateCategory(mainCat[0]._id, formData));
             }
         } else {
@@ -58,6 +63,18 @@ const CategoryTable = () => {
             dispatch(createCategory(formData));
         }
     };
+
+    useEffect(() => {
+        if (error) {
+            enqueueSnackbar(error, { variant: 'error' });
+            dispatch(clearErrors());
+        }
+        if (success) {
+            enqueueSnackbar('Product Created', { variant: 'success' });
+            dispatch({ type: NEW_CATEGORY_RESET });
+        }
+        dispatch(getAdminCategory());
+    }, [dispatch, error, success, enqueueSnackbar]);
 
     useEffect(() => {
         if (error) {
@@ -155,7 +172,7 @@ const CategoryTable = () => {
                                             </div>
                                         </form>
                                     </div>
-                                    <CategoryTab catList={'category-list'} />
+                                    <CategoryTab catList={'category-list'} deleteCategory={deleteCategoryHandler} />
                                 </div>
                             </div>
                         </div>

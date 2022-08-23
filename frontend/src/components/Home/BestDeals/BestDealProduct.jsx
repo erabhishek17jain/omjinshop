@@ -64,97 +64,97 @@ const BestDealProduct = ({ _id, name, images, ratings, numOfReviews, price, cate
     };
 
     return (
-        <div className="col-lg-6 col-md-6 u-s-m-b-30">
-            <div className="product-o product-o--radius product-o--hover-off u-h-100">
-                <div className="product-o__wrap">
-                    <a className="aspect aspect--bg-grey aspect--square u-d-block" href="product-#">
-                        <img className="aspect__img" src={images[0].url} alt={name} />
+        <div className='col-lg-6 col-md-6 u-s-m-b-30' key={_id}>
+            <div className='product-o product-o--radius product-o--hover-off u-h-100'>
+                <div className='product-o__wrap'>
+                    <a className='aspect aspect--bg-grey aspect--square u-d-block' href='product-#'>
+                        <img className='aspect__img' src={images[0].url} alt={name} />
                     </a>
-                    <div className="product-o__special-count-wrap">
-                        <div className="countdown countdown--style-special" data-countdown="2020/05/01">
-                            <div className="countdown__content">
+                    <div className='product-o__special-count-wrap'>
+                        <div className='countdown countdown--style-special' data-countdown='2020/05/01'>
+                            <div className='countdown__content'>
                                 <div>
-                                    <span className="countdown__value">00</span>
-                                    <span className="countdown__key">Days</span>
+                                    <span className='countdown__value'>00</span>
+                                    <span className='countdown__key'>Days</span>
                                 </div>
                             </div>
-                            <div className="countdown__content">
+                            <div className='countdown__content'>
                                 <div>
-                                    <span className="countdown__value">00</span>
-                                    <span className="countdown__key">Hours</span>
+                                    <span className='countdown__value'>00</span>
+                                    <span className='countdown__key'>Hours</span>
                                 </div>
                             </div>
-                            <div className="countdown__content">
+                            <div className='countdown__content'>
                                 <div>
-                                    <span className="countdown__value">00</span>
-                                    <span className="countdown__key">Mins</span>
+                                    <span className='countdown__value'>00</span>
+                                    <span className='countdown__key'>Mins</span>
                                 </div>
                             </div>
-                            <div className="countdown__content">
+                            <div className='countdown__content'>
                                 <div>
-                                    <span className="countdown__value">00</span>
-                                    <span className="countdown__key">Secs</span>
+                                    <span className='countdown__value'>00</span>
+                                    <span className='countdown__key'>Secs</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="product-o__action-wrap">
-                        <ul className="product-o__action-list">
-                            <li>
+                    <div className='product-o__action-wrap'>
+                        <ul className='product-o__action-list'>
+                            <li key={'quick-look'}>
                                 <a
-                                    id="#quick-look"
-                                    title="Quick View"
+                                    id='#quick-look'
+                                    title='Quick View'
                                     onClick={() => {
                                         setQuickLookModal(true);
                                     }}
                                 >
-                                    <i className="fas fa-search-plus"></i>
+                                    <i className='fas fa-search-plus' key={_id}></i>
                                 </a>
                             </li>
-                            <li>
+                            <li key={'alltocart'}>
                                 <a
-                                    data-modal="modal"
-                                    data-modal-id="#add-to-cart"
-                                    data-tooltip="tooltip"
-                                    data-placement="top"
-                                    title="Add to Cart"
+                                    data-modal='modal'
+                                    data-modal-id='#add-to-cart'
+                                    data-tooltip='tooltip'
+                                    data-placement='top'
+                                    title='Add to Cart'
                                     onClick={() => moveToCartHandler(_id, 1)}
                                 >
-                                    <i className="fas fa-plus-circle"></i>
+                                    <i className='fas fa-plus-circle' key={_id}></i>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" data-tooltip="tooltip" data-placement="top" title="Add to Wishlist" onClick={addToWishlistHandler}>
-                                    <i className="fas fa-heart"></i>
+                            <li key={'wishlist'}>
+                                <a href='#' data-tooltip='tooltip' data-placement='top' title='Add to Wishlist' onClick={addToWishlistHandler}>
+                                    <i className='fas fa-heart' key={_id}></i>
                                 </a>
                             </li>
-                            <li>
+                            <li key={'saveforlater'}>
                                 <a
-                                    href="#"
-                                    data-tooltip="tooltip"
-                                    data-placement="top"
-                                    title="Email me When the price drops"
+                                    href='#'
+                                    data-tooltip='tooltip'
+                                    data-placement='top'
+                                    title='Email me When the price drops'
                                     onClick={() => saveForLaterHandler(_id)}
                                 >
-                                    <i className="fas fa-save"></i>
+                                    <i className='fas fa-save' key={_id}></i>
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <span className="product-o__category">
+                <span className='product-o__category'>
                     <Link to={`/products/${category}`}>{category}</Link>
                 </span>
-                <span className="product-o__name">
+                <span className='product-o__name'>
                     <Link to={`/product/${_id}`}>{name.length > 50 ? `${name.substring(0, 50)}...` : name}</Link>
                 </span>
-                <div className="product-l__rating gl-rating-style">
+                <div className='product-l__rating gl-rating-style'>
                     {setRatings(ratings)}
-                    <span className="product-o__review">({numOfReviews})</span>
+                    <span className='product-o__review'>({numOfReviews})</span>
                 </div>
-                <span className="product-o__price">
+                <span className='product-o__price'>
                     ₹{cuttedPrice.toLocaleString()}
-                    <span className="product-o__discount">₹{price.toLocaleString()}</span>
+                    <span className='product-o__discount'>₹{price.toLocaleString()}</span>
                 </span>
             </div>
             {addToCartModal && (

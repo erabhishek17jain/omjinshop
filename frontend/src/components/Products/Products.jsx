@@ -10,20 +10,20 @@ import MetaData from '../Layouts/MetaData';
 import { useLocation } from 'react-router-dom';
 import React from 'react';
 import ProductCategory from './ProductCategory/ProductCategory';
+import FilterInfoTab from './ProductCategory/FilterInfoTab';
 
 const Products = () => {
     const dispatch = useDispatch();
     const { enqueueSnackbar } = useSnackbar();
     const params = useParams();
     const location = useLocation();
+    const totalProducts = 0;
 
     const [price, setPrice] = useState([0, 200000]);
-    const [category, setCategory] = useState(location.search ? location.search.split('=')[1] : '');
+    const [category, setCategory] = useState(location.search ? location.search.split('=') : []);
     const [ratings, setRatings] = useState(0);
 
-    // pagination
     const [currentPage, setCurrentPage] = useState(1);
-
     const { products, loading, error, resultPerPage, filteredProductsCount } = useSelector((state) => state.products);
     const keyword = params.keyword;
 
@@ -32,7 +32,7 @@ const Products = () => {
             setPrice(val);
         }
         if (type === 'category') {
-            setCategory(val);
+            setCategory([...category, val]);
         }
         if (type === 'ratings') {
             setRatings(val);
@@ -41,7 +41,7 @@ const Products = () => {
 
     const clearFilters = () => {
         setPrice([0, 200000]);
-        setCategory('');
+        setCategory([]);
         setRatings(0);
     };
 
@@ -50,7 +50,7 @@ const Products = () => {
             enqueueSnackbar(error, { variant: 'error' });
             dispatch(clearErrors());
         }
-        dispatch(getProducts(keyword, category, price, ratings, currentPage));
+        dispatch(getProducts(keyword, category[category.length - 1], price, ratings, currentPage));
     }, [dispatch, keyword, category, price, ratings, currentPage, error, enqueueSnackbar]);
 
     return (
@@ -59,60 +59,11 @@ const Products = () => {
             <div className='u-s-p-y-90'>
                 <div className='container'>
                     <div className='row'>
-                        <ProductCategory searchCriteria={setFilters} />
+                        <ProductCategory setFilters={setFilters} clearFilters={clearFilters} />
                         <div className='col-lg-9 col-md-12'>
                             <div className='shop-p'>
-                                <div className='shop-p__toolbar u-s-m-b-30'>
-                                    <div className='shop-p__meta-wrap u-s-m-b-60'>
-                                        <span className='shop-p__meta-text-1'>FOUND 18 RESULTS</span>
-                                        <div className='shop-p__meta-text-2'>
-                                            <span>Related Searches:</span>
-
-                                            <a className='gl-tag btn--e-brand-shadow' href='#'>
-                                                men's clothing
-                                            </a>
-
-                                            <a className='gl-tag btn--e-brand-shadow' href='#'>
-                                                mobiles & tablets
-                                            </a>
-
-                                            <a className='gl-tag btn--e-brand-shadow' href='#'>
-                                                books & audible
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div className='shop-p__tool-style'>
-                                        <div className='tool-style__group u-s-m-b-8'>
-                                            <span className='js-shop-grid-target is-active'>Grid</span>
-
-                                            <span className='js-shop-list-target'>List</span>
-                                        </div>
-                                        <form>
-                                            <div className='tool-style__form-wrap'>
-                                                <div className='u-s-m-b-8'>
-                                                    <select className='select-box select-box--transparent-b-2'>
-                                                        <option>Show: 8</option>
-                                                        <option selected>Show: 12</option>
-                                                        <option>Show: 16</option>
-                                                        <option>Show: 28</option>
-                                                    </select>
-                                                </div>
-                                                <div className='u-s-m-b-8'>
-                                                    <select className='select-box select-box--transparent-b-2'>
-                                                        <option selected>Sort By: Newest Items</option>
-                                                        <option>Sort By: Latest Items</option>
-                                                        <option>Sort By: Best Selling</option>
-                                                        <option>Sort By: Best Rating</option>
-                                                        <option>Sort By: Lowest Price</option>
-                                                        <option>Sort By: Highest Price</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
+                                <FilterInfoTab count={products.length} filters={category} />
                                 {!loading && products?.length === 0 && <div className='shop-p__collection'></div>}
-
                                 {loading ? (
                                     <Loader />
                                 ) : (
