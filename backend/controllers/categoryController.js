@@ -24,6 +24,7 @@ exports.getAdminCategory = asyncErrorHandler(async (req, res, next) => {
 
 // Create Category ---ADMIN
 exports.createCategory = asyncErrorHandler(async (req, res, next) => {
+    req.body.sub1 = setSub1(req.body.sub1);
     const category = await Category.create(req.body);
 
     res.status(201).json({
@@ -40,12 +41,7 @@ exports.updateCategory = asyncErrorHandler(async (req, res, next) => {
         return next(new ErrorHandler('Category Not Found', 404));
     }
 
-    let sub1 = [];
-    req.body.sub1.forEach((s) => {
-        sub1.push(JSON.parse(s));
-    });
-    req.body.sub1 = sub1;
-
+    req.body.sub1 = setSub1(req.body.sub1);
     category = await Category.findByIdAndUpdate(req.params.id, req.body, {
         new: true,
         runValidators: true,
@@ -72,3 +68,15 @@ exports.deleteCategory = asyncErrorHandler(async (req, res, next) => {
         success: true,
     });
 });
+
+const setSub1 = (sub1) => {
+    let sub1New = [];
+    if (Array.isArray(sub1)) {
+        sub1.forEach((s) => {
+            sub1New.push(JSON.parse(s));
+        });
+    } else {
+        sub1New.push(JSON.parse(sub1));
+    }
+    return sub1New;
+};

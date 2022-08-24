@@ -17,7 +17,6 @@ import FeaturedProducts from './FeatureProducts/FeaturedProducts';
 import InformationSection from './InformationSection/InformationSection';
 import EveryDayProducts from './EveryDayProducts/EveryDayProducts';
 import OurProducts from './OurProducts/OurProducts';
-import { getAllCategory } from '../../middleware/actions/categoryAction';
 
 const Home = () => {
     const dispatch = useDispatch();

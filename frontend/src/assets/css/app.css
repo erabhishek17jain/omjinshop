@@ -6196,7 +6196,7 @@ input::-ms-clear {
 
 .shop-w__category-list {
     overflow: auto;
-    max-height: 290px;
+    max-height: 500px;
 }
 .shop-w__category-list > li {
     padding: 4px 14px;
@@ -6244,10 +6244,6 @@ input::-ms-clear {
 }
 .js-shop-category-span:hover {
     color: #000000;
-}
-
-.js-shop-category-span.is-expanded:before {
-    content: '\f068';
 }
 
 .shop-w__form-p-wrap {
@@ -8134,11 +8130,47 @@ Additional CSS
     display: flex;
     justify-content: space-between;
     padding: 10px 20px;
-    background-color: #e1f0e5;
+    background-color: #f1f1f1;
     align-items: center;
     margin: 3px 1px 3px 2px;
+    font-size: 13px;
+    color: #000000;
 }
 
 .category-list > li ul{
     margin: 10px 10px 10px 30px;
+}
+
+.admin-table-name{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    width: 100%;
+}
+
+.admin-table-avatar{
+    width: 30px;
+    height: 30px;
+    border: 1px solid;
+    border-radius: 50%;
+}
+
+.admin-table-avatar-span{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 8px;
+}
+
+.modal-btn{
+    font-weight: 600;
+    display: inline-block;
+    text-align: center;
+    padding: 6px 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    width: fit-content;
+}
+.css-14lkbja-MuiDataGrid-root{
+    height: 630px !important;
 }

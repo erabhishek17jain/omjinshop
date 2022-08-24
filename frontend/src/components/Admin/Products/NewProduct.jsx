@@ -3,18 +3,15 @@ import Avatar from '@mui/material/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { useNavigate } from 'react-router-dom';
-import { NEW_PRODUCT_RESET } from '../../../middleware/constants/productConstants';
+import { ADMIN_PRODUCTS_REQUEST, NEW_PRODUCT_RESET } from '../../../middleware/constants/productConstants';
 import { createProduct, clearErrors } from '../../../middleware/actions/productAction';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import React from 'react';
 import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
-import { TextField } from '@mui/material';
-import ImageIcon from '@mui/icons-material/Image';
-import DeleteIcon from '@mui/icons-material/Delete';
-import MenuItem from '@mui/material/MenuItem';
 import { getAdminCategory } from '../../../middleware/actions/categoryAction';
+import { setPath } from '../../../middleware/actions/pathAction';
 
 const NewProduct = () => {
     const dispatch = useDispatch();
@@ -24,6 +21,8 @@ const NewProduct = () => {
     const { loading, success, error } = useSelector((state) => state.newProduct);
     const { category } = useSelector((state) => state.category);
     const { pathItems } = useSelector((state) => state.path);
+
+    const products = { title: 'Products', path: '/admin/products', tab: 'adProducts' };
 
     const [highlights, setHighlights] = useState([]);
     const [highlightInput, setHighlightInput] = useState('');
@@ -37,7 +36,7 @@ const NewProduct = () => {
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [cuttedPrice, setCuttedPrice] = useState(0);
-    const [mainCategory, setMainCategory] = useState('');
+    const [main, setMain] = useState('');
     const [sub1, setsub1] = useState('');
     const [sub1List, setsub1List] = useState([]);
     const [sub1Data, setsub1Data] = useState([]);
@@ -56,13 +55,15 @@ const NewProduct = () => {
         setSpecsInput({ ...specsInput, [e.target.name]: e.target.value });
     };
 
-    const addSpecs = () => {
+    const addSpecs = (e) => {
+        e.preventDefault();
         if (!specsInput.title.trim() || !specsInput.title.trim()) return;
         setSpecs([...specs, specsInput]);
         setSpecsInput({ title: '', description: '' });
     };
 
-    const addHighlight = () => {
+    const addHighlight = (e) => {
+        e.preventDefault();
         if (!highlightInput.trim()) return;
         setHighlights([...highlights, highlightInput]);
         setHighlightInput('');
@@ -108,9 +109,7 @@ const NewProduct = () => {
         });
     };
 
-    const newProductSubmitHandler = (e) => {
-        e.preventDefault();
-
+    const newProductSubmitHandler = () => {
         // required field checks
         if (highlights.length <= 0) {
             enqueueSnackbar('Add Highlights', { variant: 'warning' });
@@ -135,7 +134,7 @@ const NewProduct = () => {
         formData.set('description', description);
         formData.set('price', price);
         formData.set('cuttedPrice', cuttedPrice);
-        formData.set('category', mainCategory);
+        formData.set('category', main + '=' + sub1 + '=' + sub2);
         formData.set('stock', stock);
         formData.set('warranty', warranty);
         formData.set('brandname', brand);
@@ -156,10 +155,20 @@ const NewProduct = () => {
         dispatch(createProduct(formData));
     };
 
+    const redirectTo = (e, path, i) => {
+        if (e !== '') e.preventDefault();
+        let newPath = pathItems;
+        newPath.splice(i, newPath.length - 1);
+        newPath[newPath.length - 1] = path;
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
+    };
+
     useEffect(() => {
-        if (mainCategory !== '') {
+        if (main !== '') {
             const found = category.filter((item) => {
-                return item.main === mainCategory;
+                return item.main === main;
             });
             const sub1 = found[0].sub1.map((item) => {
                 return item.name;
@@ -167,7 +176,7 @@ const NewProduct = () => {
             setsub1Data(found[0].sub1);
             setsub1List(sub1);
         }
-    }, [mainCategory]);
+    }, [main]);
 
     useEffect(() => {
         if (sub1 !== '') {
@@ -185,7 +194,7 @@ const NewProduct = () => {
         }
         if (success) {
             enqueueSnackbar('Product Created', { variant: 'success' });
-            dispatch({ type: NEW_PRODUCT_RESET });
+            dispatch({ type: ADMIN_PRODUCTS_REQUEST });
             navigate('/admin/products');
         }
         dispatch(getAdminCategory());
@@ -206,7 +215,7 @@ const NewProduct = () => {
                                     <Sidebar activeTab={'adDashboard'} />
                                 </div>
                                 <div className='col-lg-9 col-md-12 pd-detail__form ad-product'>
-                                    <form id='mainform' onSubmit={() => newProductSubmitHandler()} encType='multipart/form-data' className='row pd-new'>
+                                    <form id='mainform' onSubmit={newProductSubmitHandler} encType='multipart/form-data' className='row pd-new'>
                                         <div className='row'>
                                             <div className='col-lg-6 col-md-8 u-s-m-b-15'>
                                                 <div className='u-s-m-b-15'>
@@ -245,6 +254,7 @@ const NewProduct = () => {
                                                                 type='text'
                                                                 id='price'
                                                                 name='price'
+                                                                min={0}
                                                                 value={price}
                                                                 onChange={(e) => setPrice(e.target.value)}
                                                                 placeholder='First Name'
@@ -261,6 +271,7 @@ const NewProduct = () => {
                                                                 name='cuttedPrice'
                                                                 value={cuttedPrice}
                                                                 placeholder='Price'
+                                                                min={0}
                                                                 onChange={(e) => setCuttedPrice(e.target.value)}
                                                                 className='input-text input-text--primary-style'
                                                             />
@@ -277,8 +288,8 @@ const NewProduct = () => {
                                                                 required
                                                                 id='category'
                                                                 name='category'
-                                                                value={mainCategory}
-                                                                onChange={(e) => setMainCategory(e.target.value)}
+                                                                value={main}
+                                                                onChange={(e) => setMain(e.target.value)}
                                                                 className='select-box select-box--primary-style u-w-100'
                                                             >
                                                                 <option value=''>Select Category</option>
@@ -329,7 +340,6 @@ const NewProduct = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-
                                                 <div className='u-s-m-b-15'>
                                                     <div className=''>
                                                         <div style={{ display: 'flex' }}>
@@ -364,7 +374,7 @@ const NewProduct = () => {
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div className='u-s-m-b-15 ad-product'>
+                                                <div className='u-s-m-b-15'>
                                                     <label className='gl-label' htmlFor='name'>
                                                         HIGHLIGHTS *
                                                     </label>
@@ -380,11 +390,11 @@ const NewProduct = () => {
                                                                 className='input-text input-text--primary-style'
                                                             />
                                                         </div>
-                                                        <button className='btn btn--e-brand-b-2' onClick={() => addHighlight()}>
+                                                        <button className='btn btn--e-brand-b-2' onClick={(e) => addHighlight(e)}>
                                                             Add
                                                         </button>
                                                     </div>
-                                                    <ul>
+                                                    <ul style={{ padding: 0, margin: 0 }}>
                                                         {highlights?.map((h, i) => (
                                                             <li key={i} className='pd-new-highlight'>
                                                                 <span>
@@ -489,11 +499,11 @@ const NewProduct = () => {
                                                                 className='input-text input-text--primary-style'
                                                             />
                                                         </div>
-                                                        <button className='btn btn--e-brand-b-2' onClick={() => addSpecs()}>
+                                                        <button className='btn btn--e-brand-b-2' onClick={(e) => addSpecs(e)}>
                                                             Add
                                                         </button>
                                                     </div>
-                                                    <ul>
+                                                    <ul style={{ padding: 0, margin: 0 }}>
                                                         {specs?.map((s, i) => (
                                                             <li key={i} className='pd-new-highlight'>
                                                                 <span>
@@ -509,251 +519,19 @@ const NewProduct = () => {
                                                 </div>
                                             </div>
                                             <div className='col-lg-12 col-md-12 col-sm-12 flex justify-end' style={{ flex: '0 0 100%' }}>
-                                                <button className='btn btn--e-brand-b-2' type='submit'>
+                                                <button className='btn btn--e-brand-b-2' style={{ marginRight: 16 }} type='submit'>
                                                     SUBMIT
                                                 </button>
+                                                <a
+                                                    href='#'
+                                                    onClick={(e) => redirectTo(e, products, products.path.split('/').length - 1)}
+                                                    className='btn btn--e-transparent-brand-b-2 u-s-m-l-15'
+                                                >
+                                                    CANCEL
+                                                </a>
                                             </div>
                                         </div>
                                     </form>
-                                    {/* <form
-                                        onSubmit={newProductSubmitHandler}
-                                        encType="multipart/form-data"
-                                        className="flex flex-col sm:flex-row bg-white rounded-lg shadow p-4"
-                                        id="mainform"
-                                    >
-                                        <div className="flex flex-col gap-3 m-2 sm:w-1/2">
-                                            <TextField
-                                                label="Name"
-                                                variant="outlined"
-                                                size="small"
-                                                required
-                                                value={name}
-                                                onChange={(e) => setName(e.target.value)}
-                                            />
-                                            <TextField
-                                                label="Description"
-                                                multiline
-                                                rows={3}
-                                                required
-                                                variant="outlined"
-                                                size="small"
-                                                value={description}
-                                                onChange={(e) => setDescription(e.target.value)}
-                                            />
-                                            <div className="flex justify-between">
-                                                <TextField
-                                                    label="Price"
-                                                    type="number"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    InputProps={{
-                                                        inputProps: {
-                                                            min: 0,
-                                                        },
-                                                    }}
-                                                    required
-                                                    value={price}
-                                                    onChange={(e) => setPrice(e.target.value)}
-                                                />
-                                                <TextField
-                                                    label="Cutted Price"
-                                                    type="number"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    InputProps={{
-                                                        inputProps: {
-                                                            min: 0,
-                                                        },
-                                                    }}
-                                                    required
-                                                    value={cuttedPrice}
-                                                    onChange={(e) => setCuttedPrice(e.target.value)}
-                                                />
-                                            </div>
-                                            <div className="flex justify-between gap-4">
-                                                <TextField
-                                                    label="Category"
-                                                    select
-                                                    fullWidth
-                                                    variant="outlined"
-                                                    size="small"
-                                                    required
-                                                    value={mainCategory}
-                                                    onChange={(e) => setMainCategory(e.target.value)}
-                                                >
-                                                    {categories.map((el, i) => (
-                                                        <MenuItem value={el} key={i}>
-                                                            {el}
-                                                        </MenuItem>
-                                                    ))}
-                                                </TextField>
-                                                <TextField
-                                                    label="Stock"
-                                                    type="number"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    InputProps={{
-                                                        inputProps: {
-                                                            min: 0,
-                                                        },
-                                                    }}
-                                                    required
-                                                    value={stock}
-                                                    onChange={(e) => setStock(e.target.value)}
-                                                />
-                                                <TextField
-                                                    label="Warranty"
-                                                    type="number"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    InputProps={{
-                                                        inputProps: {
-                                                            min: 0,
-                                                        },
-                                                    }}
-                                                    required
-                                                    value={warranty}
-                                                    onChange={(e) => setWarranty(e.target.value)}
-                                                />
-                                            </div>
-
-                                            <div className="flex flex-col gap-2">
-                                                <div className="flex justify-between items-center border rounded">
-                                                    <input
-                                                        value={highlightInput}
-                                                        onChange={(e) => setHighlightInput(e.target.value)}
-                                                        type="text"
-                                                        placeholder="Highlight"
-                                                        className="px-2 flex-1 outline-none border-none"
-                                                    />
-                                                    <span
-                                                        onClick={() => addHighlight()}
-                                                        className="py-2 px-6 bg-primary-blue text-white rounded-r hover:shadow-lg cursor-pointer"
-                                                    >
-                                                        Add
-                                                    </span>
-                                                </div>
-
-                                                <div className="flex flex-col gap-1.5">
-                                                    {highlights.map((h, i) => (
-                                                        <div className="flex justify-between rounded items-center py-1 px-2 bg-green-50">
-                                                            <p className="text-green-800 text-sm font-medium">{h}</p>
-                                                            <span
-                                                                onClick={() => deleteHighlight(i)}
-                                                                className="text-red-600 hover:bg-red-100 p-1 rounded-full cursor-pointer"
-                                                            >
-                                                                <DeleteIcon />
-                                                            </span>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            </div>
-
-                                            <h2 className="font-medium">Brand Details</h2>
-                                            <div className="flex justify-between gap-4 items-start">
-                                                <TextField
-                                                    label="Brand"
-                                                    type="text"
-                                                    variant="outlined"
-                                                    size="small"
-                                                    required
-                                                    value={brand}
-                                                    onChange={(e) => setBrand(e.target.value)}
-                                                />
-                                                <div className="w-24 h-10 flex items-center justify-center border rounded-lg">
-                                                    {!logoPreview ? (
-                                                        <ImageIcon />
-                                                    ) : (
-                                                        <img
-                                                            draggable="false"
-                                                            src={logoPreview}
-                                                            alt="Brand Logo"
-                                                            className="w-full h-full object-contain"
-                                                        />
-                                                    )}
-                                                </div>
-                                                <label className="rounded bg-gray-400 text-center cursor-pointer text-white py-2 px-2.5 shadow hover:shadow-lg">
-                                                    <input type="file" name="logo" accept="image/*" onChange={handleLogoChange} className="hidden" />
-                                                    Choose Logo
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex flex-col gap-2 m-2 sm:w-1/2">
-                                            <h2 className="font-medium">Specifications</h2>
-
-                                            <div className="flex justify-evenly gap-2 items-center">
-                                                <TextField
-                                                    value={specsInput.title}
-                                                    onChange={handleSpecsChange}
-                                                    name="title"
-                                                    label="Name"
-                                                    placeholder="Model No"
-                                                    variant="outlined"
-                                                    size="small"
-                                                />
-                                                <TextField
-                                                    value={specsInput.description}
-                                                    onChange={handleSpecsChange}
-                                                    name="description"
-                                                    label="Description"
-                                                    placeholder="WJDK42DF5"
-                                                    variant="outlined"
-                                                    size="small"
-                                                />
-                                                <span
-                                                    onClick={() => addSpecs()}
-                                                    className="py-2 px-6 bg-primary-blue text-white rounded hover:shadow-lg cursor-pointer"
-                                                >
-                                                    Add
-                                                </span>
-                                            </div>
-
-                                            <div className="flex flex-col gap-1.5">
-                                                {specs.map((spec, i) => (
-                                                    <div className="flex justify-between items-center text-sm rounded bg-blue-50 py-1 px-2">
-                                                        <p className="text-gray-500 font-medium">{spec.title}</p>
-                                                        <p>{spec.description}</p>
-                                                        <span
-                                                            onClick={() => deleteSpec(i)}
-                                                            className="text-red-600 hover:bg-red-200 bg-red-100 p-1 rounded-full cursor-pointer"
-                                                        >
-                                                            <DeleteIcon />
-                                                        </span>
-                                                    </div>
-                                                ))}
-                                            </div>
-
-                                            <h2 className="font-medium">Product Images</h2>
-                                            <div className="pd-new-image">
-                                                {imagesPreview.map((image, i) => (
-                                                    <img
-                                                        draggable="false"
-                                                        src={image}
-                                                        alt="Product"
-                                                        key={i}
-                                                        className="w-full h-full object-contain"
-                                                    />
-                                                ))}
-                                            </div>
-                                            <label className="pd-new-image">
-                                                <input
-                                                    type="file"
-                                                    name="images"
-                                                    accept="image/*"
-                                                    multiple
-                                                    onChange={handleProductImageChange}
-                                                    className="hidden"
-                                                />
-                                                CHOOSE FILE
-                                            </label>
-                                            <div className="flex justify-end">
-                                                <button className="btn btn--e-brand-b-2" type="submit">
-                                                    SUBMIT
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </form> */}
                                 </div>
                             </div>
                         </div>

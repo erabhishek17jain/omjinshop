@@ -1,4 +1,3 @@
-import Pagination from '@mui/material/Pagination';
 import { useSnackbar } from 'notistack';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,22 +16,37 @@ const Products = () => {
     const { enqueueSnackbar } = useSnackbar();
     const params = useParams();
     const location = useLocation();
-    const totalProducts = 0;
 
     const [price, setPrice] = useState([0, 200000]);
-    const [category, setCategory] = useState(location.search ? location.search.split('=') : []);
+    const [category, setCategory] = useState(location.search ? location.search.split('=') : '');
     const [ratings, setRatings] = useState(0);
+    const [filterVal, setFilterVal] = useState([]);
 
+    const [count, setCount] = useState(12);
     const [currentPage, setCurrentPage] = useState(1);
     const { products, loading, error, resultPerPage, filteredProductsCount } = useSelector((state) => state.products);
     const keyword = params.keyword;
 
     const setFilters = (type, val) => {
+        const found = filterVal.filter((item) => item.name == type);
+        if (found.length > 0) {
+            const newFilters = [];
+            filterVal.forEach((item) => {
+                if (item.name === type) {
+                    item['value'] = val;
+                }
+                newFilters.push(item);
+            });
+            setFilterVal(newFilters);
+        } else {
+            setFilterVal([...filterVal, { name: type, value: val }]);
+        }
+
         if (type === 'price') {
             setPrice(val);
         }
         if (type === 'category') {
-            setCategory([...category, val]);
+            setCategory(val);
         }
         if (type === 'ratings') {
             setRatings(val);
@@ -50,8 +64,8 @@ const Products = () => {
             enqueueSnackbar(error, { variant: 'error' });
             dispatch(clearErrors());
         }
-        dispatch(getProducts(keyword, category[category.length - 1], price, ratings, currentPage));
-    }, [dispatch, keyword, category, price, ratings, currentPage, error, enqueueSnackbar]);
+        dispatch(getProducts(keyword, category[category.length - 1], price, ratings, currentPage, count));
+    }, [dispatch, keyword, category, price, ratings, currentPage, count, error, enqueueSnackbar]);
 
     return (
         <>
@@ -62,7 +76,12 @@ const Products = () => {
                         <ProductCategory setFilters={setFilters} clearFilters={clearFilters} />
                         <div className='col-lg-9 col-md-12'>
                             <div className='shop-p'>
-                                <FilterInfoTab count={products.length} filters={category} />
+                                <FilterInfoTab
+                                    prodCount={filteredProductsCount}
+                                    filters={filterVal}
+                                    count={resultPerPage}
+                                    setCount={(val) => setCount(parseInt(val))}
+                                />
                                 {!loading && products?.length === 0 && <div className='shop-p__collection'></div>}
                                 {loading ? (
                                     <Loader />
@@ -76,30 +95,27 @@ const Products = () => {
                                             </div>
                                         </div>
                                         <div className='u-s-p-y-60'>
-                                            {filteredProductsCount > resultPerPage && (
-                                                <Pagination
-                                                    count={Number(((filteredProductsCount + 6) / resultPerPage).toFixed())}
-                                                    page={currentPage}
-                                                    onChange={(e, val) => setCurrentPage(val)}
-                                                    color='primary'
-                                                />
-                                            )}
                                             <ul className='shop-p__pagination'>
-                                                <li className='is-active'>
-                                                    <a href='#'>1</a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>2</a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>3</a>
-                                                </li>
-                                                <li>
-                                                    <a href='#'>4</a>
-                                                </li>
-                                                <li>
-                                                    <a className='fas fa-angle-right' href='#'></a>
-                                                </li>
+                                                {currentPage > 1 && (
+                                                    <li>
+                                                        <a className='fas fa-angle-left' href='#' onClick={(e) => setCurrentPage(currentPage - 1)}></a>
+                                                    </li>
+                                                )}
+                                                {filteredProductsCount > resultPerPage &&
+                                                    Array(parseInt(filteredProductsCount / resultPerPage) + 1)
+                                                        .fill('')
+                                                        .map((el, index) => (
+                                                            <li className={index + 1 == currentPage && 'is-active'}>
+                                                                <a href='#' onClick={(e) => setCurrentPage(index + 1)}>
+                                                                    {index + 1}
+                                                                </a>
+                                                            </li>
+                                                        ))}
+                                                {parseInt(filteredProductsCount / resultPerPage) + 1 > currentPage && (
+                                                    <li>
+                                                        <a className='fas fa-angle-right' href='#' onClick={(e) => setCurrentPage(currentPage + 1)}></a>
+                                                    </li>
+                                                )}
                                             </ul>
                                         </div>
                                     </>

@@ -58,8 +58,11 @@ const CategoryTable = () => {
                 dispatch(updateCategory(mainCat[0]._id, formData));
             }
         } else {
+            let s1 = [{ name: sub1, sub2: [sub2] }];
             formData.set('main', main);
-            formData.set('sub1', [{ name: sub1, sub2: [sub2] }]);
+            s1.forEach((s) => {
+                formData.append('sub1', JSON.stringify(s));
+            });
             dispatch(createCategory(formData));
         }
     };
@@ -172,7 +175,7 @@ const CategoryTable = () => {
                                             </div>
                                         </form>
                                     </div>
-                                    <CategoryTab catList={'category-list'} deleteCategory={deleteCategoryHandler} />
+                                    <CategoryTab deleteCategory={deleteCategoryHandler} />
                                 </div>
                             </div>
                         </div>

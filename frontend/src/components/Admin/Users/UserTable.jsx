@@ -4,17 +4,43 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useSnackbar } from 'notistack';
 import { clearErrors, deleteUser, getAllUsers } from '../../../middleware/actions/userAction';
 import { DELETE_USER_RESET } from '../../../middleware/constants/userConstants';
-import Actions from '../Actions';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import Sidebar from '../../Layouts/Sidebar';
 import { getNavigation } from '../../../utils/services';
+import DeleteConfirmModal from '../../Layouts/Modals/DeleteConfirmModal';
+import { setPath } from '../../../middleware/actions/pathAction';
+import { useNavigate } from 'react-router-dom';
+
 const UserTable = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
     const { enqueueSnackbar } = useSnackbar();
     const { users, error } = useSelector((state) => state.users);
     const { loading, isDeleted, error: deleteError } = useSelector((state) => state.profile);
     const { pathItems } = useSelector((state) => state.path);
+
+    const [details, setDetails] = useState({ id: '', name: '' });
+    const [open, setOpen] = useState(false);
+
+    const deleteUserHandler = (id) => {
+        dispatch(deleteUser(id));
+    };
+
+    const deleteItem = (e, id, name) => {
+        e.preventDefault();
+        setDetails({ id: id, name: name });
+        setOpen(true);
+    };
+
+    const redirectTo = (e, path, i) => {
+        if (e !== '') e.preventDefault();
+        let newPath = pathItems;
+        newPath.push(path);
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
+    };
 
     useEffect(() => {
         if (error) {
@@ -32,10 +58,6 @@ const UserTable = () => {
         dispatch(getAllUsers());
     }, [dispatch, error, deleteError, isDeleted, enqueueSnackbar]);
 
-    const deleteUserHandler = (id) => {
-        dispatch(deleteUser(id));
-    };
-
     const columns = [
         {
             field: 'name',
@@ -44,18 +66,9 @@ const UserTable = () => {
             flex: 1,
             renderCell: (params) => {
                 return (
-                    <div className='flex items-center gap-2'>
-                        <div className='w-10 h-10 rounded-full'>
-                            <img
-                                width={45}
-                                height={45}
-                                draggable='false'
-                                src={params.row.avatar}
-                                alt={params.row.name}
-                                className='w-full h-full rounded-full object-cover'
-                            />
-                        </div>
-                        {params.row.name}
+                    <div className='admin-table-name'>
+                        <img draggable='false' src={params.row.avatar} alt={params.row.name} className='admin-table-avatar' />
+                        <span className='admin-table-avatar-span'>{params.row.name}</span>
                     </div>
                 );
             },
@@ -104,7 +117,15 @@ const UserTable = () => {
             type: 'number',
             sortable: false,
             renderCell: (params) => {
-                return <Actions editRoute={'user'} deleteHandler={deleteUserHandler} id={params.row.id} name={params.row.name} />;
+                const updateUser = { title: 'Update User', path: `/admin/user/${params.row.id}`, tab: 'updateUser' };
+                return (
+                    <div className='flex justify-between items-center gap-3'>
+                        <a href={'#'} className='table-p__delete-link' onClick={(e) => redirectTo(e, updateUser, updateUser.path.split('/').length - 1)}>
+                            <i className='fas fa-edit'></i>
+                        </a>
+                        <a href='#' className='far fa-trash-alt table-p__delete-link' onClick={(e) => deleteItem(e, params.row.id, params.row.name)}></a>
+                    </div>
+                );
             },
         },
     ];
@@ -160,6 +181,16 @@ const UserTable = () => {
                         </div>
                     </div>
                 </div>
+                {open && (
+                    <DeleteConfirmModal
+                        id={details.id}
+                        name={details.name}
+                        closeModal={() => {
+                            setOpen(false);
+                        }}
+                        deleteHandler={() => deleteUserHandler(details.id)}
+                    />
+                )}
             </div>
         </>
     );

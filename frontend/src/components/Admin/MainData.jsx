@@ -5,11 +5,12 @@ import { getAdminProducts } from '../../middleware/actions/productAction';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllOrders } from '../../middleware/actions/orderAction';
 import { getAllUsers } from '../../middleware/actions/userAction';
-import { categories } from '../../utils/constants';
 import MetaData from '../Layouts/MetaData';
 
 const MainData = () => {
     const dispatch = useDispatch();
+
+    const { category } = useSelector((state) => state.category);
 
     const { products } = useSelector((state) => state.products);
     const { orders } = useSelector((state) => state.allOrders);
@@ -94,14 +95,14 @@ const MainData = () => {
     };
 
     const barState = {
-        labels: categories,
+        labels: category.map((cat) => cat.main),
         datasets: [
             {
                 label: 'Products',
                 borderColor: '#9333ea',
                 backgroundColor: '#9333ea',
                 hoverBackgroundColor: '#6b21a8',
-                data: categories.map((cat) => products?.filter((item) => item.category === cat).length),
+                data: category.map((cat) => products?.filter((item) => item.category.split('=')[0] === cat.main).length),
             },
         ],
     };

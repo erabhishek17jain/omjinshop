@@ -35,14 +35,14 @@ import {
 
 // Get All Products --- Filter/Search/Sort
 export const getProducts =
-    (keyword = '', category, price = [0, 200000], ratings = 0, currentPage = 1) =>
+    (keyword = '', category, price = [0, 200000], ratings = 0, currentPage = 1, count = 12) =>
     async (dispatch) => {
         try {
             dispatch({ type: ALL_PRODUCTS_REQUEST });
 
-            let url = `/api/v1/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&page=${currentPage}`;
+            let url = `/api/v1/products?keyword=${keyword}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&page=${currentPage}&count=${count}`;
             if (category) {
-                url = `/api/v1/products?keyword=${keyword}&category=${category}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&page=${currentPage}`;
+                url = `/api/v1/products?keyword=${keyword}&category=${category}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}&page=${currentPage}&count=${count}`;
             }
             const { data } = await axios.get(url);
 

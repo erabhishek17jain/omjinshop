@@ -298,7 +298,7 @@ function App() {
                 ></Route>
 
                 <Route
-                    path='/admin/newProduct'
+                    path='/admin/product/newProduct'
                     element={
                         <ProtectedRoute isAdmin={true}>
                             <NewProduct />

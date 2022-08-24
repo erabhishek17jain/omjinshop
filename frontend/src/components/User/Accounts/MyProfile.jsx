@@ -18,22 +18,7 @@ const MyProfile = () => {
     const redirectTo = (e, path, i) => {
         e.preventDefault();
         let newPath = pathItems;
-        if (newPath.length === i) {
-            newPath[newPath.length - 1] = path;
-        } else if (newPath.length < i) {
-            newPath.pop();
-            if (path.path.indexOf('order') !== -1) {
-                newPath.push({ title: 'Orders', path: '/account/orders', tab: 'adOrders' });
-            } else if (path.path.indexOf('profile') !== -1) {
-                newPath.push({ title: 'Profile', path: '/account/profile', tab: 'profile' });
-            } else if (path.path.indexOf('addressBook') !== -1) {
-                newPath.push({ title: 'Address Book', path: '/account/addressBook', tab: 'adReviews' });
-            }
-            newPath.push(path);
-        } else if (newPath.length > i) {
-            newPath.splice(i, newPath.length - 1);
-            newPath[newPath.length - 1] = path;
-        }
+        newPath.push(path);
         dispatch(setPath(newPath)).then(() => {
             navigate(path.path);
         });

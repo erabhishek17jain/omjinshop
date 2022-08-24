@@ -14,6 +14,9 @@ import TextField from '@mui/material/TextField';
 import MetaData from '../../Layouts/MetaData';
 import BackdropLoader from '../../Layouts/BackdropLoader';
 import React from 'react';
+import Sidebar from '../../Layouts/Sidebar';
+import { getNavigation } from '../../../utils/services';
+import { setPath } from '../../../middleware/actions/pathAction';
 
 const UpdateUser = () => {
     const dispatch = useDispatch();
@@ -23,6 +26,8 @@ const UpdateUser = () => {
 
     const { user, error, loading } = useSelector((state) => state.userDetails);
     const { isUpdated, error: updateError, loading: updateLoading } = useSelector((state) => state.profile);
+    const { pathItems } = useSelector((state) => state.path);
+    const users = { title: 'Users', path: '/admin/users', tab: 'adUsers' };
 
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
@@ -31,6 +36,30 @@ const UpdateUser = () => {
     const [avatarPreview, setAvatarPreview] = useState('');
 
     const userId = params.id;
+
+    const redirectTo = (e, path, i) => {
+        if (e !== '') e.preventDefault();
+        let newPath = pathItems;
+        if (newPath.length === i) {
+            newPath[newPath.length - 1] = path;
+        } else if (newPath.length < i) {
+            newPath.pop();
+            if (path.path.indexOf('order') !== -1) {
+                newPath.push({ title: 'Orders', path: '/account/orders', tab: 'adOrders' });
+            } else if (path.path.indexOf('profile') !== -1) {
+                newPath.push({ title: 'Profile', path: '/account/profile', tab: 'profile' });
+            } else if (path.path.indexOf('addressBook') !== -1) {
+                newPath.push({ title: 'Address Book', path: '/account/addressBook', tab: 'adReviews' });
+            }
+            newPath.push(path);
+        } else if (newPath.length > i) {
+            newPath.splice(i, newPath.length - 1);
+            newPath[newPath.length - 1] = path;
+        }
+        dispatch(setPath(newPath)).then(() => {
+            navigate(path.path);
+        });
+    };
 
     const updateUserSubmitHandler = (e) => {
         e.preventDefault();
@@ -41,7 +70,9 @@ const UpdateUser = () => {
         formData.set('gender', gender);
         formData.set('role', role);
 
-        dispatch(updateUser(userId, formData));
+        dispatch(updateUser(userId, formData)).then(() => {
+            redirectTo('', users, users.path.split('/').length - 1);
+        });
     };
 
     useEffect(() => {
@@ -72,99 +103,184 @@ const UpdateUser = () => {
 
     return (
         <>
-            <MetaData title="Admin: Update User" />
-
+            <MetaData title='Admin: Update User' />
             {updateLoading && <BackdropLoader />}
-
+            {getNavigation(pathItems)}
             {loading ? (
                 <Loading />
             ) : (
-                <>
-                    <div className="flex flex-col bg-white shadow-lg rounded-lg mx-auto w-lg max-w-xl">
-                        <h2 className="text-center text-2xl font-medium mt-6 text-gray-800">Update Profile</h2>
-
-                        <form onSubmit={updateUserSubmitHandler} className="p-5 sm:p-10">
-                            <div className="flex flex-col gap-3 items-start">
-                                {/* <!-- input container column --> */}
-                                <div className="flex flex-col w-full justify-between sm:flex-col gap-3 items-center">
-                                    <TextField
-                                        fullWidth
-                                        label="Full Name"
-                                        name="name"
-                                        value={name}
-                                        onChange={(e) => setName(e.target.value)}
-                                        required
-                                    />
-                                    <TextField
-                                        fullWidth
-                                        label="Email"
-                                        type="email"
-                                        name="email"
-                                        value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
-                                        required
-                                    />
-                                </div>
-                                {/* <!-- input container column --> */}
-
-                                {/* <!-- gender input --> */}
-                                <div className="flex gap-4 items-center">
-                                    <h2 className="text-md">Your Gender :</h2>
-                                    <div className="flex items-center gap-6" id="radioInput">
-                                        <RadioGroup row aria-labelledby="radio-buttons-group-label" name="radio-buttons-group">
-                                            <FormControlLabel
-                                                name="gender"
-                                                value="male"
-                                                checked={gender === 'male'}
-                                                onChange={(e) => setGender(e.target.value)}
-                                                control={<Radio required />}
-                                                label="Male"
-                                            />
-                                            <FormControlLabel
-                                                name="gender"
-                                                value="female"
-                                                checked={gender === 'female'}
-                                                onChange={(e) => setGender(e.target.value)}
-                                                control={<Radio required />}
-                                                label="Female"
-                                            />
-                                        </RadioGroup>
+                <div className='u-s-p-b-60'>
+                    <div className='section__content'>
+                        <div className='dash'>
+                            <div className='container'>
+                                <div className='row'>
+                                    <div className='col-lg-3 col-md-12'>
+                                        <Sidebar activeTab={'adDashboard'} />
                                     </div>
-                                </div>
-                                {/* <!-- gender input --> */}
+                                    <div className='col-lg-9 col-md-12 pd-detail__form ad-product'>
+                                        <form id='mainform' onSubmit={updateUserSubmitHandler} encType='multipart/form-data' className='row pd-new'>
+                                            <div className='row'>
+                                                <div className='col-lg-6 col-md-8 u-s-m-b-15'>
+                                                    <div className='u-s-m-b-15'>
+                                                        <label className='gl-label' htmlFor='name'>
+                                                            FULL NAME *
+                                                        </label>
+                                                        <input
+                                                            type='text'
+                                                            id='name'
+                                                            name='name'
+                                                            value={name}
+                                                            onChange={(e) => setName(e.target.value)}
+                                                            placeholder='Product Name'
+                                                            className='input-text input-text--primary-style'
+                                                        />
+                                                    </div>
+                                                    <div className='u-s-m-b-30'>
+                                                        <label className='gl-label' htmlFor='gender'>
+                                                            GENDER *
+                                                        </label>
+                                                        <select
+                                                            required
+                                                            id='gender'
+                                                            name='gender'
+                                                            value={gender}
+                                                            onChange={(e) => setGender(e.target.value)}
+                                                            className='select-box select-box--primary-style u-w-100'
+                                                        >
+                                                            <option value=''>Select</option>
+                                                            <option value='Male'>Male</option>
+                                                            <option value='Female'>Female</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className='col-lg-6 col-md-8 u-s-m-b-15'>
+                                                    <div className='u-s-m-b-15'>
+                                                        <label className='gl-label' htmlFor='email'>
+                                                            E-MAIL *
+                                                        </label>
+                                                        <input
+                                                            type='email'
+                                                            id='email'
+                                                            name='email'
+                                                            value={email}
+                                                            onChange={(e) => setEmail(e.target.value)}
+                                                            placeholder='Product Name'
+                                                            className='input-text input-text--primary-style'
+                                                        />
+                                                    </div>
+                                                    <div className='u-s-m-b-30'>
+                                                        <label className='gl-label' htmlFor='role'>
+                                                            ROLE *
+                                                        </label>
+                                                        <select
+                                                            required
+                                                            id='role'
+                                                            name='role'
+                                                            value={role}
+                                                            onChange={(e) => setRole(e.target.value)}
+                                                            className='select-box select-box--primary-style u-w-100'
+                                                        >
+                                                            <option value=''>Select</option>
+                                                            <option value='User'>User</option>
+                                                            <option value='Admin'>Admin</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div className='col-lg-12 col-md-12 col-sm-12 flex justify-end' style={{ flex: '0 0 100%' }}>
+                                                    <button className='btn btn--e-brand-b-2' style={{ marginRight: 16 }} type='submit'>
+                                                        SUBMIT
+                                                    </button>
+                                                    <a
+                                                        href='#'
+                                                        onClick={(e) => redirectTo(e, users, users.path.split('/').length - 1)}
+                                                        className='btn btn--e-transparent-brand-b-2 u-s-m-l-15'
+                                                    >
+                                                        CANCEL
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <form onSubmit={updateUserSubmitHandler} className='p-5 sm:p-10'>
+                                        <div className='flex flex-col gap-3 items-start'>
+                                            <div className='flex flex-col w-full justify-between sm:flex-col gap-3 items-center'>
+                                                <TextField
+                                                    fullWidth
+                                                    label='Full Name'
+                                                    name='name'
+                                                    value={name}
+                                                    onChange={(e) => setName(e.target.value)}
+                                                    required
+                                                />
+                                                <TextField
+                                                    fullWidth
+                                                    label='Email'
+                                                    type='email'
+                                                    name='email'
+                                                    value={email}
+                                                    onChange={(e) => setEmail(e.target.value)}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className='flex gap-4 items-center'>
+                                                <h2 className='text-md'>Your Gender :</h2>
+                                                <div className='flex items-center gap-6' id='radioInput'>
+                                                    <RadioGroup row aria-labelledby='radio-buttons-group-label' name='radio-buttons-group'>
+                                                        <FormControlLabel
+                                                            name='gender'
+                                                            value='male'
+                                                            checked={gender === 'male'}
+                                                            onChange={(e) => setGender(e.target.value)}
+                                                            control={<Radio required />}
+                                                            label='Male'
+                                                        />
+                                                        <FormControlLabel
+                                                            name='gender'
+                                                            value='female'
+                                                            checked={gender === 'female'}
+                                                            onChange={(e) => setGender(e.target.value)}
+                                                            control={<Radio required />}
+                                                            label='Female'
+                                                        />
+                                                    </RadioGroup>
+                                                </div>
+                                            </div>
 
-                                <div className="flex flex-col w-full justify-between sm:flex-row gap-3 items-center">
-                                    <Avatar alt="Avatar Preview" src={avatarPreview} sx={{ width: 56, height: 56 }} />
-                                    <TextField
-                                        label="Role"
-                                        select
-                                        fullWidth
-                                        variant="outlined"
-                                        required
-                                        value={role}
-                                        onChange={(e) => setRole(e.target.value)}
-                                    >
-                                        <MenuItem value={'user'}>User</MenuItem>
-                                        <MenuItem value={'admin'}>Admin</MenuItem>
-                                    </TextField>
-                                </div>
+                                            <div className='flex flex-col w-full justify-between sm:flex-row gap-3 items-center'>
+                                                <Avatar alt='Avatar Preview' src={avatarPreview} sx={{ width: 56, height: 56 }} />
+                                                <TextField
+                                                    label='Role'
+                                                    select
+                                                    fullWidth
+                                                    variant='outlined'
+                                                    required
+                                                    value={role}
+                                                    onChange={(e) => setRole(e.target.value)}
+                                                >
+                                                    <MenuItem value={'user'}>User</MenuItem>
+                                                    <MenuItem value={'admin'}>Admin</MenuItem>
+                                                </TextField>
+                                            </div>
 
-                                <button
-                                    type="submit"
-                                    className="text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium"
-                                >
-                                    Update
-                                </button>
-                                <Link
-                                    className="hover:bg-gray-100 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium"
-                                    to="/admin/users"
-                                >
-                                    Cancel
-                                </Link>
+                                            <button
+                                                type='submit'
+                                                className='text-white py-3 w-full bg-primary-orange shadow hover:shadow-lg rounded-sm font-medium'
+                                            >
+                                                Update
+                                            </button>
+                                            <Link
+                                                className='hover:bg-gray-100 text-primary-blue text-center py-3 w-full shadow border rounded-sm font-medium'
+                                                to='/admin/users'
+                                            >
+                                                Cancel
+                                            </Link>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </>
+                </div>
             )}
         </>
     );

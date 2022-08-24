@@ -4,15 +4,20 @@ const FilterInfoTab = (props) => {
     return (
         <div className='shop-p__toolbar u-s-m-b-30'>
             <div className='shop-p__meta-wrap u-s-m-b-60'>
-                <span className='shop-p__meta-text-1'>FOUND {props.count} RESULTS</span>
+                <span className='shop-p__meta-text-1'>FOUND {props.prodCount} RESULTS</span>
                 {props.filters.length > 0 && (
                     <div className='shop-p__meta-text-2'>
-                        <span>Related Searches:</span>
-                        {props.filters.map((item) => {
+                        <span style={{ marginRight: 8 }}>Related Searches:</span>
+                        {props.filters?.map((item) => (
                             <a className='gl-tag btn--e-brand-shadow' href='#'>
-                                {item}
-                            </a>;
-                        })}
+                                {item.name.charAt(0).toUpperCase() + item.name.slice(1)} :{' '}
+                                {item.name === 'ratings'
+                                    ? item.value + ' & Up'
+                                    : item.name === 'price'
+                                    ? item.value[0] + ' - ' + item.value[1]
+                                    : item.value.charAt(0).toUpperCase() + item.value.slice(1)}
+                            </a>
+                        ))}
                     </div>
                 )}
             </div>
@@ -25,11 +30,13 @@ const FilterInfoTab = (props) => {
                 <form>
                     <div className='tool-style__form-wrap'>
                         <div className='u-s-m-b-8'>
-                            <select className='select-box select-box--transparent-b-2'>
-                                <option>Show: 8</option>
-                                <option selected>Show: 12</option>
-                                <option>Show: 16</option>
-                                <option>Show: 28</option>
+                            <select value={props.count} onChange={(e) => props.setCount(e.target.value)} className='select-box select-box--transparent-b-2'>
+                                <option value='9'>Show: 9</option>
+                                <option value='12' selected>
+                                    Show: 12
+                                </option>
+                                <option value='18'>Show: 18</option>
+                                <option value='24'>Show: 24</option>
                             </select>
                         </div>
                         <div className='u-s-m-b-8'>
